@@ -6,6 +6,7 @@ import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/const/design_system/textfield_with_helper.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
 
+import 'const/design_system/empty_view.dart';
 import 'const/design_system/rounded_widget.dart';
 
 void main() {
@@ -77,6 +78,9 @@ class _MyHomePageState extends State<MyHomePage> {
               text: '오픈예정',
               bgColor: SeenearColor.blue10,
               fgColor: SeenearColor.blue60,
+            ),
+            EmptyView(
+              text: '찜한 축제/행사가 없어요',
             )
           ],
         ),
