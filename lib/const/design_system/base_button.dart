@@ -27,6 +27,9 @@ class _BaseButtonState extends State<BaseButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6.0),
+        ),
         shadowColor: Colors.transparent,
         fixedSize: Size(double.maxFinite, widget.height ?? 58),
         foregroundColor: widget.fgColor ?? Colors.white,
@@ -39,7 +42,7 @@ class _BaseButtonState extends State<BaseButton> {
       },
       child: Text(
         widget.buttonText,
-        style: const TextStyle(fontWeight: FontWeight.w600),
+        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
       ),
     );
   }

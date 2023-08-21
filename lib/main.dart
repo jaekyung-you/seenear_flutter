@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:seenear/const/define.dart';
 import 'package:seenear/const/design_system/base_button.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/const/design_system/textfield_with_helper.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
+import 'package:seenear/presentation/sign_up/widget/sign_up_screen.dart';
 
 import 'const/design_system/empty_view.dart';
 import 'const/design_system/rounded_widget.dart';
@@ -26,13 +28,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      // initialRoute: SeenearPath.SIGN_UP,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: SignUpScreen(),
     );
   }
 }
