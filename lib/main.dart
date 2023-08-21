@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:seenear/const/define.dart';
 import 'package:seenear/const/design_system/base_button.dart';
+import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/const/design_system/textfield_with_helper.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
+
+import 'const/design_system/rounded_widget.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,14 +61,23 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'You have pushed the button this many times:',
             ),
-            BaseButton(buttonText: '선택 완료', isDisabled: false, onPressed: () {
-              print("선택 완료 누름!!!");
-            }),
+            BaseButton(
+                buttonText: '선택 완료',
+                isDisabled: false,
+                onPressed: () {
+                  print("선택 완료 누름!!!");
+                }),
             TextFieldWithHelperText(
-                editingController: textEditingController,
-                hintText: '닉네임을 입력해주세요',
-                helperTextType:
-                    HelperTextType(isError: true, helperText: '닉네임을 입력해주세요!')),
+              editingController: textEditingController,
+              hintText: '닉네임을 입력해주세요',
+              helperTextType:
+                  HelperTextType(isError: true, helperText: '닉네임을 입력해주세요!'),
+            ),
+            RoundedWidget(
+              text: '오픈예정',
+              bgColor: SeenearColor.blue10,
+              fgColor: SeenearColor.blue60,
+            )
           ],
         ),
       ),
