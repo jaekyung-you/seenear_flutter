@@ -4,13 +4,12 @@ import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:seenear/const/define.dart';
 import 'package:seenear/const/design_system/base_button.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
+import 'package:seenear/const/design_system/select_image_item_cell.dart';
 import 'package:seenear/const/design_system/textfield_with_helper.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
-import 'package:seenear/presentation/sign_up/widget/sign_up_screen.dart';
-
 import 'const/design_system/empty_view.dart';
 import 'const/design_system/rounded_widget.dart';
-import 'const/design_system/select_item_cell.dart';
+import 'const/design_system/select_text_item_cell.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +34,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: SignUpScreen(),
+      home: MyHomePage(title: ';',),
     );
   }
 }
@@ -83,7 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
               bgColor: SeenearColor.blue10,
               fgColor: SeenearColor.blue60,
             ),
-            SelectItemCell(text: '서울',),
+            SelectTextItemCell(text: '서울',),
+            SelectImageItemCell(isSelected: false,),
             EmptyView(
               text: '찜한 축제/행사가 없어요',
             )

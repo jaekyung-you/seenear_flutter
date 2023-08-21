@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 
-class SelectItemCell extends StatelessWidget {
+class SelectTextItemCell extends StatelessWidget {
   final String text;
   Color? bgColor;
   Color? fgColor;
   final Function()? onTap;
 
-  SelectItemCell(
+  SelectTextItemCell(
       {super.key, required this.text, this.bgColor, this.fgColor, this.onTap});
 
   @override
