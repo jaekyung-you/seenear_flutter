@@ -8,6 +8,7 @@ import 'package:seenear/data/local/helper_text_type.dart';
 
 import 'const/design_system/empty_view.dart';
 import 'const/design_system/rounded_widget.dart';
+import 'const/design_system/select_item_cell.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -79,6 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
               bgColor: SeenearColor.blue10,
               fgColor: SeenearColor.blue60,
             ),
+            SelectItemCell(text: '서울',),
             EmptyView(
               text: '찜한 축제/행사가 없어요',
             )

@@ -10,6 +10,7 @@ class SeenearColor {
   static Color grey30 = const Color(0xff8C939F);
   static Color grey20 = const Color(0xffB1B8C0);
   static Color grey10 = const Color(0xffE9E9EA);
+  static Color grey5 = const Color(0xffF2F4F6);
   static Color textColor = const Color(0xff5B626D).withOpacity(0.6);
   static Color white = const Color(0xffffffff);
 
