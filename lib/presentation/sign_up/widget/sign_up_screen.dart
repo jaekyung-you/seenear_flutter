@@ -3,7 +3,11 @@ import 'package:get/get.dart';
 import 'package:seenear/const/design_system/base_button.dart';
 import 'package:seenear/const/design_system/base_header.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
+import 'package:seenear/const/design_system/select_image_item_cell.dart';
+import 'package:seenear/const/design_system/select_text_item_cell.dart';
+import 'package:seenear/const/design_system/textfield_with_helper.dart';
 import 'package:seenear/const/enum/sign_up_process_stage.dart';
+import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
 import 'package:seenear/presentation/sign_up/controller/sign_up_controller.dart';
 
 // GetPage에서 put했으니 GetView사용해도 될 듯 (이미 put되어야함, GetView는 find하는 wrapper)
@@ -12,42 +16,45 @@ class SignUpScreen extends GetView<SignUpController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: GetBuilder<SignUpController>(builder: (controller) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                BaseHeader(title: controller.currentStage.title),
-                const SizedBox(
-                  height: 26,
-                ),
+    return SeenearBaseScaffold(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: GetBuilder<SignUpController>(builder: (controller) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BaseHeader(title: controller.currentStage.title, onTapBack: () {
+                controller.onTapBack();
+              },),
+              const SizedBox(
+                height: 26,
+              ),
+              Text(
+                controller.currentStage.subtitle,
+                style: TextStyle(
+                    fontSize: 23,
+                    fontWeight: FontWeight.w600,
+                    color: SeenearColor.grey70),
+              ),
+              if (controller.currentStage.desc != null)
                 Text(
-                  controller.currentStage.subtitle,
+                  controller.currentStage.desc!,
                   style: TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.w600,
-                      color: SeenearColor.grey70),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: SeenearColor.grey50),
                 ),
-                if (controller.currentStage.desc != null)
-                  Text(
-                    controller.currentStage.desc!,
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: SeenearColor.grey50),
-                  ),
-                const SizedBox(
-                  height: 22,
-                ),
-                Expanded(child: contentView()),
-                buttonArea(),
-              ],
-            );
-          }),
-        ),
+              const SizedBox(
+                height: 22,
+              ),
+              Expanded(child: contentView()),
+              const SizedBox(
+                height: 20,
+              ),
+              buttonArea(),
+            ],
+          );
+        }),
       ),
     );
   }
@@ -59,21 +66,30 @@ class SignUpScreen extends GetView<SignUpController> {
       case SignUpProcessStage.interestRegion:
         return GridView.builder(
           itemCount: controller.currentStage.itemList.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3, //1 개의 행에 보여줄 item 개수
+            childAspectRatio: controller.currentStage == SignUpProcessStage.interest ? 80 / 103 : 1,
             mainAxisSpacing: 30, //수평 Padding
             crossAxisSpacing: 30, //수직 Padding
           ),
           itemBuilder: (context, index) {
-            return Container(
-              color: Colors.purple,
-              width: 100,
-              height: 100,
-            );
+            if (controller.currentStage == SignUpProcessStage.interest) {
+              return SelectImageItemCell(
+                isSelected: false,
+                imageUrl: 'https://picsum.photos/200/30$index',
+                title: controller.currentStage.itemList[index],
+              );
+            }
+
+            return SelectTextItemCell(text: controller.currentStage.itemList[index]);
           },
         );
       case SignUpProcessStage.nickname:
-        return Container();
+        return TextFieldWithHelperText(
+          editingController: controller.nicknameController,
+          hintText: '닉네임 입력',
+          helperTextType: controller.helperTextType,
+        );
     }
   }
 
@@ -96,7 +112,9 @@ class SignUpScreen extends GetView<SignUpController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  controller.currentStage != SignUpProcessStage.nickname ? '건너뛰기' : '카카오톡 이름 사용하기',
+                  controller.currentStage != SignUpProcessStage.nickname
+                      ? '건너뛰기'
+                      : '카카오톡 이름 사용하기',
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,

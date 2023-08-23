@@ -4,7 +4,6 @@ import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:seenear/const/define.dart';
 import 'package:seenear/const/design_system/base_button.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
-import 'package:seenear/const/design_system/select_image_item_cell.dart';
 import 'package:seenear/const/design_system/textfield_with_helper.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
 import 'package:seenear/presentation/sign_up/controller/sign_up_controller.dart';
@@ -92,9 +91,9 @@ class _MyHomePageState extends State<MyHomePage> {
             SelectTextItemCell(
               text: '서울',
             ),
-            SelectImageItemCell(
-              isSelected: false,
-            ),
+            // SelectImageItemCell(
+            //   isSelected: false,
+            // ),
             EmptyView(
               text: '찜한 축제/행사가 없어요',
             )

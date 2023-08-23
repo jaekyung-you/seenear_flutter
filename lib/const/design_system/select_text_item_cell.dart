@@ -22,10 +22,12 @@ class SelectTextItemCell extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
           color: bgColor ?? SeenearColor.grey5,
         ),
-        child: Text(
-          text,
-          style: TextStyle(
-              fontWeight: FontWeight.w600, color: fgColor ?? SeenearColor.grey50, fontSize: 20),
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyle(
+                fontWeight: FontWeight.w600, color: fgColor ?? SeenearColor.grey50, fontSize: 20),
+          ),
         ),
       ),
     );

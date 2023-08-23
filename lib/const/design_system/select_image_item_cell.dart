@@ -3,14 +3,21 @@ import 'package:seenear/const/design_system/seenear_color.dart';
 
 class SelectImageItemCell extends StatelessWidget {
   final bool isSelected;
+  final String imageUrl;
+  final String title;
   final Function()? onTap;
 
-  const SelectImageItemCell({super.key, required this.isSelected, this.onTap});
+  const SelectImageItemCell(
+      {super.key,
+      required this.isSelected,
+      this.onTap,
+      required this.imageUrl,
+      required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      // mainAxisSize: MainAxisSize.min,
       children: [
         Stack(
           alignment: Alignment.topRight,
@@ -21,14 +28,13 @@ class SelectImageItemCell extends StatelessWidget {
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(13.0),
-                child: SizedBox(
-                  width: 80,
-                  height: 80,
+                child: AspectRatio(
+                  aspectRatio: 1,
                   child: Opacity(
                     opacity: isSelected ? 0.5 : 1.0,
                     child: Image.network(
-                      'https://picsum.photos/200/300',
-                      fit: BoxFit.fill,
+                      imageUrl,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -53,7 +59,7 @@ class SelectImageItemCell extends StatelessWidget {
           height: 4,
         ),
         Text(
-          '라이프',
+          title,
           style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 16,

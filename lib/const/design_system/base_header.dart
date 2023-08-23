@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 
 class BaseHeader extends StatelessWidget {
   final String title;
+  final Function()? onTapBack;
 
-  const BaseHeader({super.key, required this.title});
+  const BaseHeader({super.key, required this.title, this.onTapBack});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +15,17 @@ class BaseHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset('assets/images/back.png',
-              width: 28, color: SeenearColor.grey60),
+          InkWell(
+            onTap: () {
+              if (onTapBack != null) {
+                onTapBack!();
+              } else {
+                Get.back();
+              }
+            },
+            child: Image.asset('assets/images/back.png',
+                width: 28, color: SeenearColor.grey60),
+          ),
           const SizedBox(
             width: 10,
           ),
