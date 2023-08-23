@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 
 class SeenearBaseScaffold extends StatelessWidget {
   final Widget child;
+  final double? padding;
 
-  const SeenearBaseScaffold({super.key, required this.child});
-
-
+  const SeenearBaseScaffold({super.key, required this.child, this.padding});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,10 @@ class SeenearBaseScaffold extends StatelessWidget {
         },
         child: Scaffold(
           body: SafeArea(
-            child: child,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: padding ?? 0.0),
+              child: child,
+            ),
           ),
         ),
       ),
