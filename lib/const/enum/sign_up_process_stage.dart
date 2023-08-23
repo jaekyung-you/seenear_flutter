@@ -41,4 +41,65 @@ enum SignUpProcessStage {
         return null;
     }
   }
+
+  List<String> get itemList {
+    switch (this) {
+      case SignUpProcessStage.residence:
+        return [
+          '서울',
+          '경기',
+          '인천',
+          '강원',
+          '대전',
+          '충북',
+          '충남/세종',
+          '부산',
+          '울산',
+          '경남',
+          '대구',
+          '경북',
+          '광주',
+          '전남',
+          '전주/전북',
+          '제주'
+        ];
+      case SignUpProcessStage.interest:
+        return [
+          '라이프',
+          '라이프',
+          '라이프',
+          '라이프',
+          '라이프',
+          '라이프',
+          '라이프',
+          '라이프',
+          '라이프',
+          '라이프',
+          '라이프',
+          '라이프',
+          '라이프',
+        ];
+      case SignUpProcessStage.interestRegion:
+        return [
+          '서울',
+          '경기',
+          '인천',
+          '강원',
+          '대전',
+          '충북',
+          '충남/세종',
+          '부산',
+          '울산',
+          '경남',
+          '대구',
+          '경북',
+          '광주',
+          '전남',
+          '전주/전북',
+          '제주'
+        ];
+      default:
+        return [];
+    }
+  }
 }

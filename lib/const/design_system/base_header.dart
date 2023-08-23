@@ -10,26 +10,23 @@ class BaseHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 48,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.asset('assets/images/back.png',
-                width: 28, color: SeenearColor.grey60),
-            const SizedBox(
-              width: 10,
-            ),
-            Text(
-              title,
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
-                  color: SeenearColor.grey60),
-            ),
-            const SizedBox(width: 44,),
-          ],
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Image.asset('assets/images/back.png',
+              width: 28, color: SeenearColor.grey60),
+          const SizedBox(
+            width: 10,
+          ),
+          Text(
+            title,
+            style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 20,
+                color: SeenearColor.grey60),
+          ),
+          const SizedBox(width: 44,),
+        ],
       ),
     );
   }

@@ -7,6 +7,8 @@ import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/const/design_system/select_image_item_cell.dart';
 import 'package:seenear/const/design_system/textfield_with_helper.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
+import 'package:seenear/presentation/sign_up/controller/sign_up_controller.dart';
+import 'package:seenear/presentation/sign_up/widget/sign_up_screen.dart';
 import 'const/design_system/empty_view.dart';
 import 'const/design_system/rounded_widget.dart';
 import 'const/design_system/select_text_item_cell.dart';
@@ -28,13 +30,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialBinding: BindingsBuilder(
+        () {
+          Get.put(SignUpController());
+        },
+      ),
       // initialRoute: SeenearPath.SIGN_UP,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MyHomePage(title: ';',),
+      home: SignUpScreen(),
     );
   }
 }
@@ -82,8 +89,12 @@ class _MyHomePageState extends State<MyHomePage> {
               bgColor: SeenearColor.blue10,
               fgColor: SeenearColor.blue60,
             ),
-            SelectTextItemCell(text: '서울',),
-            SelectImageItemCell(isSelected: false,),
+            SelectTextItemCell(
+              text: '서울',
+            ),
+            SelectImageItemCell(
+              isSelected: false,
+            ),
             EmptyView(
               text: '찜한 축제/행사가 없어요',
             )
