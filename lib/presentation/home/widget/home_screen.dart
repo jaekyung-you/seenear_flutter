@@ -58,7 +58,7 @@ class HomeScreen extends GetView<HomeController> {
           ),
           Expanded(
             child: GridView.builder(
-              itemCount: 4,
+              itemCount: controller.homeMenus.length,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, //1 개의 행에 보여줄 item 개수
@@ -66,8 +66,18 @@ class HomeScreen extends GetView<HomeController> {
                 crossAxisSpacing: 20, //수직 Padding
               ),
               itemBuilder: (context, index) {
-                // return Container(color: Colors.purple,);
-                return SelectTextItemCell(text: '내정보');
+                bool isNotOpened = index == controller.homeMenus.last.index;
+                Color bgColor =
+                    isNotOpened ? SeenearColor.grey10 : SeenearColor.blue10;
+                Color fgColor =
+                    isNotOpened ? SeenearColor.grey30 : SeenearColor.blue100;
+                return SelectTextItemCell(
+                  text: controller.homeMenus[index].title,
+                  borderRadius: 16,
+                  fontSize: 27,
+                  bgColor: bgColor,
+                  fgColor: fgColor,
+                );
               },
             ),
           ),

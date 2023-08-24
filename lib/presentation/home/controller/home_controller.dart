@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
+import '../../../const/enum/home_menu.dart';
 
+class HomeController extends GetxController {
+  List<HomeMenu> homeMenus = HomeMenu.values;
 }
