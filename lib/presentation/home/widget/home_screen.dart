@@ -74,6 +74,7 @@ class HomeScreen extends GetView<HomeController> {
                 return SelectTextItemCell(
                   text: controller.homeMenus[index].title,
                   borderRadius: 16,
+                  badgeText: isNotOpened ? '오픈예정' : null,
                   fontSize: 27,
                   bgColor: bgColor,
                   fgColor: fgColor,

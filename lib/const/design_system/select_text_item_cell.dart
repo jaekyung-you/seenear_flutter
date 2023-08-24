@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:seenear/const/design_system/rounded_widget.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 
 class SelectTextItemCell extends StatelessWidget {
   final String text;
   final double borderRadius;
   final double fontSize;
+  String? badgeText;
   Color? bgColor;
   Color? fgColor;
   final Function()? onTap;
@@ -14,6 +16,7 @@ class SelectTextItemCell extends StatelessWidget {
       required this.text,
       this.bgColor,
       this.fgColor,
+      this.badgeText,
       this.borderRadius = 10.0,
       this.fontSize = 20,
       this.onTap});
@@ -31,12 +34,25 @@ class SelectTextItemCell extends StatelessWidget {
           color: bgColor ?? SeenearColor.grey5,
         ),
         child: Center(
-          child: Text(
-            text,
-            style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: fgColor ?? SeenearColor.grey50,
-                fontSize: fontSize),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (badgeText != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 6.0),
+                  child: RoundedWidget(
+                      text: badgeText!,
+                      bgColor: SeenearColor.blue40,
+                      fgColor: Colors.white),
+                ),
+              Text(
+                text,
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: fgColor ?? SeenearColor.grey50,
+                    fontSize: fontSize),
+              ),
+            ],
           ),
         ),
       ),
