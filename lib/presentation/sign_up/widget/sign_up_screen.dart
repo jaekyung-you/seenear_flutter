@@ -104,7 +104,11 @@ class SignUpScreen extends GetView<SignUpController> {
             }),
         InkWell(
           onTap: () {
-            controller.moveToNextStage();
+            if (controller.currentStage != SignUpProcessStage.nickname) {
+              controller.onTapSkipPage();
+            } else {
+              controller.useKakaoName();
+            }
           },
           child: SizedBox(
             height: 60,

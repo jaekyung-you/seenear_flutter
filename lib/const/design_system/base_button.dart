@@ -15,7 +15,7 @@ class BaseButton extends StatefulWidget {
       this.bgColor,
       this.fgColor,
       this.height,
-      required this.isDisabled,
+      this.isDisabled = false,
       required this.onPressed});
 
   @override

@@ -11,6 +11,7 @@ import 'package:seenear/presentation/sign_up/widget/sign_up_complete_screen.dart
 import 'const/design_system/empty_view.dart';
 import 'const/design_system/rounded_widget.dart';
 import 'const/design_system/select_text_item_cell.dart';
+import 'presentation/sign_up/widget/sign_up_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: SignUpCompleteScreen(),
+      home: SignUpScreen(),
     );
   }
 }

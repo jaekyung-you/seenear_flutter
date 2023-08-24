@@ -42,6 +42,19 @@ enum SignUpProcessStage {
     }
   }
 
+  String get bottomSheetTitle {
+    switch (this) {
+      case SignUpProcessStage.residence:
+        return '거주 지역을';
+      case SignUpProcessStage.interest:
+        return '관심사를';
+      case SignUpProcessStage.interestRegion:
+        return '관심 지역을';
+      default:
+        return '';
+    }
+  }
+
   List<String> get itemList {
     switch (this) {
       case SignUpProcessStage.residence:
@@ -52,7 +65,7 @@ enum SignUpProcessStage {
           '강원',
           '대전',
           '충북',
-          '충남/세종',
+          '충남/\n세종',
           '부산',
           '울산',
           '경남',
@@ -60,7 +73,7 @@ enum SignUpProcessStage {
           '경북',
           '광주',
           '전남',
-          '전주/전북',
+          '전주/\n전북',
           '제주'
         ];
       case SignUpProcessStage.interest:
@@ -87,7 +100,7 @@ enum SignUpProcessStage {
           '강원',
           '대전',
           '충북',
-          '충남/세종',
+          '충남/\n세종',
           '부산',
           '울산',
           '경남',
@@ -95,7 +108,7 @@ enum SignUpProcessStage {
           '경북',
           '광주',
           '전남',
-          '전주/전북',
+          '전주/\n전북',
           '제주'
         ];
       default:
