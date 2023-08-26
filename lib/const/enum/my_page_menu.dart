@@ -67,6 +67,32 @@ enum MyPageMenu {
     }
   }
 
+  String? get deleteBottomSheetTitle {
+    switch (this) {
+      case MyPageMenu.recentView:
+        return '최근 본 목록에서 삭제 하시겠어요?';
+      case MyPageMenu.liked:
+        return '찜 목록에서 삭제 하시겠어요?';
+      case MyPageMenu.subscription:
+        return '방실방실방실이 님을\n구독 취소하시겠어요?';
+      default:
+        return null;
+    }
+  }
+
+  String? get deleteBottomSheetDesc {
+    switch (this) {
+      case MyPageMenu.recentView:
+        return '삭제된 장소는 더 이상 최근 본 목록에 보이지 않아요.';
+      case MyPageMenu.liked:
+        return '삭제된 장소는 더 이상 찜 목록에 보이지 않아요.';
+      case MyPageMenu.subscription:
+        return '구독을 취소하시면 구독 목록에서 사라져요.';
+      default:
+        return null;
+    }
+  }
+
   List<String> get contentTabTitle {
     switch (this) {
       case MyPageMenu.subscription:
