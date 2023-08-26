@@ -16,7 +16,10 @@ class MyPageScreen extends GetView<MyPageController> {
     return SeenearBaseScaffold(
       child: Column(
         children: [
-          const BaseHeader(title: '내 정보'),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: BaseHeader(title: '내 정보'),
+          ),
           const SizedBox(height: 20,),
           myPageHeader(),
           const SizedBox(height: 20,),

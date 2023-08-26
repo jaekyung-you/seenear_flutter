@@ -33,13 +33,13 @@ enum MyPageMenu {
   String get contentTitle {
     switch (this) {
       case MyPageMenu.recentView:
-        return '닉네임 님의 최근 본 목록이에요.';
+        return '<b>닉네임</b> 님의 최근 본 목록이에요.';
       case MyPageMenu.liked:
-        return '닉네임 님의 찜 목록이에요.';
+        return '<b>닉네임</b> 님의 찜 목록이에요.';
       case MyPageMenu.review:
-        return '닉네임 님이 작성하신 리뷰에요.';
+        return '<b>닉네임</b> 님이 작성하신 리뷰에요.';
       case MyPageMenu.subscription:
-        return '닉네임 님의 구독 현황이에요.';
+        return '<b>닉네임</b> 님의 구독 현황이에요.';
     }
   }
 

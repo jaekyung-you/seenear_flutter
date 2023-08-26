@@ -19,27 +19,34 @@ class MyPageContentScreen extends GetView<MyPageController> {
   Widget build(BuildContext context) {
     return SeenearBaseScaffold(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          BaseHeader(title: menu.title),
+          Container(padding: const EdgeInsets.symmetric(horizontal: 16), child: BaseHeader(title: menu.title)),
           const SizedBox(
             height: 20,
           ),
-          StyledText(
-            text: menu.contentTitle,
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 21, color: SeenearColor.grey60),
-            tags: {
-              'b': StyledTextTag(
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 21, color: SeenearColor.grey60),
-              ),
-            },
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: StyledText(
+              text: menu.contentTitle,
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 21, color: SeenearColor.grey60),
+              tags: {
+                'b': StyledTextTag(
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 21, color: SeenearColor.grey60),
+                ),
+              },
+            ),
           ),
           const SizedBox(
             height: 6,
           ),
           if (menu.contentDescription != null)
-            Text(
-              menu.contentDescription!,
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: SeenearColor.grey50),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: Text(
+                menu.contentDescription!,
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: SeenearColor.grey50),
+              ),
             ),
           const SizedBox(
             height: 10,
@@ -48,9 +55,14 @@ class MyPageContentScreen extends GetView<MyPageController> {
             controller: controller.myPageTabController,
             tabs: [
               for (String title in menu.contentTabTitle)
-                Text(
-                  title,
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+                SizedBox(
+                  width: Get.width / 2,
+                  child: Center(
+                    child: Text(
+                      title,
+                      style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+                    ),
+                  ),
                 ),
             ],
             indicatorColor: SeenearColor.blue60,
