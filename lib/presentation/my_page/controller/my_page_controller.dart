@@ -1,15 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seenear/const/enum/my_page_menu.dart';
 import 'package:seenear/const/enum/my_page_setting.dart';
 
-class MyPageController extends GetxController {
+import '../widget/my_page_common_content_screen.dart';
+
+class MyPageController extends GetxController with GetSingleTickerProviderStateMixin {
+  late TabController myPageTabController;
+
   void onTapMenuItem(MyPageMenu menu) {
-    switch (menu) {
-      case MyPageMenu.recentView:
-      case MyPageMenu.liked:
-      case MyPageMenu.review:
-      case MyPageMenu.subscription:
-    }
+    Get.to(() => MyPageCommonContentScreen(menu: menu));
   }
 
   void onTapSettingItem(MyPageSetting setting) {
