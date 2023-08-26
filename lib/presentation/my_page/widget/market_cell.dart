@@ -13,20 +13,22 @@ class MarketCell extends StatelessWidget {
         children: [
           Expanded(
             child: Stack(
-              alignment: Alignment.bottomRight,
+              fit: StackFit.expand,
               children: [
                 Container(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(6.0),
-                    child: AspectRatio(aspectRatio: 144/112, child: Image.network('https://picsum.photos/200/303', fit: BoxFit.cover,)),
+                    child: marketImage(),
                   ),
                 ),
-                Image.asset('assets/images/.png', )
+                Positioned(bottom: 4, right: 12, child: Image.asset('assets/images/favorite_empty.png', width: 30,)),
               ],
             ),
           ),
-          const SizedBox(width: 14,),
+          const SizedBox(
+            width: 14,
+          ),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,6 +102,62 @@ class MarketCell extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Widget marketImage() {
+    return AspectRatio(
+      aspectRatio: 144 / 112,
+      child: Image.network(
+        'https://picsum.photos/200/303',
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  Widget emptyImage() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      color: SeenearColor.grey10,
+      child: Column(
+        children: [
+          Image.asset(
+            'assets/images/seenear_character_4.png',
+            height: 68,
+          ),
+          const SizedBox(
+            height: 6,
+          ),
+          Text(
+            '이미지 없음',
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: SeenearColor.grey20),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget closedImage() {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        ColorFiltered(
+          colorFilter: ColorFilter.mode(SeenearColor.textColor, BlendMode.saturation),
+          child: AspectRatio(
+            aspectRatio: 144 / 112,
+            child: Image.network(
+              'https://picsum.photos/200/303',
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Center(
+          child: Text(
+            '폐장했어요',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: SeenearColor.white),
+          ),
+        )
+      ],
     );
   }
 }
