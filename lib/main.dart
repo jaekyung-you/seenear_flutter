@@ -8,9 +8,11 @@ import 'package:seenear/const/design_system/textfield_with_helper.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
 import 'package:seenear/presentation/home/controller/home_controller.dart';
 import 'package:seenear/presentation/home/widget/home_screen.dart';
+import 'package:seenear/presentation/my_page/controller/my_page_controller.dart';
 import 'const/design_system/empty_view.dart';
 import 'const/design_system/rounded_widget.dart';
 import 'const/design_system/select_text_item_cell.dart';
+import 'presentation/my_page/widget/my_page_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       initialBinding: BindingsBuilder(
         () {
-          Get.put(HomeController());
+          Get.put(MyPageController());
         },
       ),
       // initialRoute: SeenearPath.SIGN_UP,
@@ -40,7 +42,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: MyPageScreen(),
     );
   }
 }

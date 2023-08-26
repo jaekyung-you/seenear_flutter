@@ -13,7 +13,6 @@ class BaseHeader extends StatelessWidget {
     return SizedBox(
       height: 48,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           InkWell(
             onTap: () {
@@ -36,7 +35,7 @@ class BaseHeader extends StatelessWidget {
                 fontSize: 20,
                 color: SeenearColor.grey60),
           ),
-          const SizedBox(width: 44,),
+          const Spacer(),
         ],
       ),
     );
