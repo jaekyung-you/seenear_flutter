@@ -61,20 +61,23 @@ class MyPageScreen extends GetView<MyPageController> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           for (MyPageMenu menu in MyPageMenu.values)
-            Column(
-              children: [
-                Image.asset(
-                  menu.icon,
-                  width: 28,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  menu.title,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-              ],
+            InkWell(
+              onTap: () => controller.onTapMenuItem(menu),
+              child: Column(
+                children: [
+                  Image.asset(
+                    menu.icon,
+                    width: 28,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    menu.title,
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
             )
         ],
       ),
@@ -87,21 +90,24 @@ class MyPageScreen extends GetView<MyPageController> {
       child: Column(
         children: [
           for (MyPageSetting setting in MyPageSetting.values)
-            SizedBox(
-              height: 52,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    setting.title,
-                    style: TextStyle(fontWeight: FontWeight.w600, color: SeenearColor.grey60, fontSize: 18),
-                  ),
-                  Image.asset(
-                    'assets/images/arrow_right.png',
-                    color: SeenearColor.grey30,
-                    width: 22,
-                  )
-                ],
+            InkWell(
+              onTap: () => controller.onTapSettingItem(setting),
+              child: SizedBox(
+                height: 52,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      setting.title,
+                      style: TextStyle(fontWeight: FontWeight.w600, color: SeenearColor.grey60, fontSize: 18),
+                    ),
+                    Image.asset(
+                      'assets/images/arrow_right.png',
+                      color: SeenearColor.grey30,
+                      width: 22,
+                    )
+                  ],
+                ),
               ),
             )
         ],
