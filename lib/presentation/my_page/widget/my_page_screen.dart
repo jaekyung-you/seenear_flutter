@@ -17,80 +17,95 @@ class MyPageScreen extends GetView<MyPageController> {
       child: Column(
         children: [
           const BaseHeader(title: '내 정보'),
+          const SizedBox(height: 20,),
           myPageHeader(),
+          const SizedBox(height: 20,),
           myPageMenu(),
-          myPageSetting()
+          const SizedBox(height: 20,),
+          Divider(height: 2, color: SeenearColor.grey20,),
+          const SizedBox(height: 20,),
+          myPageSetting(),
         ],
       ),
     );
   }
 
   Widget myPageHeader() {
-    return Column(
-      children: [
-        StyledText(
-          text: '<s>닉네임</s> 님,\n오늘도 행복한 하루 되세요!',
-          tags: {
-            's': StyledTextTag(
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  color: SeenearColor.blue60,
-                  fontSize: 21),
-            ),
-          },
-        ),
-        Image.asset(
-          'assets/images/temp_profile.png',
-          width: 64,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          StyledText(
+            text: '<s>닉네임</s> 님,\n오늘도 행복한 하루 되세요!',
+            style: TextStyle(fontSize: 21, fontWeight: FontWeight.w500, color: SeenearColor.grey60),
+            tags: {
+              's': StyledTextTag(
+                style: TextStyle(fontWeight: FontWeight.w700, color: SeenearColor.blue60, fontSize: 21),
+              ),
+            },
+          ),
+          Image.asset(
+            'assets/images/temp_profile.png',
+            width: 64,
+          ),
+        ],
+      ),
     );
   }
 
   Widget myPageMenu() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        for (MyPageMenu menu in MyPageMenu.values)
-          Column(
-            children: [
-              Image.asset(menu.icon),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                menu.title,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-            ],
-          )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          for (MyPageMenu menu in MyPageMenu.values)
+            Column(
+              children: [
+                Image.asset(
+                  menu.icon,
+                  width: 28,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  menu.title,
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+              ],
+            )
+        ],
+      ),
     );
   }
 
   Widget myPageSetting() {
-    return Column(
-      children: [
-        for (MyPageSetting setting in MyPageSetting.values)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                setting.title,
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: SeenearColor.grey60,
-                    fontSize: 18),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        children: [
+          for (MyPageSetting setting in MyPageSetting.values)
+            SizedBox(
+              height: 52,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    setting.title,
+                    style: TextStyle(fontWeight: FontWeight.w600, color: SeenearColor.grey60, fontSize: 18),
+                  ),
+                  Image.asset(
+                    'assets/images/arrow_right.png',
+                    color: SeenearColor.grey30,
+                    width: 22,
+                  )
+                ],
               ),
-              Image.asset(
-                'assets/image/arrow_right.png',
-                color: SeenearColor.grey30,
-                width: 22,
-              )
-            ],
-          )
-      ],
+            )
+        ],
+      ),
     );
   }
 }
