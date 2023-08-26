@@ -141,8 +141,10 @@ class MarketCell extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        ColorFiltered(
-          colorFilter: ColorFilter.mode(SeenearColor.textColor, BlendMode.saturation),
+        Container(
+          foregroundDecoration: BoxDecoration(
+            color: SeenearColor.textColor,
+          ),
           child: AspectRatio(
             aspectRatio: 144 / 112,
             child: Image.network(

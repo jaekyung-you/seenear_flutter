@@ -21,7 +21,7 @@ class FestivalCell extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 8.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(6.0),
-                    child: marketImage(),
+                    child: closedImage(),
                   ),
                 ),
                 Positioned(
@@ -122,7 +122,7 @@ class FestivalCell extends StatelessWidget {
     );
   }
 
-  Widget marketImage() {
+  Widget festivalImage() {
     return AspectRatio(
       aspectRatio: 108 / 152,
       child: Image.network(
@@ -137,6 +137,7 @@ class FestivalCell extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       color: SeenearColor.grey10,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
             'assets/images/seenear_character_4.png',
@@ -158,8 +159,10 @@ class FestivalCell extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        ColorFiltered(
-          colorFilter: ColorFilter.mode(SeenearColor.textColor, BlendMode.saturation),
+        Container(
+          foregroundDecoration: BoxDecoration(
+            color: SeenearColor.textColor,
+          ),
           child: AspectRatio(
             aspectRatio: 108 / 152,
             child: Image.network(
@@ -170,7 +173,7 @@ class FestivalCell extends StatelessWidget {
         ),
         Center(
           child: Text(
-            '폐장했어요',
+            '종료했어요',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: SeenearColor.white),
           ),
         )
