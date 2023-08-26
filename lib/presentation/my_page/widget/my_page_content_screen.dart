@@ -5,6 +5,7 @@ import 'package:seenear/const/design_system/empty_view.dart';
 import 'package:seenear/const/enum/my_page_menu.dart';
 import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_controller.dart';
+import 'package:seenear/presentation/my_page/widget/market_cell.dart';
 import 'package:styled_text/styled_text.dart';
 
 import '../../../const/design_system/seenear_color.dart';
@@ -77,8 +78,7 @@ class MyPageContentScreen extends GetView<MyPageController> {
     return ListView.builder(
       itemCount: 10,
       itemBuilder: (context, index) {
-        // todo: menu에 따라서 cell 타입 다르게
-        return SizedBox(height: 100, child: Text('index: $index'));
+        return MarketCell();
       },
     );
   }
