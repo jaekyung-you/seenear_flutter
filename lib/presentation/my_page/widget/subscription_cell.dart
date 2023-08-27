@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:seenear/const/design_system/rounded_widget.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/const/enum/subscription_button_type.dart';
+import 'package:seenear/presentation/my_page/controller/my_page_controller.dart';
 
-class SubscriptionCell extends StatelessWidget {
+import '../../../const/enum/my_page_menu.dart';
+
+class SubscriptionCell extends GetView<MyPageController> {
   final bool isFollowing; // true: '내가 구독한 사람'
   final bool isMatched; // 서로 구독중인 경우
 
@@ -70,7 +74,19 @@ class SubscriptionCell extends StatelessWidget {
                           fgColor: button.fgColor,
                           image: button.icon,
                           imageColor: button.fgColor,
-                          onTap: () {},
+                          onTap: () {
+                            if (button == SubscriptionButtonType.unfollow) {
+                              controller.onDeleteItem(MyPageMenu.subscription);
+                            }
+
+                            if (button == SubscriptionButtonType.block) {
+                              controller.onTapBlockFollower();
+                            }
+
+                            if (button == SubscriptionButtonType.follow) {
+                              // todo: '나도 구독하기' 를 누른 경우, 동작 기획
+                            }
+                          },
                         ),
                       ),
                   ],

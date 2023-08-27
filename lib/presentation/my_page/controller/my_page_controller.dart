@@ -41,10 +41,24 @@ class MyPageController extends GetxController with GetSingleTickerProviderStateM
       BaseBottomSheet(
         title: menu.deleteBottomSheetTitle!,
         desc: menu.deleteBottomSheetDesc,
-        buttonTitles: const ['취소', '확인'],
+        buttonTitles: menu.deleteBottomSheetButtons,
         onTapButton: (index) {
           Get.back();
-          if (index == 1) onDeleteItem(MyPageMenu.recentView);
+          if (index == 1) _showSnackBar(title: menu.deleteBottomSheetComplete);
+        },
+      ),
+    );
+  }
+
+  void onTapBlockFollower() {
+    Get.bottomSheet(
+      BaseBottomSheet(
+        title: '방실방실방실이 님을\n차단 하시겠어요?',
+        desc: '차단하사면 상대방은 회원님의 글을 볼 수 없어요.',
+        buttonTitles: const ['아니요', '네 취소할래요'],
+        onTapButton: (index) {
+          Get.back();
+          if (index == 1) _showSnackBar(title: '차단이 완료되었습니다.');
         },
       ),
     );

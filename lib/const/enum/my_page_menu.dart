@@ -6,14 +6,14 @@ enum MyPageMenu {
 
   String get title {
     switch (this) {
-    case MyPageMenu.recentView:
-      return '최근 본 목록';
-    case MyPageMenu.liked:
-      return '찜 목록';
-    case MyPageMenu.review:
-      return '리뷰 관리';
-    case MyPageMenu.subscription:
-      return '구독 관리';
+      case MyPageMenu.recentView:
+        return '최근 본 목록';
+      case MyPageMenu.liked:
+        return '찜 목록';
+      case MyPageMenu.review:
+        return '리뷰 관리';
+      case MyPageMenu.subscription:
+        return '구독 관리';
     }
   }
 
@@ -90,6 +90,24 @@ enum MyPageMenu {
         return '구독을 취소하시면 구독 목록에서 사라져요.';
       default:
         return null;
+    }
+  }
+
+  List<String> get deleteBottomSheetButtons {
+    switch (this) {
+      case MyPageMenu.subscription:
+        return ['아니요', '네 취소할래요'];
+      default:
+        return ['취소', '확인'];
+    }
+  }
+
+  String get deleteBottomSheetComplete {
+    switch (this) {
+      case MyPageMenu.subscription:
+        return '구독이 취소되었습니다.';
+      default:
+        return '삭제가 완료되었습니다.';
     }
   }
 
