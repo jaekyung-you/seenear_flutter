@@ -5,9 +5,8 @@ import 'package:seenear/const/define.dart';
 import 'package:seenear/const/design_system/base_button.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/const/design_system/textfield_with_helper.dart';
+import 'package:seenear/const/seenear_route.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
-import 'package:seenear/presentation/home/controller/home_controller.dart';
-import 'package:seenear/presentation/home/widget/home_screen.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_controller.dart';
 import 'const/design_system/empty_view.dart';
 import 'const/design_system/rounded_widget.dart';
@@ -31,6 +30,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      getPages: SeenearRoute.routes,
+      initialRoute: '/',
       initialBinding: BindingsBuilder(
         () {
           Get.put(MyPageController());

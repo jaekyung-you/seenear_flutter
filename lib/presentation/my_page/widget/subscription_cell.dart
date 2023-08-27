@@ -27,7 +27,6 @@ class SubscriptionCell extends GetView<MyPageController> {
 
     return InkWell(
       onTap: () {
-        // todo: 타인 프로필 상세
         Get.toNamed(SeenearPath.OTHER_PROFILE, arguments: {'userId': 0});
       },
       child: Container(
