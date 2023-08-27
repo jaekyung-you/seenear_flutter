@@ -4,6 +4,8 @@ import 'package:seenear/presentation/home/controller/home_controller.dart';
 import 'package:seenear/presentation/home/widget/home_screen.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_controller.dart';
 import 'package:seenear/presentation/my_page/widget/my_page_screen.dart';
+import 'package:seenear/presentation/profile/controller/other_profile_detail_controller.dart';
+import 'package:seenear/presentation/profile/widget/other_profile_detail_screen.dart';
 import 'package:seenear/presentation/sign_up/controller/sign_up_controller.dart';
 import 'package:seenear/presentation/sign_up/widget/sign_up_screen.dart';
 
@@ -47,6 +49,15 @@ class SeenearRoute {
       binding: BindingsBuilder(
             () {
           Get.put(MyPageController());
+        },
+      ),
+    ),
+    GetPage(
+      name: SeenearPath.OTHER_PROFILE,
+      page: () => const OtherProfileDetailScreen(),
+      binding: BindingsBuilder(
+            () {
+          Get.put(OtherProfileDetailController());
         },
       ),
     ),
