@@ -6,6 +6,7 @@ class RoundedWidget extends StatelessWidget {
   final Color fgColor;
   final Color? borderColor;
   final String? image;
+  final Color? imageColor;
   final Function()? onTap;
 
   const RoundedWidget(
@@ -15,7 +16,8 @@ class RoundedWidget extends StatelessWidget {
       required this.fgColor,
       this.borderColor,
       this.image,
-      this.onTap});
+      this.onTap,
+      this.imageColor});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class RoundedWidget extends StatelessWidget {
               Image.asset(
                 image!,
                 width: 16,
+                color: imageColor,
               ),
             Text(
               text,
