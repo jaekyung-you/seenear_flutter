@@ -3,121 +3,130 @@ import 'package:get/get.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 
 class FestivalCell extends StatelessWidget {
-  const FestivalCell({super.key});
+  final Function() onTapItemCell;
+  final Function() onTapFavoriteIcon;
+
+  const FestivalCell({super.key, required this.onTapItemCell, required this.onTapFavoriteIcon});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 180,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      child: Row(
-        children: [
-          SizedBox(
-            width: Get.width / 3,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(6.0),
-                    child: closedImage(),
+    return InkWell(
+      onTap: () => onTapItemCell(),
+      child: Container(
+        height: 180,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        child: Row(
+          children: [
+            SizedBox(
+              width: Get.width / 3,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(6.0),
+                      child: closedImage(),
+                    ),
                   ),
-                ),
-                Positioned(
-                  bottom: 4,
-                  right: 12,
-                  child: Image.asset(
-                    'assets/images/favorite_empty.png',
-                    width: 30,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            width: 14,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        '제18회 국제 올림피아드 남해 마늘 한우 축제',
-                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: SeenearColor.grey60),
+                  Positioned(
+                    bottom: 4,
+                    right: 12,
+                    child: InkWell(
+                      onTap: () => onTapFavoriteIcon(),
+                      child: Image.asset(
+                        'assets/images/favorite_empty.png',
+                        width: 30,
                       ),
                     ),
-                    // const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4.0, left: 4.0),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Image.asset(
-                          'assets/images/close.png',
-                          width: 24,
-                          color: SeenearColor.blue60,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              width: 14,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          '제18회 국제 올림피아드 남해 마늘 한우 축제',
+                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: SeenearColor.grey60),
                         ),
                       ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 6,
-                ),
-                Text(
-                  '경남 남해시 남해유배문학관 앞',
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: SeenearColor.grey60),
-                ),
-                const SizedBox(
-                  height: 6,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'assets/images/date_available.png',
-                      width: 20,
-                    ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    Text('2023-01-20(금)\n~2023-01-29(일)',
-                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: SeenearColor.grey50))
-                  ],
-                ),
-                const SizedBox(
-                  height: 6,
-                ),
-                Row(
-                  children: [
-                    Image.asset(
-                      'assets/images/star.png',
-                      width: 22,
-                    ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    Text(
-                      '4.3',
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: SeenearColor.grey50),
-                    ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    Text(
-                      '후기 999+개',
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: SeenearColor.grey30),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
+                      // const Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4.0, left: 4.0),
+                        child: InkWell(
+                          onTap: () {},
+                          child: Image.asset(
+                            'assets/images/close.png',
+                            width: 24,
+                            color: SeenearColor.blue60,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    '경남 남해시 남해유배문학관 앞',
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: SeenearColor.grey60),
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        'assets/images/date_available.png',
+                        width: 20,
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      Text('2023-01-20(금)\n~2023-01-29(일)',
+                          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: SeenearColor.grey50))
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/images/star.png',
+                        width: 22,
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      Text(
+                        '4.3',
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: SeenearColor.grey50),
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      Text(
+                        '후기 999+개',
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: SeenearColor.grey30),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
