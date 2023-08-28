@@ -24,9 +24,17 @@ class DeactiveAccountScreen extends GetView<MyPageSettingController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/images/seenear_character_unhappy.png', width: 70,),
-                const SizedBox(width: 8,),
-                Image.asset('assets/images/dont_go_image.png', height: 52,),
+                Image.asset(
+                  'assets/images/seenear_character_unhappy.png',
+                  width: 70,
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                Image.asset(
+                  'assets/images/dont_go_image.png',
+                  height: 52,
+                ),
               ],
             ),
             const SizedBox(
@@ -46,12 +54,36 @@ class DeactiveAccountScreen extends GetView<MyPageSettingController> {
             const SizedBox(
               height: 20,
             ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    for (String reason in controller.deactiveReasons)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: BaseButton(
+                          buttonText: reason,
+                          bgColor: SeenearColor.grey5,
+                          fgColor: SeenearColor.grey50,
+                          onPressed: () {},
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             BaseButton(
               buttonText: '탈퇴하기',
               isDisabled: controller.nicknameEditController.text.trim().isEmpty,
               onPressed: () {
                 controller.onTapFinishDeactiveAccount();
               },
+            ),
+            const SizedBox(
+              height: 30,
             ),
           ],
         ),
