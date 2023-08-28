@@ -4,7 +4,7 @@ import 'package:seenear/const/design_system/base_header.dart';
 import 'package:seenear/const/design_system/empty_view.dart';
 import 'package:seenear/const/enum/my_page_menu.dart';
 import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
-import 'package:seenear/presentation/my_page/controller/my_page_controller.dart';
+import 'package:seenear/presentation/my_page/controller/my_page_menu_controller.dart';
 import 'package:seenear/presentation/my_page/widget/my_page_menu/subscription_cell.dart';
 import 'package:styled_text/styled_text.dart';
 import '../../../../const/design_system/seenear_color.dart';

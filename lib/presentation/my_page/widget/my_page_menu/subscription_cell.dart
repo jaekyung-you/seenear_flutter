@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:seenear/const/design_system/rounded_widget.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/const/enum/subscription_button_type.dart';
-import 'package:seenear/presentation/my_page/controller/my_page_controller.dart';
+import 'package:seenear/presentation/my_page/controller/my_page_menu_controller.dart';
 import '../../../../const/enum/my_page_menu.dart';
 import '../../../../const/seenear_path.dart';
 

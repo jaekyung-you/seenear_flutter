@@ -5,7 +5,7 @@ import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/const/enum/my_page_menu.dart';
 import 'package:seenear/const/enum/my_page_setting.dart';
 import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
-import 'package:seenear/presentation/my_page/controller/my_page_controller.dart';
+import 'package:seenear/presentation/my_page/controller/my_page_menu_controller.dart';
 import 'package:styled_text/styled_text.dart';
 
 class MyPageScreen extends GetView<MyPageController> {
