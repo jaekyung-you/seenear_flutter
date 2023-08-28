@@ -8,6 +8,7 @@ class RoundedWidget extends StatelessWidget {
   final String? image;
   final Color? imageColor;
   final IconData? icon;
+  final double horizontalPadding;
   final Function()? onTap;
 
   const RoundedWidget(
@@ -18,6 +19,7 @@ class RoundedWidget extends StatelessWidget {
       this.borderColor,
       this.image,
       this.icon,
+      this.horizontalPadding = 8,
       this.onTap,
       this.imageColor});
 
@@ -28,7 +30,7 @@ class RoundedWidget extends StatelessWidget {
         if (onTap != null) onTap!();
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+        padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 4.0),
         decoration: BoxDecoration(
           border: borderColor != null ? Border.all(color: borderColor!) : null,
           borderRadius: BorderRadius.circular(20.0),
@@ -51,7 +53,7 @@ class RoundedWidget extends StatelessWidget {
               ),
             Text(
               text,
-              style: TextStyle(fontSize: 14, color: fgColor),
+              style: TextStyle(fontSize: 14, color: fgColor, fontWeight: FontWeight.w500),
             ),
           ],
         ),

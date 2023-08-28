@@ -34,18 +34,23 @@ class MyAccountScreen extends GetView<MyPageSettingController> {
                         'https://picsum.photos/200/303',
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(4.0),
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: SeenearColor.blue60,
-                      ),
-                      child: const Icon(
-                        Icons.edit,
-                        color: Colors.white,
-                        size: 18,
+                    InkWell(
+                      onTap: () {
+                        controller.onTapEditProfileImage();
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(4.0),
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: SeenearColor.blue60,
+                        ),
+                        child: const Icon(
+                          Icons.edit,
+                          color: Colors.white,
+                          size: 18,
+                        ),
                       ),
                     ),
                   ],
@@ -81,14 +86,19 @@ class MyAccountScreen extends GetView<MyPageSettingController> {
                       style: TextStyle(fontWeight: FontWeight.w500, color: Colors.black, fontSize: 21),
                     ),
                     const Spacer(),
-                    RoundedWidget(
-                      text: '변경',
-                      bgColor: Colors.white,
-                      fgColor: SeenearColor.blue60,
-                      borderColor: SeenearColor.blue60,
-                      imageColor: SeenearColor.blue60,
-                      horizontalPadding: 13.0,
-                      icon: Icons.edit,
+                    InkWell(
+                      onTap: () {
+                        controller.onTapEditNickname();
+                      },
+                      child: RoundedWidget(
+                        text: '변경',
+                        bgColor: Colors.white,
+                        fgColor: SeenearColor.blue60,
+                        borderColor: SeenearColor.blue60,
+                        imageColor: SeenearColor.blue60,
+                        horizontalPadding: 13.0,
+                        icon: Icons.edit,
+                      ),
                     ),
                   ],
                 ),
@@ -115,7 +125,32 @@ class MyAccountScreen extends GetView<MyPageSettingController> {
                   thickness: 1,
                 ),
               ],
-            )
+            ),
+            const Spacer(),
+            InkWell(
+              onTap: () {
+                controller.onTapDeactiveAccount();
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    '회원탈퇴 및 계정 삭제',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: SeenearColor.grey30),
+                  ),
+                  const SizedBox(
+                    width: 4,
+                  ),
+                  Image.asset(
+                    'assets/images/arrow_right.png',
+                    color: SeenearColor.grey30,
+                    height: 20,
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(height: 30,),
           ],
         ),
       ),
