@@ -4,9 +4,8 @@ import 'package:seenear/const/design_system/rounded_widget.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/const/enum/subscription_button_type.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_controller.dart';
-
-import '../../../const/enum/my_page_menu.dart';
-import '../../../const/seenear_path.dart';
+import '../../../../const/enum/my_page_menu.dart';
+import '../../../../const/seenear_path.dart';
 
 class SubscriptionCell extends GetView<MyPageController> {
   final bool isFollowing; // true: '내가 구독한 사람'

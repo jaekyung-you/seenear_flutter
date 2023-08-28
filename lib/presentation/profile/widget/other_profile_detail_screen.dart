@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:seenear/const/design_system/base_header.dart';
 import 'package:seenear/const/design_system/empty_view.dart';
 import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
-import 'package:seenear/presentation/my_page/widget/review_cell.dart';
-import 'package:seenear/presentation/my_page/widget/subscription_cell.dart';
 import '../../../const/design_system/seenear_color.dart';
 import '../../../const/enum/other_profile_tab_menu.dart';
+import '../../my_page/widget/my_page_menu/review_cell.dart';
+import '../../my_page/widget/my_page_menu/subscription_cell.dart';
 import '../controller/other_profile_detail_controller.dart';
 
 class OtherProfileDetailScreen extends GetView<OtherProfileDetailController> {
@@ -17,7 +17,10 @@ class OtherProfileDetailScreen extends GetView<OtherProfileDetailController> {
     return SeenearBaseScaffold(
       child: Column(
         children: [
-          BaseHeader(title: '닉네임 님이 작성한 글'),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: BaseHeader(title: '닉네임 님이 작성한 글'),
+          ),
           SubscriptionCell(isFollowing: false, isMatched: false),
           const SizedBox(
             height: 20,

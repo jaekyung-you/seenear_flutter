@@ -8,10 +8,10 @@ import 'package:seenear/const/design_system/textfield_with_helper.dart';
 import 'package:seenear/const/seenear_route.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_controller.dart';
+import 'package:seenear/presentation/my_page/widget/my_page_menu/my_page_screen.dart';
 import 'const/design_system/empty_view.dart';
 import 'const/design_system/rounded_widget.dart';
 import 'const/design_system/select_text_item_cell.dart';
-import 'presentation/my_page/widget/my_page_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

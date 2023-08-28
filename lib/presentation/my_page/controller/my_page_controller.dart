@@ -5,7 +5,7 @@ import 'package:seenear/const/enum/my_page_menu.dart';
 import 'package:seenear/const/enum/my_page_setting.dart';
 
 import '../../../const/design_system/base_bottom_sheet.dart';
-import '../widget/my_page_content_screen.dart';
+import '../widget/my_page_menu/my_page_content_screen.dart';
 
 class MyPageController extends GetxController with GetSingleTickerProviderStateMixin {
   late TabController myPageTabController;
