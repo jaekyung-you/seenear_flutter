@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/const/enum/my_page_menu.dart';
 import 'package:seenear/const/enum/my_page_setting.dart';
+import 'package:seenear/domain/util/snack_bar_manager.dart';
 
 import '../../../const/design_system/base_bottom_sheet.dart';
 import '../widget/my_page_menu/my_page_content_screen.dart';
@@ -44,7 +44,7 @@ class MyPageController extends GetxController with GetSingleTickerProviderStateM
         buttonTitles: menu.deleteBottomSheetButtons,
         onTapButton: (index) {
           Get.back();
-          if (index == 1) _showSnackBar(title: menu.deleteBottomSheetComplete);
+          if (index == 1) SnackBarManager().showSnackBar(title: menu.deleteBottomSheetComplete);
         },
       ),
     );
@@ -58,34 +58,9 @@ class MyPageController extends GetxController with GetSingleTickerProviderStateM
         buttonTitles: const ['아니요', '네 취소할래요'],
         onTapButton: (index) {
           Get.back();
-          if (index == 1) _showSnackBar(title: '차단이 완료되었습니다.');
+          if (index == 1) SnackBarManager().showSnackBar(title: '차단이 완료되었습니다.');
         },
       ),
     );
-  }
-
-  void _showSnackBar({required String title}) {
-    final getSnackBar = GetSnackBar(
-      dismissDirection: DismissDirection.none,
-      message: title,
-      messageText: Text(
-        title,
-        textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
-      ),
-      snackPosition: SnackPosition.BOTTOM,
-      borderRadius: 20,
-      margin: const EdgeInsets.all(10.0),
-      duration: const Duration(seconds: 2),
-      barBlur: 7.0,
-      onTap: (_) {
-        Get.back();
-      },
-      backgroundColor: SeenearColor.grey40,
-      snackStyle: SnackStyle.FLOATING,
-    );
-
-    final controller = SnackbarController(getSnackBar);
-    controller.show();
   }
 }
