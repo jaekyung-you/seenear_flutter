@@ -86,19 +86,17 @@ class MyAccountScreen extends GetView<MyPageSettingController> {
                       style: TextStyle(fontWeight: FontWeight.w500, color: Colors.black, fontSize: 21),
                     ),
                     const Spacer(),
-                    InkWell(
+                    RoundedWidget(
+                      text: '변경',
+                      bgColor: Colors.white,
+                      fgColor: SeenearColor.blue60,
+                      borderColor: SeenearColor.blue60,
+                      imageColor: SeenearColor.blue60,
+                      horizontalPadding: 13.0,
+                      icon: Icons.edit,
                       onTap: () {
                         controller.onTapEditNickname();
                       },
-                      child: RoundedWidget(
-                        text: '변경',
-                        bgColor: Colors.white,
-                        fgColor: SeenearColor.blue60,
-                        borderColor: SeenearColor.blue60,
-                        imageColor: SeenearColor.blue60,
-                        horizontalPadding: 13.0,
-                        icon: Icons.edit,
-                      ),
                     ),
                   ],
                 ),

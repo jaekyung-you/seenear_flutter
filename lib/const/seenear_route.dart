@@ -3,6 +3,8 @@ import 'package:seenear/const/seenear_path.dart';
 import 'package:seenear/presentation/home/controller/home_controller.dart';
 import 'package:seenear/presentation/home/widget/home_screen.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_menu_controller.dart';
+import 'package:seenear/presentation/my_page/controller/my_page_setting_controller.dart';
+import 'package:seenear/presentation/my_page/widget/my_setting_menu/my_account_screen.dart';
 import 'package:seenear/presentation/profile/controller/other_profile_detail_controller.dart';
 import 'package:seenear/presentation/profile/widget/other_profile_detail_screen.dart';
 import 'package:seenear/presentation/sign_up/controller/sign_up_controller.dart';
@@ -57,6 +59,15 @@ class SeenearRoute {
       binding: BindingsBuilder(
             () {
           Get.put(OtherProfileDetailController());
+        },
+      ),
+    ),
+    GetPage(
+      name: SeenearPath.MY_PAGE_ACCOUNT,
+      page: () => const MyAccountScreen(),
+      binding: BindingsBuilder(
+            () {
+          Get.put(MyPageSettingController());
         },
       ),
     ),

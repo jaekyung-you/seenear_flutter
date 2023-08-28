@@ -6,4 +6,6 @@ class SeenearPath {
   static String MY_PAGE = '/my_page';
   static String OTHER_PROFILE = '/profile/other';
   static String MY_PROFILE = '/profile/my';
+
+  static String MY_PAGE_ACCOUNT = '/my_page/account';
 }

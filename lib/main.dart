@@ -7,7 +7,7 @@ import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/const/design_system/textfield_with_helper.dart';
 import 'package:seenear/const/seenear_route.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
-import 'package:seenear/presentation/my_page/controller/my_page_menu_controller.dart';
+import 'package:seenear/presentation/my_page/controller/my_page_setting_controller.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/my_account_screen.dart';
 import 'const/design_system/empty_view.dart';
 import 'const/design_system/rounded_widget.dart';
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       initialBinding: BindingsBuilder(
         () {
-          Get.put(MyPageController());
+          Get.put(MyPageSettingController());
         },
       ),
       // initialRoute: SeenearPath.SIGN_UP,
