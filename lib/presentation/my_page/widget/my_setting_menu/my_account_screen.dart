@@ -134,7 +134,7 @@ class MyAccountScreen extends GetView<MyPageSettingController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    '회원탈퇴 및 계정 삭제',
+                    '회원 탈퇴 및 계정 삭제',
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: SeenearColor.grey30),
                   ),
                   const SizedBox(

@@ -25,7 +25,7 @@ class MyPageSettingController extends GetxController {
   void onTapFinishEditNickname() {
     Get.bottomSheet(
       BaseBottomSheet(
-        title: '닉네임 변경을 완료하시겠어요?',
+        title: '닉네임 변경을 완제료하시겠어요?',
         desc: '완료 이후 변경된 닉네임으로 적용됩니다.',
         buttonTitles: const ['아니요', '완료'],
         onTapButton: (index) {
@@ -41,5 +41,21 @@ class MyPageSettingController extends GetxController {
 
   void onTapDeactiveAccount() {
     Get.to(() => const DeactiveAccountScreen());
+  }
+
+  void onTapFinishDeactiveAccount() {
+    Get.bottomSheet(
+      BaseBottomSheet(
+        title: '정말 탈퇴 하시겠어요?',
+        desc: '탈퇴시 회원님의 모든 정보는 즉시 폐기됩니다.',
+        buttonTitles: const ['아니요', '탈퇴 완료'],
+        onTapButton: (index) {
+          Get.back();
+          if (index == 1) {
+            // todo: 탈퇴하기 api -> 인트로로 돌아가기
+          }
+        },
+      ),
+    );
   }
 }
