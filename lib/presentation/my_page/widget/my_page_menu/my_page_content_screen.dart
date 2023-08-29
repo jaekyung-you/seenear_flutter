@@ -9,7 +9,7 @@ import 'package:seenear/presentation/my_page/widget/my_page_menu/subscription_ce
 import 'package:styled_text/styled_text.dart';
 import '../../../../const/design_system/seenear_color.dart';
 
-class MyPageContentScreen extends GetView<MyPageController> {
+class MyPageContentScreen extends GetView<MyPageMenuController> {
   final MyPageMenu menu;
 
   const MyPageContentScreen({super.key, required this.menu});

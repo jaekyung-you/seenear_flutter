@@ -5,6 +5,7 @@ import 'package:seenear/presentation/home/widget/home_screen.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_menu_controller.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_setting_controller.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/my_account_screen.dart';
+import 'package:seenear/presentation/my_page/widget/my_setting_menu/notice_screen.dart';
 import 'package:seenear/presentation/profile/controller/other_profile_detail_controller.dart';
 import 'package:seenear/presentation/profile/widget/other_profile_detail_screen.dart';
 import 'package:seenear/presentation/sign_up/controller/sign_up_controller.dart';
@@ -49,7 +50,7 @@ class SeenearRoute {
       page: () => const MyPageScreen(),
       binding: BindingsBuilder(
             () {
-          Get.put(MyPageController());
+          Get.put(MyPageMenuController());
         },
       ),
     ),
@@ -65,6 +66,15 @@ class SeenearRoute {
     GetPage(
       name: SeenearPath.MY_PAGE_ACCOUNT,
       page: () => const MyAccountScreen(),
+      binding: BindingsBuilder(
+            () {
+          Get.put(MyPageSettingController());
+        },
+      ),
+    ),
+    GetPage(
+      name: SeenearPath.MY_PAGE_NOTICE,
+      page: () => const NoticeScreen(),
       binding: BindingsBuilder(
             () {
           Get.put(MyPageSettingController());

@@ -10,6 +10,8 @@ class MyPageSettingController extends GetxController {
   TextEditingController nicknameEditController = TextEditingController();
   HelperTextType helperTextType = HelperTextType(isError: false, helperText: '닉네임을 입력해주세요.');
 
+  List<String> noticeList = [];
+
   List<String> deactiveReasons = [
     '개인정보 노출이 걱정돼요',
     '자주 사용하지 않아요',

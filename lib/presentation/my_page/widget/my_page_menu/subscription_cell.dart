@@ -7,7 +7,7 @@ import 'package:seenear/presentation/my_page/controller/my_page_menu_controller.
 import '../../../../const/enum/my_page_menu.dart';
 import '../../../../const/seenear_path.dart';
 
-class SubscriptionCell extends GetView<MyPageController> {
+class SubscriptionCell extends GetView<MyPageMenuController> {
   final bool isFollowing; // true: '내가 구독한 사람'
   final bool isMatched; // 서로 구독중인 경우
 

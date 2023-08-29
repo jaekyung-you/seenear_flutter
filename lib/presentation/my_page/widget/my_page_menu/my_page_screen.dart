@@ -8,7 +8,7 @@ import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_menu_controller.dart';
 import 'package:styled_text/styled_text.dart';
 
-class MyPageScreen extends GetView<MyPageController> {
+class MyPageScreen extends GetView<MyPageMenuController> {
   const MyPageScreen({super.key});
 
   @override
