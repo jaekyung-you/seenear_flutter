@@ -34,6 +34,7 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
       case MyPageSetting.notice:
         Get.toNamed(SeenearPath.MY_PAGE_NOTICE);
       case MyPageSetting.helpdesk:
+        Get.toNamed(SeenearPath.MY_PAGE_HELP_DESK);
       case MyPageSetting.notification:
     }
   }
