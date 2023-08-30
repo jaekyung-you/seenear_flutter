@@ -13,4 +13,8 @@ class HelpDeskController extends GetxController {
   ];
   List<String> topFiveQuestionList = [];
   TextEditingController searchInputController = TextEditingController();
+  TextEditingController phoneInputController = TextEditingController();
+
+  TextEditingController inquiryTitleInputController = TextEditingController();
+  TextEditingController inquiryContentInputController = TextEditingController();
 }

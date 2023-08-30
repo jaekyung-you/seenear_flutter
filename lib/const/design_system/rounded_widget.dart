@@ -18,7 +18,7 @@ class RoundedWidget extends StatelessWidget {
       required this.bgColor,
       required this.fgColor,
       this.borderColor,
-        this.borderRadius = 20.0,
+      this.borderRadius = 20.0,
       this.image,
       this.icon,
       this.horizontalPadding = 8,

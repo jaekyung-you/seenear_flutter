@@ -18,6 +18,7 @@ class TextFieldWithHelperText extends StatefulWidget {
       _TextFieldWithHelperTextState();
 }
 
+// todo: floatingLabelBehavior, alignLabelWithHint 등 찾아볼 것
 class _TextFieldWithHelperTextState extends State<TextFieldWithHelperText> {
   @override
   Widget build(BuildContext context) {

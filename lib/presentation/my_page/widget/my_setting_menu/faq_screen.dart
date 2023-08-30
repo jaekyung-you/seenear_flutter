@@ -16,7 +16,10 @@ class FAQScreen extends GetView<HelpDeskController> {
     return SeenearBaseScaffold(
       child: Column(
         children: [
-          const BaseHeader(title: '자주 묻는 질문'),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: BaseHeader(title: '자주 묻는 질문'),
+          ),
           Expanded(
             child: Column(
               children: [
@@ -53,20 +56,25 @@ class FAQScreen extends GetView<HelpDeskController> {
         child: TextField(
           controller: controller.searchInputController,
           decoration: InputDecoration(
-              prefixIcon: Icon(
-                Icons.search,
-                color: SeenearColor.grey50,
-              ),
-              fillColor: SeenearColor.grey5,
-              filled: true,
-              focusColor: Colors.white,
-              enabledBorder: const OutlineInputBorder(borderSide: BorderSide.none),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-                borderSide: BorderSide(color: SeenearColor.blue60),
-              ),
-              hintText: '검색어를 입력해주세요',
-              hintStyle: TextStyle(fontWeight: FontWeight.w400, color: SeenearColor.grey30, fontSize: 17)),
+            prefixIcon: Icon(
+              Icons.search,
+              color: SeenearColor.grey50,
+            ),
+            fillColor: SeenearColor.grey5,
+            filled: true,
+            focusColor: Colors.white,
+            enabledBorder: const OutlineInputBorder(borderSide: BorderSide.none),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+              borderSide: BorderSide(color: SeenearColor.blue60),
+            ),
+            hintText: '검색어를 입력해주세요',
+            hintStyle: TextStyle(
+              fontWeight: FontWeight.w400,
+              color: SeenearColor.grey30,
+              fontSize: 17,
+            ),
+          ),
         ),
       ),
     );
