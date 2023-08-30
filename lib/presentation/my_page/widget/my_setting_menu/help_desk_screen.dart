@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:seenear/const/design_system/base_header.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
-import 'package:seenear/presentation/my_page/controller/my_page_setting_controller.dart';
+import '../../../../const/seenear_path.dart';
+import '../../controller/help_desk_controller.dart';
 
-class HelpDeskScreen extends GetView<MyPageSettingController> {
+class HelpDeskScreen extends GetView<HelpDeskController> {
   const HelpDeskScreen({super.key});
 
   @override
@@ -16,7 +17,9 @@ class HelpDeskScreen extends GetView<MyPageSettingController> {
         child: Column(
           children: [
             const BaseHeader(title: '고객센터'),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -47,39 +50,53 @@ class HelpDeskScreen extends GetView<MyPageSettingController> {
             const SizedBox(
               height: 20,
             ),
-            helpDeskCell(imageString: 'inquiry', title: '자주 묻는 질문'),
-            helpDeskCell(imageString: 'review', title: '1:1 문의하기'),
-            helpDeskCell(imageString: 'notice', title: '공지사항'),
+            helpDeskCell(
+              imageString: 'inquiry',
+              title: '자주 묻는 질문',
+              onTap: () {
+                Get.toNamed(SeenearPath.MY_PAGE_HELP_DESK_FAQ);
+              },
+            ),
+            helpDeskCell(
+              imageString: 'review',
+              title: '1:1 문의하기',
+              onTap: () {
+                Get.toNamed(SeenearPath.MY_PAGE_HELP_DESK_INQUIRY);
+              },
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget helpDeskCell({required String imageString, required String title}) {
-    return SizedBox(
-      width: Get.width,
-      height: 60,
-      child: Row(
-        children: [
-          Image.asset(
-            'assets/images/$imageString.png',
-            width: 28,
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          Text(
-            title,
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: SeenearColor.grey70),
-          ),
-          const Spacer(),
-          Image.asset(
-            'assets/images/arrow_right.png',
-            width: 22,
-            color: SeenearColor.grey30,
-          ),
-        ],
+  Widget helpDeskCell({required String imageString, required String title, required Function onTap}) {
+    return InkWell(
+      onTap: onTap(),
+      child: SizedBox(
+        width: Get.width,
+        height: 60,
+        child: Row(
+          children: [
+            Image.asset(
+              'assets/images/$imageString.png',
+              width: 28,
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            Text(
+              title,
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: SeenearColor.grey70),
+            ),
+            const Spacer(),
+            Image.asset(
+              'assets/images/arrow_right.png',
+              width: 22,
+              color: SeenearColor.grey30,
+            ),
+          ],
+        ),
       ),
     );
   }

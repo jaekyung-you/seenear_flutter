@@ -10,8 +10,11 @@ import 'package:seenear/presentation/profile/controller/other_profile_detail_con
 import 'package:seenear/presentation/profile/widget/other_profile_detail_screen.dart';
 import 'package:seenear/presentation/sign_up/controller/sign_up_controller.dart';
 import 'package:seenear/presentation/sign_up/widget/sign_up_screen.dart';
+import '../presentation/my_page/controller/help_desk_controller.dart';
 import '../presentation/my_page/widget/my_page_menu/my_page_screen.dart';
+import '../presentation/my_page/widget/my_setting_menu/faq_screen.dart';
 import '../presentation/my_page/widget/my_setting_menu/help_desk_screen.dart';
+import '../presentation/my_page/widget/my_setting_menu/inquiry_screen.dart';
 import '../presentation/sign_up/widget/sign_up_complete_screen.dart';
 
 class SeenearRoute {
@@ -87,7 +90,25 @@ class SeenearRoute {
       page: () => const HelpDeskScreen(),
       binding: BindingsBuilder(
             () {
-          Get.put(MyPageSettingController());
+          Get.put(HelpDeskController());
+        },
+      ),
+    ),
+    GetPage(
+      name: SeenearPath.MY_PAGE_HELP_DESK_FAQ,
+      page: () => const FAQScreen(),
+      binding: BindingsBuilder(
+            () {
+          Get.put(HelpDeskController());
+        },
+      ),
+    ),
+    GetPage(
+      name: SeenearPath.MY_PAGE_HELP_DESK_INQUIRY,
+      page: () => const InquiryScreen(),
+      binding: BindingsBuilder(
+            () {
+          Get.put(HelpDeskController());
         },
       ),
     ),
