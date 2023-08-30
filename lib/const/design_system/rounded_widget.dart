@@ -5,6 +5,7 @@ class RoundedWidget extends StatelessWidget {
   final Color bgColor;
   final Color fgColor;
   final Color? borderColor;
+  final double borderRadius;
   final String? image;
   final Color? imageColor;
   final IconData? icon;
@@ -17,6 +18,7 @@ class RoundedWidget extends StatelessWidget {
       required this.bgColor,
       required this.fgColor,
       this.borderColor,
+        this.borderRadius = 20.0,
       this.image,
       this.icon,
       this.horizontalPadding = 8,
@@ -33,7 +35,7 @@ class RoundedWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 4.0),
         decoration: BoxDecoration(
           border: borderColor != null ? Border.all(color: borderColor!) : null,
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(borderRadius),
           color: bgColor,
         ),
         child: Row(

@@ -72,7 +72,9 @@ class HelpDeskScreen extends GetView<HelpDeskController> {
 
   Widget helpDeskCell({required String imageString, required String title, required Function onTap}) {
     return InkWell(
-      onTap: onTap(),
+      onTap: () {
+        onTap();
+      },
       child: SizedBox(
         width: Get.width,
         height: 60,
@@ -87,7 +89,11 @@ class HelpDeskScreen extends GetView<HelpDeskController> {
             ),
             Text(
               title,
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: SeenearColor.grey70),
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 20,
+                color: SeenearColor.grey70,
+              ),
             ),
             const Spacer(),
             Image.asset(
