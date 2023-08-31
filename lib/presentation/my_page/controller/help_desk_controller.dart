@@ -25,7 +25,7 @@ class HelpDeskController extends GetxController {
       BaseBottomSheet(
         title: '작성을 완료하시겠어요?',
         desc: '답변은 영업일 기준 2~3일 정도 소요됩니다.',
-        buttonTitles: ['아니요', '작성 완료'],
+        buttonTitles: const ['아니요', '작성 완료'],
         onTapButton: (index) async {
           Get.back();
           if (index == 1) {

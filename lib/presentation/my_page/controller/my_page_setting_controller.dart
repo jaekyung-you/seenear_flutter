@@ -21,6 +21,14 @@ class MyPageSettingController extends GetxController {
     '기타',
   ];
 
+  Map<String, RxBool> notificationSwitchList = {
+    '모든 알림 허용': false.obs,
+    '공지사항 알림': false.obs,
+    '후기 댓글 알림': false.obs,
+    '업데이트 알림': false.obs,
+    '마케팅 수신 알림': false.obs,
+  };
+
   @override
   void onInit() {
     super.onInit();

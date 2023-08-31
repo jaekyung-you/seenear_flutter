@@ -12,4 +12,5 @@ class SeenearPath {
   static String MY_PAGE_HELP_DESK = '/my_page/help_desk';
   static String MY_PAGE_HELP_DESK_FAQ = '/my_page/help_desk/faq';
   static String MY_PAGE_HELP_DESK_INQUIRY = '/my_page/help_desk/inquiry';
+  static String MY_PAGE_NOTIFICATION = '/my_page/help_desk/notification';
 }
