@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:seenear/const/seenear_path.dart';
 import 'package:seenear/presentation/home/controller/home_controller.dart';
 import 'package:seenear/presentation/home/widget/home_screen.dart';
+import 'package:seenear/presentation/login/controller/login_controller.dart';
+import 'package:seenear/presentation/login/widget/login_screen.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_menu_controller.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_setting_controller.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/my_account_screen.dart';
@@ -28,6 +30,15 @@ class SeenearRoute {
   }
 
   static final routes = [
+    GetPage(
+      name: SeenearPath.LOGIN,
+      page: () => const LoginScreen(),
+      binding: BindingsBuilder(
+            () {
+          Get.put(LoginController());
+        },
+      ),
+    ),
     GetPage(
       name: SeenearPath.SIGN_UP,
       page: () => const SignUpScreen(),

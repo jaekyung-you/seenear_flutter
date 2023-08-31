@@ -7,6 +7,8 @@ import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/const/design_system/textfield_with_helper.dart';
 import 'package:seenear/const/seenear_route.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
+import 'package:seenear/presentation/login/controller/login_controller.dart';
+import 'package:seenear/presentation/login/widget/login_screen.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_menu_controller.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_setting_controller.dart';
 import 'package:seenear/presentation/my_page/widget/my_page_menu/my_page_screen.dart';
@@ -36,8 +38,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       initialBinding: BindingsBuilder(
         () {
-          Get.put(MyPageMenuController());
-          Get.put(MyPageSettingController());
+          Get.put(LoginController());
         },
       ),
       // initialRoute: SeenearPath.SIGN_UP,
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MyPageScreen(),
+      home: LoginScreen(),
     );
   }
 }
