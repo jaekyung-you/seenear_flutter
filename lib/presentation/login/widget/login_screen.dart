@@ -40,10 +40,20 @@ class LoginScreen extends GetView<LoginController> {
                           color: SeenearColor.grey50,
                         ),
                       ),
-                      const SizedBox(height: 10,),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          controller.onTapLogin();
+                        },
                         child: Image.asset('assets/images/kakao_login_button.png'),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          controller.onTapLogout();
+                        },
+                        child: Text('임시 로그아웃'),
                       ),
                     ],
                   ),
