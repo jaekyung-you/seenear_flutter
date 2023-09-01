@@ -38,6 +38,8 @@ dependencies:
   kakao_flutter_sdk_user: ^1.5.0
   get: ^4.6.5
   styled_text: ^8.1.0
+  package_info_plus: ^4.1.0
+  device_info_plus: ^9.0.3
 
 dev_dependencies:
   flutter_test:
