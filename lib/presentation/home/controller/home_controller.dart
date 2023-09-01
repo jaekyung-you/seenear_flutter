@@ -13,7 +13,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> getMainList() async {
-    Response res = await ApiBase().get('http://3.37.70.222:9090/health-check');
+    Response res = await ApiBase().get('/health-check');
     print('res: $res');
   }
 }

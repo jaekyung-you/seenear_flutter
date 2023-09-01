@@ -12,6 +12,7 @@ class ApiBase {
   static final ApiBase _instance = ApiBase._privateConstructor();
   final GetHttpClient _httpClient = GetHttpClient();
 
+  String _baseUrl = 'http://3.37.70.222:9090';
   Map<String, String>? _baseHeader;
   PackageInfo? _packageInfo;
   AndroidDeviceInfo? _androidDeviceInfo;
@@ -21,7 +22,6 @@ class ApiBase {
     return _instance;
   }
 
-// dot ?? 라이브러리 사용할지 고민 ..
   Future<void> init() async {
     _httpClient.defaultContentType = "application/json";
     _httpClient.timeout = const Duration(hours: 1);
@@ -72,17 +72,17 @@ class ApiBase {
   }
 
   Future<Response> get(
-    String url, {
-    Map<String, String>? headers,
-    String? contentType,
+    String path, {
     Map<String, dynamic>? query,
     Map<String, dynamic>? body,
-    Decoder? decoder,
   }) async {
     await init();
+    String url = _baseUrl + path;
+
     try {
       var res = await _httpClient.get(
         url,
+        headers: _baseHeader,
         query: query,
       );
       return res;

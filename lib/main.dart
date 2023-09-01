@@ -13,13 +13,15 @@ import 'const/design_system/empty_view.dart';
 import 'const/design_system/rounded_widget.dart';
 import 'const/design_system/select_text_item_cell.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   KakaoSdk.init(
     nativeAppKey: Defines.KAKAO_SDK_KEY,
   );
 
+  // 스플레시 화면 3초간 노출
+  await Future.delayed(const Duration(seconds: 3));
   runApp(const MyApp());
 }
 
