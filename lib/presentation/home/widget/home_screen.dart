@@ -78,6 +78,10 @@ class HomeScreen extends GetView<HomeController> {
                   fontSize: 27,
                   bgColor: bgColor,
                   fgColor: fgColor,
+                  onTap: () {
+                    if (isNotOpened) return;
+                    controller.onTapMainCell(controller.homeMenus[index]);
+                  },
                 );
               },
             ),

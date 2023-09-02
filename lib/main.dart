@@ -19,7 +19,7 @@ void main() async {
   KakaoSdk.init(
     nativeAppKey: Defines.KAKAO_SDK_KEY,
   );
-
+  
   // 스플레시 화면 3초간 노출
   await Future.delayed(const Duration(seconds: 3));
   runApp(const MyApp());
