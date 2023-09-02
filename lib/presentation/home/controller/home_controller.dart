@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
-
 import '../../../const/enum/home_menu.dart';
 import '../../../const/seenear_path.dart';
-import '../../../data/remote/api/api_base.dart';
+import '../../../data/remote/api/health/health_api.dart';
 
 class HomeController extends GetxController {
   List<HomeMenu> homeMenus = HomeMenu.values;
   bool isLogined = false;
+
+  // usecase
+  CheckHealth checkHealth = CheckHealth();
 
   @override
   void onInit() {
@@ -15,8 +17,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> getMainList() async {
-    Response res = await ApiBase().get('/health-check');
-    print('res: $res');
+    checkHealth();
   }
 
   void onTapMainCell(HomeMenu menu) {
