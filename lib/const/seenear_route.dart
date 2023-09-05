@@ -4,6 +4,8 @@ import 'package:seenear/presentation/home/controller/home_controller.dart';
 import 'package:seenear/presentation/home/widget/home_screen.dart';
 import 'package:seenear/presentation/login/controller/login_controller.dart';
 import 'package:seenear/presentation/login/widget/login_screen.dart';
+import 'package:seenear/presentation/market_festival/controller/market_festival_controller.dart';
+import 'package:seenear/presentation/market_festival/widget/market_festival_screen.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_menu_controller.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_setting_controller.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/my_account_screen.dart';
@@ -34,7 +36,7 @@ class SeenearRoute {
       name: SeenearPath.LOGIN,
       page: () => const LoginScreen(),
       binding: BindingsBuilder(
-            () {
+        () {
           Get.put(LoginController());
         },
       ),
@@ -56,7 +58,7 @@ class SeenearRoute {
       name: SeenearPath.HOME,
       page: () => const HomeScreen(),
       binding: BindingsBuilder(
-            () {
+        () {
           Get.put(HomeController());
         },
       ),
@@ -65,7 +67,7 @@ class SeenearRoute {
       name: SeenearPath.MY_PAGE,
       page: () => const MyPageScreen(),
       binding: BindingsBuilder(
-            () {
+        () {
           Get.put(MyPageMenuController());
         },
       ),
@@ -74,7 +76,7 @@ class SeenearRoute {
       name: SeenearPath.OTHER_PROFILE,
       page: () => const OtherProfileDetailScreen(),
       binding: BindingsBuilder(
-            () {
+        () {
           Get.put(OtherProfileDetailController());
         },
       ),
@@ -83,7 +85,7 @@ class SeenearRoute {
       name: SeenearPath.MY_PAGE_ACCOUNT,
       page: () => const MyAccountScreen(),
       binding: BindingsBuilder(
-            () {
+        () {
           Get.put(MyPageSettingController());
         },
       ),
@@ -92,7 +94,7 @@ class SeenearRoute {
       name: SeenearPath.MY_PAGE_NOTICE,
       page: () => const NoticeScreen(),
       binding: BindingsBuilder(
-            () {
+        () {
           Get.put(MyPageSettingController());
         },
       ),
@@ -101,7 +103,7 @@ class SeenearRoute {
       name: SeenearPath.MY_PAGE_HELP_DESK,
       page: () => const HelpDeskScreen(),
       binding: BindingsBuilder(
-            () {
+        () {
           Get.put(HelpDeskController());
         },
       ),
@@ -110,7 +112,7 @@ class SeenearRoute {
       name: SeenearPath.MY_PAGE_HELP_DESK_FAQ,
       page: () => const FAQScreen(),
       binding: BindingsBuilder(
-            () {
+        () {
           Get.put(HelpDeskController());
         },
       ),
@@ -119,7 +121,7 @@ class SeenearRoute {
       name: SeenearPath.MY_PAGE_HELP_DESK_INQUIRY,
       page: () => const InquiryScreen(),
       binding: BindingsBuilder(
-            () {
+        () {
           Get.put(HelpDeskController());
         },
       ),
@@ -128,8 +130,30 @@ class SeenearRoute {
       name: SeenearPath.MY_PAGE_NOTIFICATION,
       page: () => const NotificationScreen(),
       binding: BindingsBuilder(
-            () {
+        () {
           Get.put(MyPageSettingController());
+        },
+      ),
+    ),
+    GetPage(
+      name: SeenearPath.MARKET,
+      page: () => const MarketFestivalScreen(
+        isFestival: false,
+      ),
+      binding: BindingsBuilder(
+        () {
+          Get.put(MarketFestivalController());
+        },
+      ),
+    ),
+    GetPage(
+      name: SeenearPath.FESTIVAl,
+      page: () => const MarketFestivalScreen(
+        isFestival: true,
+      ),
+      binding: BindingsBuilder(
+        () {
+          Get.put(MarketFestivalController());
         },
       ),
     ),
