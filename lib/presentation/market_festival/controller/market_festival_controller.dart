@@ -53,33 +53,44 @@ class MarketFestivalController extends GetxController {
     if (index == 0) {
       title = '지역을 선택해주세요';
       content = SizedBox(
-        height: Get.height / 1.9 ,
+        height: Get.height / 1.9,
         child: GridView.builder(
             itemCount: Defines.selectRegionList.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, //1 개의 행에 보여줄 item 개수
               mainAxisSpacing: 16, //수평 Padding
               crossAxisSpacing: 6,
-              mainAxisExtent: 36,//수직 Padding
+              mainAxisExtent: 36, //수직 Padding
             ),
             itemBuilder: (context, index) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    Defines.selectRegionList[index],
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      color: SeenearColor.grey80, // blue80
-                    ),
-                  ),
-                  const SizedBox(width: 4,),
-                  Image.asset(
-                    'assets/images/check_filled.png',
-                    width: 22,
-                  ),
-                ],
+              return InkWell(
+                onTap: () {
+                  region.value = Defines.selectRegionList[index];
+                  Get.back();
+                },
+                child: Obx(() {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        Defines.selectRegionList[index],
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: region.value == Defines.selectRegionList[index] ? SeenearColor.blue80 : SeenearColor.grey80, //
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      if (region.value == Defines.selectRegionList[index])
+                        Image.asset(
+                          'assets/images/check_filled.png',
+                          width: 22,
+                        ),
+                    ],
+                  );
+                }),
               );
             }),
       );

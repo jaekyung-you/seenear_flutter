@@ -50,21 +50,21 @@ class FilterWidget extends GetView<MarketFestivalController> {
                 children: [
                   if (controller.region.value.isNotEmpty)
                     selectedFilter(
-                      title: '인천',
+                      title: controller.region.value,
                       onTap: () {
                         controller.region.value = '';
                       },
                     ),
                   if (controller.location.value.isNotEmpty)
                     selectedFilter(
-                      title: '남동구',
+                      title: controller.location.value,
                       onTap: () {
                         controller.location.value = '';
                       },
                     ),
                   if (controller.date.value.isNotEmpty)
                     selectedFilter(
-                      title: '2023-10-07 (월)',
+                      title: controller.date.value,
                       onTap: () {
                         controller.date.value = '';
                       },
