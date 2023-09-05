@@ -10,9 +10,9 @@ import '../../../const/design_system/seenear_color.dart';
 import '../controller/market_festival_controller.dart';
 
 class MarketFestivalScreen extends GetView<MarketFestivalController> {
-  final bool isMarket;
-
-  const MarketFestivalScreen({super.key, required this.isMarket});
+  const MarketFestivalScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +22,22 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
           children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: BaseHeader(title: isMarket ? '전통시장' : '축제/행사'),
+              child: BaseHeader(title: controller.isMarket ? '전통시장' : '축제/행사'),
             ),
             const SizedBox(
               height: 10,
             ),
-            FilterWidget(isMarket: isMarket),
-            Expanded(child: contentView(isMarket)),
+            const FilterWidget(),
+            Expanded(
+              child: contentView(),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget contentView(bool isFestival) {
+  Widget contentView() {
     return Column(
       children: [
         Container(
@@ -87,7 +89,7 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
           ),
         ),
         Expanded(
-          child: isMarket
+          child: controller.isMarket
               ? controller.marketList.isEmpty
                   ? emptyView()
                   : ListView.builder(
@@ -125,7 +127,7 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
           height: 8,
         ),
         Text(
-          isMarket ? '선택하신 지역과 요일에\n열리는 장이 없어요' : '선택하신 지역과 시기에는 진행되는\n축제나 행사가 없어요',
+          controller.isMarket ? '선택하신 지역과 요일에\n열리는 장이 없어요' : '선택하신 지역과 시기에는 진행되는\n축제나 행사가 없어요',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 20,

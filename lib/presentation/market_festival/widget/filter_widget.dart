@@ -4,9 +4,7 @@ import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/presentation/market_festival/controller/market_festival_controller.dart';
 
 class FilterWidget extends GetView<MarketFestivalController> {
-  final bool isMarket;
-
-  const FilterWidget({super.key, required this.isMarket});
+  const FilterWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -23,7 +23,7 @@ class HomeController extends GetxController {
   void onTapMainCell(HomeMenu menu) {
     switch (menu) {
       case HomeMenu.market:
-        Get.toNamed(SeenearPath.MARKET);
+        Get.toNamed(SeenearPath.MARKET, arguments: {'type': 'market'});
         break;
       case HomeMenu.community:
         // 커뮤니티 진입, 화면 미기획
@@ -32,7 +32,7 @@ class HomeController extends GetxController {
         Get.toNamed(isLogined ? SeenearPath.MY_PAGE : SeenearPath.LOGIN);
         break;
       case HomeMenu.festival:
-        Get.toNamed(SeenearPath.FESTIVAl);
+        Get.toNamed(SeenearPath.FESTIVAl, arguments: {'type': 'festival'});
         break;
     }
   }

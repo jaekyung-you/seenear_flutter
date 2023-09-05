@@ -34,7 +34,11 @@ class OneButtonBottomSheet extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.start,
-            style: TextStyle(fontSize: 21, fontWeight: FontWeight.w700, color: SeenearColor.grey60),
+            style: TextStyle(
+              fontSize: 21,
+              fontWeight: FontWeight.w700,
+              color: SeenearColor.grey60,
+            ),
           ),
           const SizedBox(
             height: 20,

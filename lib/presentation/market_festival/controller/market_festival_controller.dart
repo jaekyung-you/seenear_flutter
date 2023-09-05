@@ -3,12 +3,34 @@ import 'package:get/get.dart';
 import 'package:seenear/const/design_system/one_button_bottom_sheet.dart';
 
 class MarketFestivalController extends GetxController {
-  RxList<String> marketList = <String>["1", "2"].obs;
+  bool isMarket = true;
+  RxList<String> marketList = <String>[].obs;
   RxList<String> festivalList = <String>[].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    if (Get.arguments != null) {
+      isMarket = Get.arguments['type'] == 'market';
+      print("isMarket: $isMarket");
+    }
+    getList();
+  }
+
+  Future<void> getList() async {
+    if (isMarket) {
+      // todo: market list api 호출
+    } else {
+      // todo: festival list api 호출
+    }
+
+    return;
+  }
 
   void onTapFilterCell({required int index}) {
     String title = '';
     Widget? content;
+
     if (index == 0) {
       title = '지역을 선택해주세요';
       content = Container(
