@@ -1,7 +1,6 @@
 import 'dart:io';
-
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:get/get.dart';
+import 'package:dio/dio.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../const/api_base_string.dart';
@@ -10,9 +9,7 @@ class ApiBase {
   ApiBase._privateConstructor();
 
   static final ApiBase _instance = ApiBase._privateConstructor();
-  final GetHttpClient _httpClient = GetHttpClient();
-
-  String _baseUrl = 'http://3.37.70.222:9090';
+  final Dio dio = Dio();
   Map<String, String>? _baseHeader;
   PackageInfo? _packageInfo;
   AndroidDeviceInfo? _androidDeviceInfo;
@@ -23,8 +20,6 @@ class ApiBase {
   }
 
   Future<void> init() async {
-    _httpClient.defaultContentType = "application/json";
-    _httpClient.timeout = const Duration(hours: 1);
     await _createBaseHeader();
   }
 
@@ -42,6 +37,9 @@ class ApiBase {
     _baseHeader?.putIfAbsent(HEADER_APP_VERSION, () => _packageInfo?.version ?? "");
     _baseHeader?.putIfAbsent(HEADER_PLATFORM, () => platform);
 
+    dio.options.baseUrl = 'http://3.37.70.222:9090';
+    dio.options.contentType = "application/json";
+    dio.options.headers = _baseHeader;
     // String uuid = await SharedPrefManager().getUuidStr();
     // if (uuid.isNotEmpty) {
     //   _baseHeader?.putIfAbsent(HEADER_UUID, () => uuid);
@@ -71,20 +69,20 @@ class ApiBase {
     }
   }
 
-  Future<Response> get(
-    String path, {
-    Map<String, dynamic>? query,
-    Map<String, dynamic>? body,
-  }) async {
+  Future<Response> get(String path, {Map<String, dynamic>? query}) async {
     await init();
-    String url = _baseUrl + path;
-
     try {
-      var res = await _httpClient.get(
-        url,
-        headers: _baseHeader,
-        query: query,
-      );
+      var res = await dio.get(path, queryParameters: query);
+      return res;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Response> post(String path, {Map<String, dynamic>? data}) async {
+    await init();
+    try {
+      var res = await dio.post(path, data: data);
       return res;
     } catch (e) {
       rethrow;
