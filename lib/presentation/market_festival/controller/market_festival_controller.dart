@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seenear/const/design_system/one_button_bottom_sheet.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
-
 import '../../../const/define.dart';
 
 class MarketFestivalController extends GetxController {
@@ -10,20 +9,37 @@ class MarketFestivalController extends GetxController {
   RxList<String> marketList = <String>[].obs;
   RxList<String> festivalList = <String>[].obs;
 
+  // property
+  RxInt totalCount = 10.obs;
+  RxString region = ''.obs; // 지역
+  RxString location = ''.obs; // 동네
+  RxString date = ''.obs; // 2023-10-07 (월) 이런식
+
+  RxList<String> filterList = <String>[].obs;
+  RxString sort = '거리순'.obs; // or 인기순
+
   @override
   void onInit() {
     super.onInit();
     if (Get.arguments != null) {
       isMarket = Get.arguments['type'] == 'market';
-      print("isMarket: $isMarket");
     }
     getList();
   }
 
+  void onTapResetButton() {
+    region.value = '';
+    location.value = '';
+    date.value = '';
+    filterList.value = [];
+  }
+
   Future<void> getList() async {
     if (isMarket) {
+      totalCount.value = marketList.length;
       // todo: market list api 호출
     } else {
+      totalCount.value = festivalList.length;
       // todo: festival list api 호출
     }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:seenear/const/design_system/base_header.dart';
 import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
 import 'package:seenear/presentation/market_festival/widget/filter_widget.dart';
@@ -44,70 +45,76 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           color: const Color(0xFFF2F4F6),
           height: 48,
-          child: Row(
-            children: [
-              Text(
-                '총 100개',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: SeenearColor.grey60,
-                ),
-              ),
-              const Spacer(),
-              InkWell(
-                onTap: () {},
-                child: Text(
-                  '거리순',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: SeenearColor.blue80,
-                  ),
-                ),
-              ),
-              Text(
-                ' | ',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: SeenearColor.grey40,
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: Text(
-                  '인기순',
+          child: Obx(() {
+            return Row(
+              children: [
+                Text(
+                  '총 ${controller.totalCount}개',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: SeenearColor.grey60,
                   ),
                 ),
-              ),
-            ],
-          ),
+                const Spacer(),
+                InkWell(
+                  onTap: () {
+                    controller.sort.value = '거리순';
+                  },
+                  child: Text(
+                    '거리순',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: controller.sort.value == '거리순' ? SeenearColor.blue80 : SeenearColor.grey60,
+                    ),
+                  ),
+                ),
+                Text(
+                  ' | ',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: SeenearColor.grey40,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    controller.sort.value = '인기순';
+                  },
+                  child: Text(
+                    '인기순',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: controller.sort.value == '인기순' ? SeenearColor.blue80 : SeenearColor.grey60,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }),
         ),
         Expanded(
           child: controller.isMarket
               ? controller.marketList.isEmpty
-                  ? emptyView()
-                  : ListView.builder(
-                      itemCount: controller.marketList.length,
-                      itemBuilder: (context, index) {
-                        return MarketCell(onTapItemCell: () {}, onTapFavoriteIcon: () {});
-                      })
+              ? emptyView()
+              : ListView.builder(
+              itemCount: controller.marketList.length,
+              itemBuilder: (context, index) {
+                return MarketCell(onTapItemCell: () {}, onTapFavoriteIcon: () {});
+              })
               : controller.festivalList.isEmpty
-                  ? emptyView()
-                  : ListView.builder(
-                      itemCount: controller.festivalList.length,
-                      itemBuilder: (context, index) {
-                        return FestivalCell(
-                          onTapItemCell: () {},
-                          onTapFavoriteIcon: () {},
-                        );
-                      },
-                    ),
+              ? emptyView()
+              : ListView.builder(
+            itemCount: controller.festivalList.length,
+            itemBuilder: (context, index) {
+              return FestivalCell(
+                onTapItemCell: () {},
+                onTapFavoriteIcon: () {},
+              );
+            },
+          ),
         ),
       ],
     );

@@ -12,56 +12,75 @@ class FilterWidget extends GetView<MarketFestivalController> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          selectCell(
-            title: '지역을 선택해주세요',
-            onTap: () {
-              controller.onTapFilterCell(index: 0);
-            },
-          ),
+          Obx(() {
+            return selectCell(
+              title: controller.region.isEmpty ? '지역을 선택해주세요' : controller.region.value,
+              onTap: () {
+                controller.onTapFilterCell(index: 0);
+              },
+            );
+          }),
           const SizedBox(
             height: 10,
           ),
-          selectCell(
-            title: '동네를 선택해주세요',
-            onTap: () {
-              controller.onTapFilterCell(index: 1);
-            },
-          ),
+          Obx(() {
+            return selectCell(
+              title: controller.location.isEmpty ? '동네를 선택해주세요' : controller.location.value,
+              onTap: () {
+                controller.onTapFilterCell(index: 1);
+              },
+            );
+          }),
           const SizedBox(
             height: 10,
           ),
-          selectCell(
-            title: '방문 일자를 선택해주세요',
-            imageName: 'date_available',
-            onTap: () {
-              controller.onTapFilterCell(index: 2);
-            },
-          ),
+          Obx(() {
+            return selectCell(
+              title: controller.date.isEmpty ? '방문 일자를 선택해주세요' : controller.date.value,
+              imageName: 'date_available',
+              onTap: () {
+                controller.onTapFilterCell(index: 2);
+              },
+            );
+          }),
           SizedBox(
             height: 40,
-            child: Row(
-              children: [
-                selectedFilter(
-                  title: '인천',
-                  onTap: () {},
-                ),
-                selectedFilter(
-                  title: '남동구',
-                  onTap: () {},
-                ),
-                selectedFilter(
-                  title: '2023-10-07 (월)',
-                  onTap: () {},
-                ),
-                const Spacer(),
-                selectedFilter(
-                  title: '초기화',
-                  fgColor: SeenearColor.grey30,
-                  imageName: 'reset',
-                  onTap: () {},
-                ),
-              ],
-            ),
+            child: Obx(() {
+              return Row(
+                children: [
+                  if (controller.region.value.isNotEmpty)
+                    selectedFilter(
+                      title: '인천',
+                      onTap: () {
+                        controller.region.value = '';
+                      },
+                    ),
+                  if (controller.location.value.isNotEmpty)
+                    selectedFilter(
+                      title: '남동구',
+                      onTap: () {
+                        controller.location.value = '';
+                      },
+                    ),
+                  if (controller.date.value.isNotEmpty)
+                    selectedFilter(
+                      title: '2023-10-07 (월)',
+                      onTap: () {
+                        controller.date.value = '';
+                      },
+                    ),
+                  const Spacer(),
+                  selectedFilter(
+                    title: '초기화',
+                    fgColor: SeenearColor.grey30,
+                    imageName: 'reset',
+                    onTap: () {
+                      controller.onTapResetButton();
+                    },
+                  ),
+                ],
+              );
+            }),
           )
         ],
       ),
