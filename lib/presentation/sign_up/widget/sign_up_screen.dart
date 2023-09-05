@@ -61,7 +61,7 @@ class SignUpScreen extends GetView<SignUpController> {
 
   Widget contentView() {
     switch (controller.currentStage) {
-      case SignUpProcessStage.residence:
+      case SignUpProcessStage.region:
       case SignUpProcessStage.interest:
       case SignUpProcessStage.interestRegion:
         return GridView.builder(

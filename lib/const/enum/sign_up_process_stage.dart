@@ -1,12 +1,14 @@
+import '../define.dart';
+
 enum SignUpProcessStage {
-  residence,
+  region,
   interest,
   interestRegion,
   nickname;
 
   String get title {
     switch (this) {
-      case SignUpProcessStage.residence:
+      case SignUpProcessStage.region:
         return '🏠 거주 지역 선택';
       case SignUpProcessStage.interest:
         return '💜 관심사 선택';
@@ -19,7 +21,7 @@ enum SignUpProcessStage {
 
   String get subtitle {
     switch (this) {
-      case SignUpProcessStage.residence:
+      case SignUpProcessStage.region:
         return '홍길동 님의\n현재 거주 지역은 어디인가요?';
       case SignUpProcessStage.interest:
         return '홍길동 님의\n평소 관심사는 무엇인가요?';
@@ -44,7 +46,7 @@ enum SignUpProcessStage {
 
   String get bottomSheetTitle {
     switch (this) {
-      case SignUpProcessStage.residence:
+      case SignUpProcessStage.region:
         return '거주 지역을';
       case SignUpProcessStage.interest:
         return '관심사를';
@@ -57,25 +59,9 @@ enum SignUpProcessStage {
 
   List<String> get itemList {
     switch (this) {
-      case SignUpProcessStage.residence:
-        return [
-          '서울',
-          '경기',
-          '인천',
-          '강원',
-          '대전',
-          '충북',
-          '충남/\n세종',
-          '부산',
-          '울산',
-          '경남',
-          '대구',
-          '경북',
-          '광주',
-          '전남',
-          '전주/\n전북',
-          '제주'
-        ];
+      case SignUpProcessStage.region:
+      case SignUpProcessStage.interestRegion:
+        return Defines.signUpRegionList;
       case SignUpProcessStage.interest:
         return [
           '라이프',
@@ -91,25 +77,6 @@ enum SignUpProcessStage {
           '라이프',
           '라이프',
           '라이프',
-        ];
-      case SignUpProcessStage.interestRegion:
-        return [
-          '서울',
-          '경기',
-          '인천',
-          '강원',
-          '대전',
-          '충북',
-          '충남/\n세종',
-          '부산',
-          '울산',
-          '경남',
-          '대구',
-          '경북',
-          '광주',
-          '전남',
-          '전주/\n전북',
-          '제주'
         ];
       default:
         return [];

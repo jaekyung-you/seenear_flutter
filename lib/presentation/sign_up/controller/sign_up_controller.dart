@@ -7,7 +7,7 @@ import '../../../const/design_system/base_bottom_sheet.dart';
 import '../../../const/enum/sign_up_process_stage.dart';
 
 class SignUpController extends GetxController {
-  SignUpProcessStage currentStage = SignUpProcessStage.residence;
+  SignUpProcessStage currentStage = SignUpProcessStage.region;
   bool enableNextButton = false;
   TextEditingController nicknameController = TextEditingController();
   HelperTextType helperTextType = HelperTextType(isError: false, helperText: '닉네임을 입력하지 않으면,\n카카오톡에 등록된 이름으로 자동 설정돼요!');
@@ -15,7 +15,7 @@ class SignUpController extends GetxController {
   void onTapSelectItem() {
     // todo: api 호출
     switch (currentStage) {
-      case SignUpProcessStage.residence:
+      case SignUpProcessStage.region:
         break;
       case SignUpProcessStage.interest:
         break;
