@@ -10,9 +10,9 @@ import '../../../const/design_system/seenear_color.dart';
 import '../controller/market_festival_controller.dart';
 
 class MarketFestivalScreen extends GetView<MarketFestivalController> {
-  final bool isFestival;
+  final bool isMarket;
 
-  const MarketFestivalScreen({super.key, required this.isFestival});
+  const MarketFestivalScreen({super.key, required this.isMarket});
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +22,13 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
           children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: BaseHeader(title: isFestival ? '축제/행사' : '전통시장'),
+              child: BaseHeader(title: isMarket ? '전통시장' : '축제/행사'),
             ),
-            FilterWidget(),
-            // Expanded(
-            //   child: Container(
-            //     color: Colors.blue,
-            //   ),
-            // ),
-            // FilterWidget(),
-            Expanded(child: contentView(isFestival)),
+            const SizedBox(
+              height: 10,
+            ),
+            FilterWidget(isMarket: isMarket),
+            Expanded(child: contentView(isMarket)),
           ],
         ),
       ),
@@ -89,21 +86,27 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
             ],
           ),
         ),
-        Expanded(child: emptyView())
-        // isFestival
-        //     ? ListView.builder(
-        //         itemCount: 10,
-        //         itemBuilder: (context, index) {
-        //           return FestivalCell(
-        //             onTapItemCell: () {},
-        //             onTapFavoriteIcon: () {},
-        //           );
-        //         })
-        //     : ListView.builder(
-        //         itemCount: 10,
-        //         itemBuilder: (context, index) {
-        //           return MarketCell(onTapItemCell: () {}, onTapFavoriteIcon: () {});
-        //         })
+        Expanded(
+          child: isMarket
+              ? controller.marketList.isEmpty
+                  ? emptyView()
+                  : ListView.builder(
+                      itemCount: controller.marketList.length,
+                      itemBuilder: (context, index) {
+                        return MarketCell(onTapItemCell: () {}, onTapFavoriteIcon: () {});
+                      })
+              : controller.festivalList.isEmpty
+                  ? emptyView()
+                  : ListView.builder(
+                      itemCount: controller.festivalList.length,
+                      itemBuilder: (context, index) {
+                        return FestivalCell(
+                          onTapItemCell: () {},
+                          onTapFavoriteIcon: () {},
+                        );
+                      },
+                    ),
+        ),
       ],
     );
   }
@@ -111,7 +114,9 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
   Widget emptyView() {
     return Column(
       children: [
-        const SizedBox(height: 80,),
+        const SizedBox(
+          height: 80,
+        ),
         Image.asset(
           'assets/images/seenear_character_4.png',
           width: 70,
@@ -120,11 +125,12 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
           height: 8,
         ),
         Text(
-          '선택하신 지역과 요일에\n열리는 장이 없어요',
+          isMarket ? '선택하신 지역과 요일에\n열리는 장이 없어요' : '선택하신 지역과 시기에는 진행되는\n축제나 행사가 없어요',
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
-            color: SeenearColor.grey30,
+            color: SeenearColor.grey20,
           ),
         ),
       ],

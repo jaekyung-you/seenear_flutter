@@ -4,8 +4,9 @@ import 'package:seenear/const/design_system/seenear_color.dart';
 class MarketCell extends StatelessWidget {
   final Function() onTapItemCell;
   final Function() onTapFavoriteIcon;
+  final bool? showDeleteButton;
 
-  const MarketCell({super.key, required this.onTapItemCell, required this.onTapFavoriteIcon});
+  const MarketCell({super.key, required this.onTapItemCell, required this.onTapFavoriteIcon, this.showDeleteButton = false});
 
   @override
   Widget build(BuildContext context) {
@@ -55,13 +56,14 @@ class MarketCell extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: SeenearColor.grey60),
                       ),
                       const Spacer(),
-                      InkWell(
-                        onTap: () {},
-                        child: Image.asset(
-                          'assets/images/close.png',
-                          width: 24,
-                          color: SeenearColor.blue60,
-                        ),
+                      if (showDeleteButton == true)
+                        InkWell(
+                          onTap: () {},
+                          child: Image.asset(
+                            'assets/images/close.png',
+                            width: 24,
+                            color: SeenearColor.blue60,
+                          ),
                       )
                     ],
                   ),

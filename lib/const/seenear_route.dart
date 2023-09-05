@@ -138,7 +138,7 @@ class SeenearRoute {
     GetPage(
       name: SeenearPath.MARKET,
       page: () => const MarketFestivalScreen(
-        isFestival: false,
+        isMarket: true,
       ),
       binding: BindingsBuilder(
         () {
@@ -149,7 +149,7 @@ class SeenearRoute {
     GetPage(
       name: SeenearPath.FESTIVAl,
       page: () => const MarketFestivalScreen(
-        isFestival: true,
+        isMarket: false,
       ),
       binding: BindingsBuilder(
         () {

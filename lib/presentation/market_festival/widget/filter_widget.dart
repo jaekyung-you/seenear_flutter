@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 
 class FilterWidget extends StatelessWidget {
-  const FilterWidget({super.key});
+  final bool isMarket;
+
+  const FilterWidget({super.key, required this.isMarket});
 
   @override
   Widget build(BuildContext context) {
