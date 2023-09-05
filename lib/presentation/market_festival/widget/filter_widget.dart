@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
+import 'package:seenear/presentation/market_festival/controller/market_festival_controller.dart';
 
-class FilterWidget extends StatelessWidget {
+class FilterWidget extends GetView<MarketFestivalController> {
   final bool isMarket;
 
   const FilterWidget({super.key, required this.isMarket});
@@ -12,13 +14,20 @@ class FilterWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          selectCell(title: '지역을 선택해주세요', onTap: () {}),
+          selectCell(
+            title: '지역을 선택해주세요',
+            onTap: () {
+              controller.onTapFilterCell(index: 0);
+            },
+          ),
           const SizedBox(
             height: 10,
           ),
           selectCell(
             title: '동네를 선택해주세요',
-            onTap: () {},
+            onTap: () {
+              controller.onTapFilterCell(index: 1);
+            },
           ),
           const SizedBox(
             height: 10,
@@ -26,7 +35,9 @@ class FilterWidget extends StatelessWidget {
           selectCell(
             title: '방문 일자를 선택해주세요',
             imageName: 'date_available',
-            onTap: () {},
+            onTap: () {
+              controller.onTapFilterCell(index: 2);
+            },
           ),
           SizedBox(
             height: 40,
