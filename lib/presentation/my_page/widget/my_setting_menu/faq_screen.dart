@@ -60,7 +60,7 @@ class FAQScreen extends GetView<HelpDeskController> {
               Icons.search,
               color: SeenearColor.grey50,
             ),
-            fillColor: SeenearColor.grey5,
+            fillColor: Colors.white,
             filled: true,
             focusColor: Colors.white,
             enabledBorder: const OutlineInputBorder(borderSide: BorderSide.none),

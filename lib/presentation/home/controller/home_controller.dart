@@ -29,7 +29,8 @@ class HomeController extends GetxController {
         // 커뮤니티 진입, 화면 미기획
         break;
       case HomeMenu.myInfo:
-        Get.toNamed(isLogined ? SeenearPath.MY_PAGE : SeenearPath.LOGIN);
+        // Get.toNamed(isLogined ? SeenearPath.MY_PAGE : SeenearPath.LOGIN);
+        Get.toNamed(SeenearPath.MY_PAGE);
         break;
       case HomeMenu.festival:
         Get.toNamed(SeenearPath.FESTIVAl, arguments: {'type': 'festival'});

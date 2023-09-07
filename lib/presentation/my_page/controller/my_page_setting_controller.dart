@@ -21,6 +21,10 @@ class MyPageSettingController extends GetxController {
     '기타',
   ];
 
+  RxList<String> selectedReasons = <String>[].obs;
+  TextEditingController customReasonInputController = TextEditingController();
+  FocusNode focusNode = FocusNode();
+
   Map<String, RxBool> notificationSwitchList = {
     '모든 알림 허용': false.obs,
     '공지사항 알림': false.obs,
@@ -33,6 +37,12 @@ class MyPageSettingController extends GetxController {
   void onInit() {
     super.onInit();
     nicknameEditController.text = '핑크빛장미'; // 본래 유저의 닉네임
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    selectedReasons.clear();
   }
 
   void onTapEditProfileImage() {}
@@ -76,5 +86,13 @@ class MyPageSettingController extends GetxController {
         },
       ),
     );
+  }
+
+  void onTapDeactivateReason(String reason) {
+    if (selectedReasons.contains(reason)) {
+      selectedReasons.remove(reason);
+    } else {
+      selectedReasons.add(reason);
+    }
   }
 }

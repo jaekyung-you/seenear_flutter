@@ -111,8 +111,6 @@ class MarketFestivalController extends GetxController {
             onSelectionChanged: _onSelectChanged,
             showNavigationArrow: true,
             selectionColor: SeenearColor.blue80,
-            // todayHighlightColor: ,
-
             monthCellStyle: const DateRangePickerMonthCellStyle(
               todayCellDecoration: BoxDecoration(
                 color: Colors.transparent,
