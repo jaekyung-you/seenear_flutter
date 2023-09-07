@@ -17,7 +17,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> getMainList() async {
-    checkHealth();
+    // checkHealth();
   }
 
   void onTapMainCell(HomeMenu menu) {

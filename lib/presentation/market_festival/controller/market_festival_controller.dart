@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:seenear/const/design_system/one_button_bottom_sheet.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -22,6 +24,7 @@ class MarketFestivalController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    initializeDateFormatting(Localizations.localeOf(Get.context!).languageCode);
     if (Get.arguments != null) {
       isMarket = Get.arguments['type'] == 'market';
     }
@@ -108,7 +111,9 @@ class MarketFestivalController extends GetxController {
         content = SizedBox(
           height: 370,
           child: SfDateRangePicker(
-            onSelectionChanged: _onSelectChanged,
+            onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
+              _onSelectChanged(args);
+            },
             showNavigationArrow: true,
             selectionColor: SeenearColor.blue80,
             monthCellStyle: const DateRangePickerMonthCellStyle(
@@ -133,6 +138,9 @@ class MarketFestivalController extends GetxController {
         content = SizedBox(
           height: 370,
           child: SfDateRangePicker(
+            onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
+              _onSelectChanged(args);
+            },
             showTodayButton: false,
             view: DateRangePickerView.year,
             enablePastDates: true,
@@ -173,7 +181,8 @@ class MarketFestivalController extends GetxController {
   }
 
   void _onSelectChanged(DateRangePickerSelectionChangedArgs args) {
-    print("selected : ${args.value}");
-    return;
+    String dayOfWeek = DateFormat('E', 'ko_KR').format(args.value);
+    date.value = '${args.value.toString().split(' ').first} ($dayOfWeek)';
+    Get.back();
   }
 }

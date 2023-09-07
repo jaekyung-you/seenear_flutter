@@ -137,6 +137,7 @@ class FAQScreen extends GetView<HelpDeskController> {
           ),
           Expanded(
             child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: 5,
               itemBuilder: (context, index) {
                 return SizedBox(
