@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seenear/const/design_system/one_button_bottom_sheet.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../../const/define.dart';
 
 class MarketFestivalController extends GetxController {
@@ -101,11 +102,63 @@ class MarketFestivalController extends GetxController {
         height: 370,
       );
     } else if (index == 2) {
-      title = '방문 지역을 선택해주세요';
-      content = Container(
-        color: Colors.pink,
-        height: 370,
-      );
+      if (isMarket) {
+        // 시장은 방문일자
+        title = '방문 일자를 선택해주세요';
+        content = SizedBox(
+          height: 370,
+          child: SfDateRangePicker(
+            onSelectionChanged: _onSelectChanged,
+            showNavigationArrow: true,
+            selectionColor: SeenearColor.blue80,
+            // todayHighlightColor: ,
+
+            monthCellStyle: const DateRangePickerMonthCellStyle(
+              todayCellDecoration: BoxDecoration(
+                color: Colors.transparent,
+              ),
+              weekendTextStyle: TextStyle(color: Colors.red),
+            ),
+            headerStyle: DateRangePickerHeaderStyle(
+              textAlign: TextAlign.center,
+              textStyle: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 18,
+                color: SeenearColor.grey70,
+              ),
+            ),
+          ),
+        );
+      } else {
+        // 축제는 방문시기
+        title = '방문 시기를 선택해주세요';
+        content = SizedBox(
+          height: 370,
+          child: SfDateRangePicker(
+            showTodayButton: false,
+            view: DateRangePickerView.year,
+            enablePastDates: true,
+            allowViewNavigation: false,
+            selectionColor: SeenearColor.blue60,
+            selectionShape: DateRangePickerSelectionShape.rectangle,
+            showNavigationArrow: true,
+            todayHighlightColor: SeenearColor.blue80,
+            yearCellStyle: const DateRangePickerYearCellStyle(
+              cellDecoration: BoxDecoration(
+                color: Colors.transparent,
+              )
+            ),
+            headerStyle: DateRangePickerHeaderStyle(
+              textAlign: TextAlign.center,
+              textStyle: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 18,
+                color: SeenearColor.grey70,
+              ),
+            ),
+          ),
+        );
+      }
     }
 
     Get.bottomSheet(
@@ -119,5 +172,10 @@ class MarketFestivalController extends GetxController {
         },
       ),
     );
+  }
+
+  void _onSelectChanged(DateRangePickerSelectionChangedArgs args) {
+    print("selected : ${args.value}");
+    return;
   }
 }
