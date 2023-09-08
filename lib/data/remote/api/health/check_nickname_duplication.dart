@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:seenear/data/remote/api/api_base.dart';
 
+/// 가입 시, 닉네임 중복 체크
 class CheckNicknameDuplication {
   final Dio dio = Dio();
 
