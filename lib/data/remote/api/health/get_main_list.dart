@@ -1,9 +1,15 @@
-import 'package:seenear/data/remote/api/member/member_api.dart';
+import 'package:dio/dio.dart';
+import '../../response/main_response.dart';
+import '../api_base.dart';
 
 class GetMainList {
-  MemberApi memberApi = MemberApi();
+  final Dio dio = Dio();
 
-  Future<void> call() async {
-    await memberApi.getMainList();
+  Future<MainResponse> call({required int id}) async {
+    Response res = await ApiBase().get(
+      '/member/api/v1/main',
+      query: {'id': id},
+    );
+    return MainResponse.fromJson(res.data);
   }
 }

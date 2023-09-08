@@ -1,9 +1,14 @@
-import 'package:seenear/data/remote/api/member/member_api.dart';
+import 'package:dio/dio.dart';
+import 'package:seenear/data/remote/api/api_base.dart';
 
 class CheckNicknameDuplication {
-  MemberApi memberApi = MemberApi();
+  final Dio dio = Dio();
 
-  Future<void> call() async {
-    await memberApi.checkNicknameDuplication();
+  Future<bool> call({required String nickname}) async {
+    Response res = await ApiBase().get(
+      '/member/api/v1/check-duplicated-nickname',
+      query: {'insertedNickname': nickname},
+    );
+    return res.data;
   }
 }

@@ -5,10 +5,6 @@ import '../api_base.dart';
 class MemberApi {
   String url = '/member/api/v1';
 
-  Future<Response> checkNicknameDuplication() async {
-    Response res = await ApiBase().get('/check-duplicated-nickname');
-    return res;
-  }
 
   Future<Response> getMainList() async {
     Response res = await ApiBase().get('/main');
