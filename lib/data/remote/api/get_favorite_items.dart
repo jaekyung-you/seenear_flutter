@@ -1,15 +1,14 @@
 import 'package:dio/dio.dart';
-import 'package:seenear/data/remote/api/api_base.dart';
 
-import '../../response/recent_viewed_item_response.dart';
+import '../response/recent_viewed_item_response.dart';
+import 'api_base.dart';
 
-/// 내 정보 > 최근 본 목록 호출
-class GetRecentViews {
+class GetFavoriteItemList {
   final Dio dio = Dio();
 
   Future<List<RecentViewedItemResponse>> call({required int size, int? cursorId}) async {
     Response res = await ApiBase().get(
-      '/member/api/v1/recently-views',
+      '/member/api/v1/favorite-items',
       query: {'cursorId': cursorId, 'size': cursorId},
     );
 

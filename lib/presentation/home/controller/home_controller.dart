@@ -1,24 +1,14 @@
 import 'package:get/get.dart';
 import '../../../const/enum/home_menu.dart';
 import '../../../const/seenear_path.dart';
-import '../../../data/remote/api/health/health_api.dart';
+import '../../../data/remote/api/get_health_check.dart';
 
 class HomeController extends GetxController {
   List<HomeMenu> homeMenus = HomeMenu.values;
   bool isLogined = false;
 
   // usecase
-  CheckHealth checkHealth = CheckHealth();
-
-  @override
-  void onInit() {
-    super.onInit();
-    getMainList();
-  }
-
-  Future<void> getMainList() async {
-    // checkHealth();
-  }
+  GetHealthCheck checkHealth = GetHealthCheck();
 
   void onTapMainCell(HomeMenu menu) {
     switch (menu) {

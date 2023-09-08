@@ -88,4 +88,14 @@ class ApiBase {
       rethrow;
     }
   }
+
+  Future<Response> delete(String path, {Map<String, dynamic>? data}) async {
+    await init();
+    try {
+      var res = await dio.delete(path, data: data);
+      return res;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

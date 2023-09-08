@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import '../../response/main_response.dart';
-import '../api_base.dart';
+import '../response/main_response.dart';
+import 'api_base.dart';
 
 class GetMainList {
   final Dio dio = Dio();
