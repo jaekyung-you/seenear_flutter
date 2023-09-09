@@ -4,6 +4,7 @@ import 'package:seenear/const/design_system/base_bottom_sheet.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
 import 'package:seenear/domain/util/snack_bar_manager.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/deactive_account_screen.dart';
+import 'package:seenear/presentation/my_page/widget/my_setting_menu/deactive_complete_screen.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/nickname_edit_screen.dart';
 
 class MyPageSettingController extends GetxController {
@@ -81,7 +82,8 @@ class MyPageSettingController extends GetxController {
         onTapButton: (index) {
           Get.back();
           if (index == 1) {
-            // todo: 탈퇴하기 api -> 인트로로 돌아가기
+            // todo: 탈퇴하기 api
+            Get.to(() => const DeactiveCompleteScreen());
           }
         },
       ),
