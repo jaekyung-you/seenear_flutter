@@ -30,28 +30,29 @@ class LoginController extends GetxController {
       }
 
       try {
-        // 카카오톡 설치 여부 확인
-        // bool isInstalled = await isKakaoTalkInstalled();
-        // if (isInstalled) {
-        try {
-          // todo: 우리 서버에 쏴야하는지 확인
-          OAuthToken token = await UserApi.instance.loginWithKakaoTalk();
-          print("⭕ 로그인 성공: ${token.accessToken}");
-          return true;
-        } catch (error) {
-          print("❌ 로그인 실패: $error");
-          return false;
+        // 카카오톡 설치 여부 확인 -> 카카오톡 어플로 열기
+        bool isInstalled = await isKakaoTalkInstalled();
+        if (isInstalled) {
+          try {
+            // todo: 우리 서버에 쏴야하는지 확인
+            OAuthToken token = await UserApi.instance.loginWithKakaoTalk();
+            print("⭕ 로그인 성공: ${token.accessToken}");
+            return true;
+          } catch (error) {
+            print("❌ 로그인 실패: $error");
+            return false;
+          }
+        } else {
+          // 카카오톡 설치 여부 확인 -> 웹 브라우저로 열기
+          try {
+            OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
+            print("⭕ 로그인 성공: ${token.accessToken}");
+            return true;
+          } catch (error) {
+            print("❌ 로그인 실패: $error");
+            return false;
+          }
         }
-        // } else {
-        //   try {
-        //     OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
-        //     print("⭕ 로그인 성공: ${token.accessToken}");
-        //     return true;
-        //   } catch (error) {
-        //     print("❌ 로그인 실패: $error");
-        //     return false;
-        //   }
-        // }
       } catch (e) {
         return false;
       }
