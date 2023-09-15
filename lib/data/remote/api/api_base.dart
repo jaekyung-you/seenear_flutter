@@ -9,7 +9,7 @@ class ApiBase {
 
   static final ApiBase _instance = ApiBase._privateConstructor();
   final Dio dio = Dio();
-  Map<String, String>? _baseHeader;
+  final Map<String, String> _baseHeader = {};
   PackageInfo? _packageInfo;
 
   factory ApiBase() {
@@ -34,8 +34,10 @@ class ApiBase {
     // _baseHeader?.putIfAbsent(HEADER_PLATFORM, () => platform);
 
     String platform = Platform.isIOS ? "IOS" : "ANDROID";
-    _baseHeader?[HEADER_X_APP_OS] = platform;
-    _baseHeader?[HEADER_X_APP_VERSION] = _packageInfo?.version ?? "";
+    _baseHeader[HEADER_X_APP_OS] = platform;
+    _baseHeader[HEADER_X_APP_VERSION] = _packageInfo?.version ?? "";
+    // _baseHeader.putIfAbsent(HEADER_X_APP_OS, () => platform);
+    // _baseHeader.putIfAbsent(HEADER_X_APP_VERSION, () => _packageInfo?.version ?? "");
 
     dio.options.baseUrl = 'http://3.37.70.222:9090';
     dio.options.contentType = "application/json";
@@ -92,5 +94,9 @@ class ApiBase {
     } catch (e) {
       rethrow;
     }
+  }
+
+  void setAuthTokenHeader(String accessToken) {
+    _baseHeader["Authorization"] = "Bearer $accessToken";
   }
 }

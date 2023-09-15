@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:get/get.dart';
+import 'package:seenear/data/remote/api/api_base.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../const/enum/home_menu.dart';
 import '../../../const/seenear_path.dart';
@@ -9,7 +10,7 @@ import '../../../data/remote/response/health_check_response.dart';
 
 class HomeController extends GetxController {
   List<HomeMenu> homeMenus = HomeMenu.values;
-  bool isLogined = false;
+  bool isMember = false;
   AndroidDeviceInfo? _androidDeviceInfo;
   IosDeviceInfo? _iosDeviceInfo;
 
@@ -32,9 +33,10 @@ class HomeController extends GetxController {
 
   Future<void> _requestHealthCheck() async {
     await _getDeviceInfo();
-    String deviceInfo = Platform.isAndroid ? _androidDeviceInfo?.model ?? "" : _iosDeviceInfo?.model ?? ""; // device uuid
-    HealthCheckResponse res = await checkHealth(deviceId: deviceInfo);
-    // todo:  member 여부 처리
+    String deviceId = Platform.isAndroid ? _androidDeviceInfo?.id ?? "" : _iosDeviceInfo?.identifierForVendor ?? ""; // device uuid
+    HealthCheckResponse res = await checkHealth(deviceId: deviceId);
+    isMember = res.member;
+    ApiBase().setAuthTokenHeader(res.accessToken);
   }
 
   void onTapMainCell(HomeMenu menu) {

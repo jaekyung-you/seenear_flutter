@@ -1,13 +1,14 @@
-const String HEADER_DEVICE_INFO = "Device-Info";
-const String HEADER_DEVICE_VERSION = "Device-Version";
-const String HEADER_APP_VERSION = "App-Version";
-const String HEADER_PLATFORM = "Platform";
-const String HEADER_UUID = "Uuid";
-const String HEADER_AUTH_TOKEN = "Auth-Token";
-const String HEADER_SESSION_TOKEN = "Session-Token";
 const String HEADER_X_APP_OS = "X-APP-OS";
 const String HEADER_X_APP_VERSION = "X-APP-VERSION";
+const String HEADER_AUTHORIZATION = "Authorization";
 
+// const String HEADER_DEVICE_INFO = "Device-Info";
+// const String HEADER_DEVICE_VERSION = "Device-Version";
+// const String HEADER_APP_VERSION = "App-Version";
+// const String HEADER_PLATFORM = "Platform";
+// const String HEADER_UUID = "Uuid";
+// const String HEADER_AUTH_TOKEN = "Auth-Token";
+// const String HEADER_SESSION_TOKEN = "Session-Token";
 
 // const String HEADER_DEVICE_DISPLAY = "Device-Display";
 // const String HEADER_CLEAN = "Clean";

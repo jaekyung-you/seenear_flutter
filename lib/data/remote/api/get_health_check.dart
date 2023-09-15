@@ -5,7 +5,7 @@ import 'api_base.dart';
 
 class GetHealthCheck {
   Future<HealthCheckResponse> call({required String deviceId}) async {
-    Response res = await ApiBase().post('/member/api/v1/recently-views', data: {'deviceId': deviceId});
+    Response res = await ApiBase().post('/health', data: {'deviceId': deviceId});
     return HealthCheckResponse.fromJson(res.data);
   }
 }
