@@ -2,14 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:seenear/const/design_system/base_bottom_sheet.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
+import 'package:seenear/data/remote/api/check_nickname.dart';
+import 'package:seenear/data/remote/api/get_sign_out_reasons.dart';
+import 'package:seenear/data/remote/api/logout.dart';
 import 'package:seenear/domain/util/snack_bar_manager.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/deactive_account_screen.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/deactive_complete_screen.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/nickname_edit_screen.dart';
 
 class MyPageSettingController extends GetxController {
+  // property
   TextEditingController nicknameEditController = TextEditingController();
-  HelperTextType helperTextType = HelperTextType(isError: false, helperText: '닉네임을 입력해주세요.');
+  Rx<HelperTextType> helperTextType = HelperTextType(isError: false, helperText: '닉네임을 입력해주세요.').obs;
 
   List<String> noticeList = [];
 
@@ -34,6 +38,11 @@ class MyPageSettingController extends GetxController {
     '마케팅 수신 알림': false.obs,
   };
 
+  // usecase
+  final CheckNickname _checkNickname = CheckNickname();
+  final GetSignOutReasons _getSignOutReasons = GetSignOutReasons();
+  final Logout _logout = Logout();
+
   @override
   void onInit() {
     super.onInit();
@@ -44,6 +53,22 @@ class MyPageSettingController extends GetxController {
   void dispose() {
     super.dispose();
     selectedReasons.clear();
+  }
+
+  Future<void> onTapNicknameConfirm() async {
+    String nickname = nicknameEditController.text.trim();
+    if (nickname.isEmpty) return;
+
+    bool res = await _checkNickname(nickname: nickname);
+    if (res) {
+      // helperText 잠깐 보여준 다음에 뒤로 가기
+      helperTextType.value = HelperTextType(isError: false, helperText: '사용 가능한 닉네임이에요.');
+      Future.delayed(const Duration(milliseconds: 500), () {
+        Get.back();
+      });
+    } else {
+      helperTextType.value = HelperTextType(isError: true, helperText: '이미 사용중인 닉네임이에요.\n다른 닉네임을 입력해주세요.');
+    }
   }
 
   void onTapEditProfileImage() {}

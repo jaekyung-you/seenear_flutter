@@ -1,16 +1,22 @@
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
+import '../../../data/remote/api/login.dart';
+
 class LoginController extends GetxController {
   User? user; // kakao_sdk에서 제공하는 사용자 정보
   bool isLogined = false;
+
+  // usecase
+  final Login _login = Login();
 
   Future<void> onTapLogin() async {
     isLogined = await _loginWithKakao();
     if (isLogined) {
       user = await UserApi.instance.me();
       // todo: user 정보를 서버에 보내는 api 찌르기
-
+      if (user == null) return;
+      await _login(user: user!);
       print("user: $user");
     }
   }

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -12,8 +11,6 @@ class ApiBase {
   final Dio dio = Dio();
   Map<String, String>? _baseHeader;
   PackageInfo? _packageInfo;
-  AndroidDeviceInfo? _androidDeviceInfo;
-  IosDeviceInfo? _iosDeviceInfo;
 
   factory ApiBase() {
     return _instance;
@@ -65,11 +62,6 @@ class ApiBase {
 
   Future<void> _getDeviceInfo() async {
     _packageInfo = await PackageInfo.fromPlatform();
-    if (Platform.isAndroid) {
-      _androidDeviceInfo = await DeviceInfoPlugin().androidInfo;
-    } else if (Platform.isIOS) {
-      _iosDeviceInfo = await DeviceInfoPlugin().iosInfo;
-    }
   }
 
   Future<Response> get(String path, {Map<String, dynamic>? query}) async {

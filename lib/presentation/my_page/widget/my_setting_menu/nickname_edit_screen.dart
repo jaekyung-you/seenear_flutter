@@ -38,7 +38,7 @@ class NicknameEditScreen extends GetView<MyPageSettingController> {
               height: 50,
             ),
             TextFieldWithHelperText(
-                editingController: controller.nicknameEditController, hintText: '', helperTextType: controller.helperTextType),
+                editingController: controller.nicknameEditController, hintText: '', helperTextType: controller.helperTextType.value),
             const Spacer(),
             BaseButton(
               buttonText: '변경 완료',
