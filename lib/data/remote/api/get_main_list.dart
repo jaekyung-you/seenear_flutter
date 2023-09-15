@@ -3,8 +3,6 @@ import '../response/main_response.dart';
 import 'api_base.dart';
 
 class GetMainList {
-  final Dio dio = Dio();
-
   Future<MainResponse> call({required int id}) async {
     Response res = await ApiBase().get(
       '/member/api/v1/main',
