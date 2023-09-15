@@ -9,6 +9,8 @@ class LoginController extends GetxController {
     isLogined = await _loginWithKakao();
     if (isLogined) {
       user = await UserApi.instance.me();
+      // todo: user 정보를 서버에 보내는 api 찌르기
+
       print("user: $user");
     }
   }
@@ -78,6 +80,7 @@ class LoginController extends GetxController {
   Future<bool> _logout() async {
     try {
       await UserApi.instance.unlink();
+      // todo: 우리 서버 logout 찌르기
       return true;
     } catch (e) {
       return false;

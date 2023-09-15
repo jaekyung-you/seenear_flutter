@@ -28,14 +28,17 @@ class ApiBase {
       await _getDeviceInfo();
     }
 
-    String deviceInfo = Platform.isAndroid ? _androidDeviceInfo?.model ?? "" : _iosDeviceInfo?.model ?? "";
-    String platformVersion = Platform.isAndroid ? _androidDeviceInfo?.version.release ?? "" : _iosDeviceInfo?.systemVersion ?? "";
-    String platform = Platform.isIOS ? "ios" : "android";
+    // String deviceInfo = Platform.isAndroid ? _androidDeviceInfo?.model ?? "" : _iosDeviceInfo?.model ?? "";
+    // String platformVersion = Platform.isAndroid ? _androidDeviceInfo?.version.release ?? "" : _iosDeviceInfo?.systemVersion ?? "";
 
-    _baseHeader?.putIfAbsent(HEADER_DEVICE_INFO, () => deviceInfo);
-    _baseHeader?.putIfAbsent(HEADER_DEVICE_VERSION, () => platformVersion);
-    _baseHeader?.putIfAbsent(HEADER_APP_VERSION, () => _packageInfo?.version ?? "");
-    _baseHeader?.putIfAbsent(HEADER_PLATFORM, () => platform);
+    // _baseHeader?.putIfAbsent(HEADER_DEVICE_INFO, () => deviceInfo);
+    // _baseHeader?.putIfAbsent(HEADER_DEVICE_VERSION, () => platformVersion);
+    // _baseHeader?.putIfAbsent(HEADER_APP_VERSION, () => _packageInfo?.version ?? "");
+    // _baseHeader?.putIfAbsent(HEADER_PLATFORM, () => platform);
+
+    String platform = Platform.isIOS ? "IOS" : "ANDROID";
+    _baseHeader?[HEADER_X_APP_OS] = platform;
+    _baseHeader?[HEADER_X_APP_VERSION] = _packageInfo?.version ?? "";
 
     dio.options.baseUrl = 'http://3.37.70.222:9090';
     dio.options.contentType = "application/json";
