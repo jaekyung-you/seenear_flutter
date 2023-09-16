@@ -2,6 +2,9 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:get/get.dart';
 import 'package:seenear/data/remote/api/api_base.dart';
+import 'package:seenear/data/remote/api/get_main_list.dart';
+import 'package:seenear/data/remote/response/main_category_response.dart';
+import 'package:seenear/data/remote/response/main_response.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../const/enum/home_menu.dart';
 import '../../../const/seenear_path.dart';
@@ -13,14 +16,22 @@ class HomeController extends GetxController {
   bool isMember = false;
   AndroidDeviceInfo? _androidDeviceInfo;
   IosDeviceInfo? _iosDeviceInfo;
+  List<MainCategoryResponse> categoryList = [];
 
   // usecase
   GetHealthCheck checkHealth = GetHealthCheck();
+  GetMainList getMainList = GetMainList();
 
   @override
   void onInit() {
     super.onInit();
+    _requestMainList();
     _requestHealthCheck();
+  }
+
+  Future<void> _requestMainList() async {
+    MainResponse res = await getMainList();
+    categoryList = res.categoryList;
   }
 
   Future<void> _getDeviceInfo() async {
@@ -49,7 +60,7 @@ class HomeController extends GetxController {
         Share.share('check out my website https://example.com');
         break;
       case HomeMenu.myInfo:
-        // Get.toNamed(isLogined ? SeenearPath.MY_PAGE : SeenearPath.LOGIN);
+        // Get.toNamed(isMember ? SeenearPath.MY_PAGE : SeenearPath.LOGIN);
         Get.toNamed(SeenearPath.LOGIN);
         // Get.toNamed(SeenearPath.MY_PAGE);
         break;

@@ -3,11 +3,8 @@ import '../response/main_response.dart';
 import 'api_base.dart';
 
 class GetMainList {
-  Future<MainResponse> call({required int id}) async {
-    Response res = await ApiBase().get(
-      '/member/api/v1/main',
-      query: {'id': id},
-    );
+  Future<MainResponse> call() async {
+    Response res = await ApiBase().get('/member/api/v1/main');
     return MainResponse.fromJson(res.data);
   }
 }

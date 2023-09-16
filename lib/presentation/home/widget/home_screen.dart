@@ -4,6 +4,7 @@ import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
 
 import '../../../const/design_system/seenear_color.dart';
 import '../../../const/design_system/select_text_item_cell.dart';
+import '../../../const/enum/home_menu.dart';
 import '../controller/home_controller.dart';
 
 class HomeScreen extends GetView<HomeController> {
@@ -58,7 +59,7 @@ class HomeScreen extends GetView<HomeController> {
           ),
           Expanded(
             child: GridView.builder(
-              itemCount: controller.homeMenus.length,
+              itemCount: controller.categoryList.length,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, //1 개의 행에 보여줄 item 개수
@@ -66,13 +67,13 @@ class HomeScreen extends GetView<HomeController> {
                 crossAxisSpacing: 20, //수직 Padding
               ),
               itemBuilder: (context, index) {
-                bool isNotOpened = index == controller.homeMenus.last.index;
+                bool isNotOpened = controller.categoryList[index].isActive == false;
                 Color bgColor =
                     isNotOpened ? SeenearColor.grey10 : SeenearColor.blue10;
                 Color fgColor =
                     isNotOpened ? SeenearColor.grey30 : SeenearColor.blue100;
                 return SelectTextItemCell(
-                  text: controller.homeMenus[index].title,
+                  text: controller.categoryList[index].mainName,
                   borderRadius: 16,
                   badgeText: isNotOpened ? '오픈예정' : null,
                   fontSize: 27,
@@ -80,7 +81,7 @@ class HomeScreen extends GetView<HomeController> {
                   fgColor: fgColor,
                   onTap: () {
                     if (isNotOpened) return;
-                    controller.onTapMainCell(controller.homeMenus[index]);
+                    controller.onTapMainCell(HomeMenu.convert(controller.categoryList[index].mainName));
                   },
                 );
               },

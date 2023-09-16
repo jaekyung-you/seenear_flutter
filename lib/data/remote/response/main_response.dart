@@ -7,7 +7,8 @@ class MainResponse {
 
   factory MainResponse.fromJson(Map<String, dynamic> json) {
     return MainResponse(
-      categoryList: json['categoryList'].map((e) => MainCategoryResponse.fromJson(e)).toList(),
+      // MainCategoryResponse
+      categoryList: json['categoryList'].map<MainCategoryResponse>((e) => MainCategoryResponse.fromJson(e)).toList(),
     );
   }
 

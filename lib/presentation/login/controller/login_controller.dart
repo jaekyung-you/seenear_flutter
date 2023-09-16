@@ -14,10 +14,11 @@ class LoginController extends GetxController {
     isLogined = await _loginWithKakao();
     if (isLogined) {
       user = await UserApi.instance.me();
-      // todo: user 정보를 서버에 보내는 api 찌르기
       if (user == null) return;
       await _login(user: user!);
       print("user: $user");
+
+      // todo: 내 정보 화면으로 전환 ??
     }
   }
 
