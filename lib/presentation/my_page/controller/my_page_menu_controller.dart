@@ -4,11 +4,11 @@ import 'package:seenear/const/enum/my_page_menu.dart';
 import 'package:seenear/const/enum/my_page_setting.dart';
 import 'package:seenear/const/seenear_path.dart';
 import 'package:seenear/domain/util/snack_bar_manager.dart';
-
 import '../../../const/design_system/base_bottom_sheet.dart';
 import '../widget/my_page_menu/my_page_content_screen.dart';
 
 class MyPageMenuController extends GetxController with GetSingleTickerProviderStateMixin {
+  // property
   late TabController myPageTabController;
 
   @override

@@ -49,7 +49,7 @@ class MyPageScreen extends GetView<MyPageMenuController> {
             },
           ),
           Image.asset(
-            'assets/images/temp_profile.png',
+            'assets/images/default_profile.png',
             width: 64,
           ),
         ],

@@ -10,8 +10,15 @@ import 'package:seenear/presentation/my_page/widget/my_setting_menu/deactive_acc
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/deactive_complete_screen.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/nickname_edit_screen.dart';
 
+import '../../../data/remote/api/get_my_profile.dart';
+import '../../../data/remote/response/member_detail_response.dart';
+
 class MyPageSettingController extends GetxController {
   // property
+  RxString loginType = ''.obs;
+  RxString nickname = ''.obs;
+  RxString profileImageSrc = ''.obs;
+
   TextEditingController nicknameEditController = TextEditingController();
   Rx<HelperTextType> helperTextType = HelperTextType(isError: false, helperText: '닉네임을 입력해주세요.').obs;
 
@@ -42,17 +49,26 @@ class MyPageSettingController extends GetxController {
   final CheckNickname _checkNickname = CheckNickname();
   final GetSignOutReasons _getSignOutReasons = GetSignOutReasons();
   final Logout _logout = Logout();
+  final GetMyProfile _getMyProfile = GetMyProfile();
 
   @override
   void onInit() {
     super.onInit();
-    nicknameEditController.text = '핑크빛장미'; // 본래 유저의 닉네임
+    _requestMyProfile();
+    nicknameEditController.text = ''; // 본래 유저의 닉네임
   }
 
   @override
   void dispose() {
     super.dispose();
     selectedReasons.clear();
+  }
+
+  Future<void> _requestMyProfile() async {
+    MemberDetailResponse res = await _getMyProfile();
+    nickname.value = res.nickname;
+    loginType.value = res.loginType == 'KAKAO' ? '카카오로그인' : '';
+    profileImageSrc.value = res.profileImageSrc ?? '';
   }
 
   Future<void> onTapNicknameConfirm() async {

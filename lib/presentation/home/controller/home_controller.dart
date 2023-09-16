@@ -16,22 +16,22 @@ class HomeController extends GetxController {
   bool isMember = false;
   AndroidDeviceInfo? _androidDeviceInfo;
   IosDeviceInfo? _iosDeviceInfo;
-  List<MainCategoryResponse> categoryList = [];
+  RxList<MainCategoryResponse> categoryList = <MainCategoryResponse>[].obs;
 
   // usecase
   GetHealthCheck checkHealth = GetHealthCheck();
   GetMainList getMainList = GetMainList();
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    _requestMainList();
+    await _requestMainList();
     _requestHealthCheck();
   }
 
   Future<void> _requestMainList() async {
     MainResponse res = await getMainList();
-    categoryList = res.categoryList;
+    categoryList.value = res.categoryList;
   }
 
   Future<void> _getDeviceInfo() async {
@@ -47,6 +47,7 @@ class HomeController extends GetxController {
     String deviceId = Platform.isAndroid ? _androidDeviceInfo?.id ?? "" : _iosDeviceInfo?.identifierForVendor ?? ""; // device uuid
     HealthCheckResponse res = await checkHealth(deviceId: deviceId);
     isMember = res.member;
+    // ApiBase 헤더에 jwt 토큰 저장
     ApiBase().setAuthTokenHeader(res.accessToken);
   }
 
@@ -60,8 +61,8 @@ class HomeController extends GetxController {
         Share.share('check out my website https://example.com');
         break;
       case HomeMenu.myInfo:
-        // Get.toNamed(isMember ? SeenearPath.MY_PAGE : SeenearPath.LOGIN);
-        Get.toNamed(SeenearPath.LOGIN);
+        Get.toNamed(isMember ? SeenearPath.MY_PAGE : SeenearPath.LOGIN);
+        // Get.toNamed(SeenearPath.LOGIN);
         // Get.toNamed(SeenearPath.MY_PAGE);
         break;
       case HomeMenu.festival:

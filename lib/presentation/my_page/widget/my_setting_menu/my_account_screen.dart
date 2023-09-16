@@ -25,48 +25,57 @@ class MyAccountScreen extends GetView<MyPageSettingController> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Stack(
-                  alignment: Alignment.bottomRight,
-                  children: [
-                    CircleAvatar(
-                      radius: 50,
-                      backgroundImage: NetworkImage(
-                        'https://picsum.photos/200/303',
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        controller.onTapEditProfileImage();
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(4.0),
-                        width: 30,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: SeenearColor.blue60,
-                        ),
-                        child: const Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                          size: 18,
+                Obx(() {
+                  return Stack(
+                    alignment: Alignment.bottomRight,
+                    children: [
+                      controller.profileImageSrc.isEmpty
+                          ? Image.asset(
+                        'assets/images/default_profile.png',
+                        width: 100,
+                      )
+                          : CircleAvatar(
+                        radius: 50,
+                        backgroundImage: NetworkImage(
+                          controller.profileImageSrc.value,
                         ),
                       ),
-                    ),
-                  ],
-                ),
+                      InkWell(
+                        onTap: () {
+                          controller.onTapEditProfileImage();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(4.0),
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: SeenearColor.blue60,
+                          ),
+                          child: const Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }),
                 const SizedBox(
                   height: 8,
                 ),
-                StyledText(
-                  text: '<s>핑크빛장미</s> 님, 환영해요!',
-                  style: TextStyle(fontSize: 21, fontWeight: FontWeight.w500, color: SeenearColor.grey60),
-                  tags: {
-                    's': StyledTextTag(
-                      style: TextStyle(fontWeight: FontWeight.w700, fontSize: 21, color: SeenearColor.blue60),
-                    ),
-                  },
-                ),
+                Obx(() {
+                  return StyledText(
+                    text: '<s>${controller.nickname.value}</s> 님, 환영해요!',
+                    style: TextStyle(fontSize: 21, fontWeight: FontWeight.w500, color: SeenearColor.grey60),
+                    tags: {
+                      's': StyledTextTag(
+                        style: TextStyle(fontWeight: FontWeight.w700, fontSize: 21, color: SeenearColor.blue60),
+                      ),
+                    },
+                  );
+                }),
               ],
             ),
             const SizedBox(
@@ -81,10 +90,12 @@ class MyAccountScreen extends GetView<MyPageSettingController> {
                 ),
                 Row(
                   children: [
-                    Text(
-                      '핑크빛장미',
-                      style: TextStyle(fontWeight: FontWeight.w500, color: Colors.black, fontSize: 21),
-                    ),
+                    Obx(() {
+                      return Text(
+                        controller.nickname.value,
+                        style: const TextStyle(fontWeight: FontWeight.w500, color: Colors.black, fontSize: 21),
+                      );
+                    }),
                     const Spacer(),
                     RoundedWidget(
                       text: '변경',
@@ -114,7 +125,16 @@ class MyAccountScreen extends GetView<MyPageSettingController> {
                   '로그인 방식',
                   style: TextStyle(fontWeight: FontWeight.w500, color: SeenearColor.grey50, fontSize: 16),
                 ),
-                Text('카카오 로그인', style: TextStyle(fontWeight: FontWeight.w500, color: Colors.black, fontSize: 21)),
+                Obx(() {
+                  return Text(
+                    controller.loginType.value,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                      fontSize: 21,
+                    ),
+                  );
+                }),
                 const SizedBox(
                   height: 4,
                 ),
@@ -148,7 +168,9 @@ class MyAccountScreen extends GetView<MyPageSettingController> {
                 ],
               ),
             ),
-            const SizedBox(height: 30,),
+            const SizedBox(
+              height: 30,
+            ),
           ],
         ),
       ),
