@@ -10,6 +10,7 @@ import 'package:seenear/presentation/my_page/widget/my_setting_menu/deactive_acc
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/deactive_complete_screen.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/nickname_edit_screen.dart';
 
+import '../../../data/local/member.dart';
 import '../../../data/remote/api/get_my_profile.dart';
 import '../../../data/remote/response/member_detail_response.dart';
 
@@ -21,7 +22,7 @@ class MyPageSettingController extends GetxController {
   RxBool enableChangeButton = false.obs; // 변경완료 버튼 활성화 여부
 
   TextEditingController nicknameEditController = TextEditingController();
-  Rx<HelperTextType> helperTextType = HelperTextType(isError: false, helperText: '닉네임을 입력해주세요.').obs;
+  Rx<HelperTextType> helperTextType = HelperTextType(isError: false, helperText: '').obs;
 
   List<String> noticeList = [];
 
@@ -56,16 +57,21 @@ class MyPageSettingController extends GetxController {
   void onInit() {
     super.onInit();
     _requestMyProfile();
-    nicknameEditController.text = ''; // 본래 유저의 닉네임
-    nicknameEditController.addListener(() {
-      enableChangeButton.value = nicknameEditController.text.trim().isNotEmpty;
-    });
   }
 
   @override
   void dispose() {
     super.dispose();
     selectedReasons.clear();
+  }
+
+  void setNicknameTextField() {
+    nicknameEditController.text = Member().nickname ?? ''; // 본래 유저의 닉네임
+    nicknameEditController.addListener(() {
+      String input = nicknameEditController.text.trim();
+      helperTextType.value = HelperTextType(isError: input.isEmpty, helperText: input.isEmpty ? '닉네임을 입력해주세요' : '');
+      enableChangeButton.value = input.isNotEmpty && (input != Member().nickname);
+    });
   }
 
   Future<void> _requestMyProfile() async {

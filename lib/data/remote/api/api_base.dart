@@ -76,6 +76,16 @@ class ApiBase {
     }
   }
 
+  Future<Response> put(String path, {Map<String, dynamic>? data}) async {
+    await init();
+    try {
+      var res = await dio.put(path, data: data);
+      return res;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<Response> post(String path, {Map<String, dynamic>? data}) async {
     await init();
     try {

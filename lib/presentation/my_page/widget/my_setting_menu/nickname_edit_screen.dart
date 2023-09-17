@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../const/design_system/base_button.dart';
 import '../../../../const/design_system/base_header.dart';
 import '../../../../const/design_system/seenear_color.dart';
@@ -8,8 +7,27 @@ import '../../../../const/design_system/textfield_with_helper.dart';
 import '../../../base_widget/seenear_base_scaffold.dart';
 import '../../controller/my_page_setting_controller.dart';
 
-class NicknameEditScreen extends GetView<MyPageSettingController> {
+class NicknameEditScreen extends StatefulWidget {
   const NicknameEditScreen({super.key});
+
+  @override
+  State<NicknameEditScreen> createState() => _NicknameEditScreenState();
+}
+
+class _NicknameEditScreenState extends State<NicknameEditScreen> {
+  final controller = Get.find<MyPageSettingController>();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.setNicknameTextField();
+  }
+
+  @override
+  void dispose() {
+    controller.nicknameEditController.clear();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +55,20 @@ class NicknameEditScreen extends GetView<MyPageSettingController> {
             const SizedBox(
               height: 50,
             ),
-            TextFieldWithHelperText(
-                editingController: controller.nicknameEditController, hintText: '', helperTextType: controller.helperTextType.value),
+            Obx(() {
+              return TextFieldWithHelperText(
+                  editingController: controller.nicknameEditController, hintText: '', helperTextType: controller.helperTextType.value);
+            }),
             const Spacer(),
-            BaseButton(
-              buttonText: '변경 완료',
-              isDisabled: !controller.enableChangeButton.value,
-              onPressed: () {
-                controller.onTapFinishEditNickname();
-              },
-            ),
+            Obx(() {
+              return BaseButton(
+                buttonText: '변경 완료',
+                isDisabled: !controller.enableChangeButton.value,
+                onPressed: () {
+                  controller.onTapFinishEditNickname();
+                },
+              );
+            }),
             const SizedBox(
               height: 30,
             ),
