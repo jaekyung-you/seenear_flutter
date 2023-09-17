@@ -20,8 +20,8 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
   RxList<InfoItemResponse> favoriteFavoriteItemList = <InfoItemResponse>[].obs;
 
   /// usecase
-  GetFavoriteItemList _getFavoriteItemList = GetFavoriteItemList();
-  DeleteFavoriteItem _deleteFavoriteItem = DeleteFavoriteItem();
+  final GetFavoriteItemList _getFavoriteItemList = GetFavoriteItemList();
+  final DeleteFavoriteItem _deleteFavoriteItem = DeleteFavoriteItem();
 
   @override
   void onInit() {
@@ -71,7 +71,6 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
         favoriteMarketItemList.add(item);
       } else if (item.itemType == "FESTIVAL") {
         favoriteFavoriteItemList.add(item);
-        print("favoriteFavoriteItemList: ${favoriteFavoriteItemList}");
       }
     }
   }

@@ -135,8 +135,15 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
           },
         );
       case MyPageMenu.favorite:
-        // todo: 나중에 content 하나로
         return Obx(() {
+          if (controller.myPageTabController.index == 0 && controller.favoriteMarketItemList.isEmpty) {
+            return Center(child: EmptyView(text: MyPageMenu.favorite.contentEmptyTitle));
+          }
+
+          if (controller.myPageTabController.index == 1 && controller.favoriteFavoriteItemList.isEmpty) {
+            return Center(child: EmptyView(text: MyPageMenu.favorite.contentEmptyTitle));
+          }
+
           return ListView.builder(
             itemCount: controller.myPageTabController.index == 0
                 ? controller.favoriteMarketItemList.length

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
+import 'package:seenear/const/extension/int_extension.dart';
 
 import '../../../../data/remote/response/info_item_response.dart';
 
@@ -118,7 +119,7 @@ class MarketCell extends StatelessWidget {
                         width: 4,
                       ),
                       Text(
-                        '후기 ${item.reviewCount}개',
+                        '후기 ${item.reviewCount.limitThousand()}개',
                         style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: SeenearColor.grey30),
                       ),
                     ],
