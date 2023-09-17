@@ -18,6 +18,7 @@ class MyPageSettingController extends GetxController {
   RxString loginType = ''.obs;
   RxString nickname = ''.obs;
   RxString profileImageSrc = ''.obs;
+  RxBool enableChangeButton = false.obs; // 변경완료 버튼 활성화 여부
 
   TextEditingController nicknameEditController = TextEditingController();
   Rx<HelperTextType> helperTextType = HelperTextType(isError: false, helperText: '닉네임을 입력해주세요.').obs;
@@ -56,6 +57,9 @@ class MyPageSettingController extends GetxController {
     super.onInit();
     _requestMyProfile();
     nicknameEditController.text = ''; // 본래 유저의 닉네임
+    nicknameEditController.addListener(() {
+      enableChangeButton.value = nicknameEditController.text.trim().isNotEmpty;
+    });
   }
 
   @override
@@ -71,43 +75,39 @@ class MyPageSettingController extends GetxController {
     profileImageSrc.value = res.profileImageSrc ?? '';
   }
 
-  Future<void> onTapNicknameConfirm() async {
-    String nickname = nicknameEditController.text.trim();
-    if (nickname.isEmpty) return;
-
-    bool res = await _checkNickname(nickname: nickname);
-    if (res) {
-      // helperText 잠깐 보여준 다음에 뒤로 가기
-      helperTextType.value = HelperTextType(isError: false, helperText: '사용 가능한 닉네임이에요.');
-      Future.delayed(const Duration(milliseconds: 500), () {
-        Get.back();
-      });
-    } else {
-      helperTextType.value = HelperTextType(isError: true, helperText: '이미 사용중인 닉네임이에요.\n다른 닉네임을 입력해주세요.');
-    }
-  }
-
   void onTapEditProfileImage() {}
 
   void onTapEditNickname() {
     Get.to(() => const NicknameEditScreen());
   }
 
-  void onTapFinishEditNickname() {
-    Get.bottomSheet(
-      BaseBottomSheet(
-        title: '닉네임 변경을 완제료하시겠어요?',
-        desc: '완료 이후 변경된 닉네임으로 적용됩니다.',
-        buttonTitles: const ['아니요', '완료'],
-        onTapButton: (index) {
-          Get.back();
-          if (index == 1) {
-            // todo: 닉네임 변경 api
-            SnackBarManager().showSnackBar(title: '닉네임 변경이 완료되었습니다.');
-          }
-        },
-      ),
-    );
+  Future<void> onTapFinishEditNickname() async {
+    String nickname = nicknameEditController.text.trim();
+    if (nickname.isEmpty || !enableChangeButton.value) return;
+
+    bool res = await _checkNickname(nickname: nickname);
+    if (res) {
+      // helperText 보여준 다음 0.5초 뒤에 닉네임 변경 확인 바텀 시트
+      helperTextType.value = HelperTextType(isError: false, helperText: '사용 가능한 닉네임이에요.');
+      Future.delayed(const Duration(milliseconds: 500), () {
+        Get.bottomSheet(
+          BaseBottomSheet(
+            title: '닉네임 변경을 완료하시겠어요?',
+            desc: '완료 이후 변경된 닉네임으로 적용됩니다.',
+            buttonTitles: const ['아니요', '완료'],
+            onTapButton: (index) {
+              Get.back();
+              if (index == 1) {
+                // todo: 프로필 수정 api
+                SnackBarManager().showSnackBar(title: '닉네임 변경이 완료되었습니다.');
+              }
+            },
+          ),
+        );
+      });
+    } else {
+      helperTextType.value = HelperTextType(isError: true, helperText: '이미 사용중인 닉네임이에요.\n다른 닉네임을 입력해주세요.');
+    }
   }
 
   void onTapDeactiveAccount() {

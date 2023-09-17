@@ -42,7 +42,7 @@ class NicknameEditScreen extends GetView<MyPageSettingController> {
             const Spacer(),
             BaseButton(
               buttonText: '변경 완료',
-              isDisabled: controller.nicknameEditController.text.trim().isEmpty,
+              isDisabled: !controller.enableChangeButton.value,
               onPressed: () {
                 controller.onTapFinishEditNickname();
               },
