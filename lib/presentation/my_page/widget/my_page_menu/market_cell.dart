@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 
+import '../../../../data/remote/response/info_item_response.dart';
+
 class MarketCell extends StatelessWidget {
+  final InfoItemResponse item;
   final Function() onTapItemCell;
   final Function() onTapFavoriteIcon;
   final bool? showDeleteButton;
 
-  const MarketCell({super.key, required this.onTapItemCell, required this.onTapFavoriteIcon, this.showDeleteButton = false});
+  const MarketCell({
+    super.key,
+    required this.item,
+    required this.onTapItemCell,
+    required this.onTapFavoriteIcon,
+    this.showDeleteButton = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +61,7 @@ class MarketCell extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        '몰디브 시장',
+                        item.name,
                         style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: SeenearColor.grey60),
                       ),
                       const Spacer(),
@@ -64,7 +73,7 @@ class MarketCell extends StatelessWidget {
                             width: 24,
                             color: SeenearColor.blue60,
                           ),
-                      )
+                        )
                     ],
                   ),
                   const SizedBox(
@@ -102,14 +111,14 @@ class MarketCell extends StatelessWidget {
                         width: 4,
                       ),
                       Text(
-                        '4.3',
+                        '${item.score}',
                         style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: SeenearColor.grey50),
                       ),
                       const SizedBox(
                         width: 4,
                       ),
                       Text(
-                        '후기 999+개',
+                        '후기 ${item.reviewCount}개',
                         style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: SeenearColor.grey30),
                       ),
                     ],
@@ -127,7 +136,7 @@ class MarketCell extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 144 / 112,
       child: Image.network(
-        'https://picsum.photos/200/303',
+        item.imageSrc.isNotEmpty ? item.imageSrc : 'https://picsum.photos/200/303',
         fit: BoxFit.cover,
       ),
     );

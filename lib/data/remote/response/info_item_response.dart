@@ -3,7 +3,7 @@ class InfoItemResponse {
   int id;
   String imageSrc;
   int itemId;
-  String itemType;
+  String itemType; // "FESTIVAL", "MARKET"
   String name;
   int reviewCount;
   int score;

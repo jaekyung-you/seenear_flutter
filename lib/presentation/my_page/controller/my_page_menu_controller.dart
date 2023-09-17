@@ -15,7 +15,9 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
   late TabController myPageTabController;
   int requestSize = 10;
 
-  RxList<InfoItemResponse> favoriteItemList = <InfoItemResponse>[].obs;
+  List<InfoItemResponse> favoriteItemList = <InfoItemResponse>[];
+  RxList<InfoItemResponse> favoriteMarketItemList = <InfoItemResponse>[].obs;
+  RxList<InfoItemResponse> favoriteFavoriteItemList = <InfoItemResponse>[].obs;
 
   /// usecase
   GetFavoriteItemList _getFavoriteItemList = GetFavoriteItemList();
@@ -33,6 +35,21 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
     super.onClose();
   }
 
+  void clearList(MyPageMenu menu) {
+    switch (menu) {
+      case MyPageMenu.recentView:
+      case MyPageMenu.review:
+      case MyPageMenu.subscription:
+        break;
+
+      case MyPageMenu.favorite:
+        favoriteItemList.clear();
+        favoriteMarketItemList.clear();
+        favoriteFavoriteItemList.clear();
+    }
+  }
+
+
   void requestListByMenu(MyPageMenu menu) {
     switch (menu) {
       case MyPageMenu.recentView:
@@ -48,7 +65,15 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
   Future<void> _requestFavoriteList() async {
     // todo: 페이징 구현
     List<InfoItemResponse> res = await _getFavoriteItemList(size: requestSize, cursorId: null);
-    favoriteItemList.value = res;
+    favoriteItemList = res;
+    for (InfoItemResponse item in favoriteItemList) {
+      if (item.itemType == "MARKET") {
+        favoriteMarketItemList.add(item);
+      } else if (item.itemType == "FESTIVAL") {
+        favoriteFavoriteItemList.add(item);
+        print("favoriteFavoriteItemList: ${favoriteFavoriteItemList}");
+      }
+    }
   }
 
   void onTapMenuItem(MyPageMenu menu) {

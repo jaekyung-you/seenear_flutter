@@ -11,6 +11,7 @@ import 'package:seenear/presentation/my_page/widget/my_page_menu/review_cell.dar
 import 'package:seenear/presentation/my_page/widget/my_page_menu/subscription_cell.dart';
 import 'package:styled_text/styled_text.dart';
 import '../../../../const/design_system/seenear_color.dart';
+import '../../../../data/remote/response/info_item_response.dart';
 
 class MyPageContentScreen extends StatefulWidget {
   final MyPageMenu menu;
@@ -28,6 +29,12 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
   void initState() {
     super.initState();
     controller.requestListByMenu(widget.menu);
+  }
+
+  @override
+  void dispose() {
+    controller.clearList(widget.menu);
+    super.dispose();
   }
 
   @override
@@ -68,6 +75,11 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
           ),
           TabBar(
             controller: controller.myPageTabController,
+            onTap: (value) {
+              setState(() {
+                controller.myPageTabController.index = value;
+              });
+            },
             tabs: [
               for (String title in widget.menu.contentTabTitle)
                 SizedBox(
@@ -90,9 +102,6 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
               controller: controller.myPageTabController,
               children: [
                 contentView(widget.menu),
-                Center(
-                  child: EmptyView(text: widget.menu.contentEmptyTitle),
-                )
               ],
             ),
           ),
@@ -103,25 +112,42 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
 
   Widget contentView(MyPageMenu menu) {
     // todo: menu에 따라 위에 헤더가 추가됨
+
+    InfoItemResponse mock = InfoItemResponse(
+      id: 608437709580928,
+      itemId: 603851914389120,
+      itemType: "MARKET",
+      name: "MOCK MARKET",
+      date: "DATE",
+      imageSrc: "https://repill-dev.s3.ap-northeast-2.amazonaws.com/test/KakaoTalk_Photo_2023-07-30-18-44-36.jpeg",
+      score: 5,
+      reviewCount: 100,
+    );
+
     switch (menu) {
       case MyPageMenu.recentView:
         return ListView.builder(
           itemCount: 10,
           itemBuilder: (context, index) {
             return controller.myPageTabController.index == 0
-                ? MarketCell(onTapItemCell: () {}, onTapFavoriteIcon: () {})
-                : FestivalCell(onTapItemCell: () {}, onTapFavoriteIcon: () {});
+                ? MarketCell(item: mock, onTapItemCell: () {}, onTapFavoriteIcon: () {})
+                : FestivalCell(item: mock, onTapItemCell: () {}, onTapFavoriteIcon: () {});
           },
         );
       case MyPageMenu.favorite:
-        return ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return controller.myPageTabController.index == 0
-                ? MarketCell(onTapItemCell: () {}, onTapFavoriteIcon: () {})
-                : FestivalCell(onTapItemCell: () {}, onTapFavoriteIcon: () {});
-          },
-        );
+        // todo: 나중에 content 하나로
+        return Obx(() {
+          return ListView.builder(
+            itemCount: controller.myPageTabController.index == 0
+                ? controller.favoriteMarketItemList.length
+                : controller.favoriteFavoriteItemList.length,
+            itemBuilder: (context, index) {
+              return controller.myPageTabController.index == 0
+                  ? MarketCell(item: controller.favoriteMarketItemList[index], onTapItemCell: () {}, onTapFavoriteIcon: () {})
+                  : FestivalCell(item: controller.favoriteFavoriteItemList[index], onTapItemCell: () {}, onTapFavoriteIcon: () {});
+            },
+          );
+        });
       case MyPageMenu.review:
         return ListView.builder(
           itemCount: 10,

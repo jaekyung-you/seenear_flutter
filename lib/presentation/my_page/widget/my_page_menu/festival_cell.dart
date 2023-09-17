@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 
+import '../../../../data/remote/response/info_item_response.dart';
+
 class FestivalCell extends StatelessWidget {
+  final InfoItemResponse item;
   final Function() onTapItemCell;
   final Function() onTapFavoriteIcon;
 
-  const FestivalCell({super.key, required this.onTapItemCell, required this.onTapFavoriteIcon});
+  const FestivalCell({
+    super.key,
+    required this.item,
+    required this.onTapItemCell,
+    required this.onTapFavoriteIcon,
+  });
 
   @override
   Widget build(BuildContext context) {

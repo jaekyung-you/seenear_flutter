@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:seenear/const/design_system/base_header.dart';
 import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
 import 'package:seenear/presentation/market_festival/widget/filter_widget.dart';
@@ -8,6 +7,7 @@ import 'package:seenear/presentation/my_page/widget/my_page_menu/festival_cell.d
 import 'package:seenear/presentation/my_page/widget/my_page_menu/market_cell.dart';
 
 import '../../../const/design_system/seenear_color.dart';
+import '../../../data/remote/response/info_item_response.dart';
 import '../controller/market_festival_controller.dart';
 
 class MarketFestivalScreen extends GetView<MarketFestivalController> {
@@ -98,23 +98,45 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
         Expanded(
           child: controller.isMarket
               ? controller.marketList.isEmpty
-              ? emptyView()
-              : ListView.builder(
-              itemCount: controller.marketList.length,
-              itemBuilder: (context, index) {
-                return MarketCell(onTapItemCell: () {}, onTapFavoriteIcon: () {});
-              })
+                  ? emptyView()
+                  : ListView.builder(
+                      itemCount: controller.marketList.length,
+                      itemBuilder: (context, index) {
+                        return MarketCell(
+                            item: InfoItemResponse(
+                              id: 608437709580928,
+                              itemId: 603851914389120,
+                              itemType: "MARKET",
+                              name: "MOCK MARKET",
+                              date: "DATE",
+                              imageSrc: "https://repill-dev.s3.ap-northeast-2.amazonaws.com/test/KakaoTalk_Photo_2023-07-30-18-44-36.jpeg",
+                              score: 5,
+                              reviewCount: 100,
+                            ),
+                            onTapItemCell: () {},
+                            onTapFavoriteIcon: () {});
+                      })
               : controller.festivalList.isEmpty
-              ? emptyView()
-              : ListView.builder(
-            itemCount: controller.festivalList.length,
-            itemBuilder: (context, index) {
-              return FestivalCell(
-                onTapItemCell: () {},
-                onTapFavoriteIcon: () {},
-              );
-            },
-          ),
+                  ? emptyView()
+                  : ListView.builder(
+                      itemCount: controller.festivalList.length,
+                      itemBuilder: (context, index) {
+                        return FestivalCell(
+                          item: InfoItemResponse(
+                            id: 608437709580928,
+                            itemId: 603851914389120,
+                            itemType: "MARKET",
+                            name: "MOCK MARKET",
+                            date: "DATE",
+                            imageSrc: "https://repill-dev.s3.ap-northeast-2.amazonaws.com/test/KakaoTalk_Photo_2023-07-30-18-44-36.jpeg",
+                            score: 5,
+                            reviewCount: 100,
+                          ),
+                          onTapItemCell: () {},
+                          onTapFavoriteIcon: () {},
+                        );
+                      },
+                    ),
         ),
       ],
     );
