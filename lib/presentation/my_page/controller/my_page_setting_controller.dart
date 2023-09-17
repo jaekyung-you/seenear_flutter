@@ -3,13 +3,13 @@ import 'package:get/get.dart';
 import 'package:seenear/const/design_system/base_bottom_sheet.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
 import 'package:seenear/data/remote/api/check_nickname.dart';
+import 'package:seenear/data/remote/api/edit_my_profile.dart';
 import 'package:seenear/data/remote/api/get_sign_out_reasons.dart';
 import 'package:seenear/data/remote/api/logout.dart';
 import 'package:seenear/domain/util/snack_bar_manager.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/deactive_account_screen.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/deactive_complete_screen.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/nickname_edit_screen.dart';
-
 import '../../../data/local/member.dart';
 import '../../../data/remote/api/get_my_profile.dart';
 import '../../../data/remote/response/member_detail_response.dart';
@@ -49,6 +49,7 @@ class MyPageSettingController extends GetxController {
 
   // usecase
   final CheckNickname _checkNickname = CheckNickname();
+  final EditMyProfile _editMyProfile = EditMyProfile();
   final GetSignOutReasons _getSignOutReasons = GetSignOutReasons();
   final Logout _logout = Logout();
   final GetMyProfile _getMyProfile = GetMyProfile();
@@ -104,8 +105,7 @@ class MyPageSettingController extends GetxController {
             onTapButton: (index) {
               Get.back();
               if (index == 1) {
-                // todo: 프로필 수정 api
-                SnackBarManager().showSnackBar(title: '닉네임 변경이 완료되었습니다.');
+                _requestEditNickname(nickname: nickname);
               }
             },
           ),
@@ -113,6 +113,16 @@ class MyPageSettingController extends GetxController {
       });
     } else {
       helperTextType.value = HelperTextType(isError: true, helperText: '이미 사용중인 닉네임이에요.\n다른 닉네임을 입력해주세요.');
+    }
+  }
+
+  Future<void> _requestEditNickname({required String nickname}) async {
+    final res = await _editMyProfile(nickname: nickname);
+    if (res) {
+      Member().nickname = nickname;
+      SnackBarManager().showSnackBar(title: '닉네임 변경이 완료되었습니다.');
+    } else {
+      SnackBarManager().showSnackBar(title: '오류가 발생했습니다.');
     }
   }
 

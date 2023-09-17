@@ -41,6 +41,7 @@ class ApiBase {
 
     dio.options.baseUrl = 'http://3.37.70.222:9090';
     dio.options.contentType = "application/json";
+    // dio.options.contentType = 'application/x-www-form-urlencoded';
     dio.options.headers = _baseHeader;
     // String uuid = await SharedPrefManager().getUuidStr();
     // if (uuid.isNotEmpty) {
@@ -68,6 +69,7 @@ class ApiBase {
 
   Future<Response> get(String path, {Map<String, dynamic>? query}) async {
     await init();
+
     try {
       var res = await dio.get(path, queryParameters: query);
       return res;
