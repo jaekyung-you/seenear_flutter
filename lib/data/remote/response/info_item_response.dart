@@ -1,4 +1,4 @@
-class RecentViewedItemResponse {
+class InfoItemResponse {
   String date;
   int id;
   String imageSrc;
@@ -8,7 +8,7 @@ class RecentViewedItemResponse {
   int reviewCount;
   int score;
 
-  RecentViewedItemResponse({
+  InfoItemResponse({
     required this.date,
     required this.id,
     required this.imageSrc,
@@ -19,8 +19,8 @@ class RecentViewedItemResponse {
     required this.score,
   });
 
-  factory RecentViewedItemResponse.fromJson(Map<String, dynamic> json) {
-    return RecentViewedItemResponse(
+  factory InfoItemResponse.fromJson(Map<String, dynamic> json) {
+    return InfoItemResponse(
       date: json['date'],
       id: json['id'],
       imageSrc: json['imageSrc'],

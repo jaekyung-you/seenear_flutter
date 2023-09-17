@@ -1,6 +1,6 @@
 enum MyPageMenu {
   recentView,
-  liked,
+  favorite,
   review,
   subscription;
 
@@ -8,7 +8,7 @@ enum MyPageMenu {
     switch (this) {
       case MyPageMenu.recentView:
         return '최근 본 목록';
-      case MyPageMenu.liked:
+      case MyPageMenu.favorite:
         return '찜 목록';
       case MyPageMenu.review:
         return '리뷰 관리';
@@ -21,7 +21,7 @@ enum MyPageMenu {
     switch (this) {
       case MyPageMenu.recentView:
         return 'assets/images/recent.png';
-      case MyPageMenu.liked:
+      case MyPageMenu.favorite:
         return 'assets/images/favorite.png';
       case MyPageMenu.review:
         return 'assets/images/review.png';
@@ -34,7 +34,7 @@ enum MyPageMenu {
     switch (this) {
       case MyPageMenu.recentView:
         return '<b>닉네임</b> 님의 최근 본 목록이에요.';
-      case MyPageMenu.liked:
+      case MyPageMenu.favorite:
         return '<b>닉네임</b> 님의 찜 목록이에요.';
       case MyPageMenu.review:
         return '<b>닉네임</b> 님이 작성하신 리뷰에요.';
@@ -47,7 +47,7 @@ enum MyPageMenu {
     switch (this) {
       case MyPageMenu.recentView:
         return '목록은 10개까지만 보여집니다.';
-      case MyPageMenu.liked:
+      case MyPageMenu.favorite:
         return '목록은 최근 찜한 순서로 보여요!';
       default:
         return null;
@@ -58,7 +58,7 @@ enum MyPageMenu {
     switch (this) {
       case MyPageMenu.recentView:
         return '최근 본 축제/행사가 없어요';
-      case MyPageMenu.liked:
+      case MyPageMenu.favorite:
         return '찜한 축제/행사가 없어요';
       case MyPageMenu.review:
         return '작성하신 리뷰가 없어요';
@@ -71,7 +71,7 @@ enum MyPageMenu {
     switch (this) {
       case MyPageMenu.recentView:
         return '최근 본 목록에서 삭제 하시겠어요?';
-      case MyPageMenu.liked:
+      case MyPageMenu.favorite:
         return '찜 목록에서 삭제 하시겠어요?';
       case MyPageMenu.subscription:
         return '방실방실방실이 님을\n구독 취소하시겠어요?';
@@ -84,7 +84,7 @@ enum MyPageMenu {
     switch (this) {
       case MyPageMenu.recentView:
         return '삭제된 장소는 더 이상 최근 본 목록에 보이지 않아요.';
-      case MyPageMenu.liked:
+      case MyPageMenu.favorite:
         return '삭제된 장소는 더 이상 찜 목록에 보이지 않아요.';
       case MyPageMenu.subscription:
         return '구독을 취소하시면 구독 목록에서 사라져요.';

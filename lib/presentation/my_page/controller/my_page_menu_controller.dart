@@ -3,13 +3,23 @@ import 'package:get/get.dart';
 import 'package:seenear/const/enum/my_page_menu.dart';
 import 'package:seenear/const/enum/my_page_setting.dart';
 import 'package:seenear/const/seenear_path.dart';
+import 'package:seenear/data/remote/api/delete_favorite_item.dart';
+import 'package:seenear/data/remote/api/get_favorite_items.dart';
 import 'package:seenear/domain/util/snack_bar_manager.dart';
 import '../../../const/design_system/base_bottom_sheet.dart';
+import '../../../data/remote/response/info_item_response.dart';
 import '../widget/my_page_menu/my_page_content_screen.dart';
 
 class MyPageMenuController extends GetxController with GetSingleTickerProviderStateMixin {
-  // property
+  /// property
   late TabController myPageTabController;
+  int requestSize = 10;
+
+  RxList<InfoItemResponse> favoriteItemList = <InfoItemResponse>[].obs;
+
+  /// usecase
+  GetFavoriteItemList _getFavoriteItemList = GetFavoriteItemList();
+  DeleteFavoriteItem _deleteFavoriteItem = DeleteFavoriteItem();
 
   @override
   void onInit() {
@@ -21,6 +31,24 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
   void onClose() {
     myPageTabController.dispose();
     super.onClose();
+  }
+
+  void requestListByMenu(MyPageMenu menu) {
+    switch (menu) {
+      case MyPageMenu.recentView:
+      case MyPageMenu.review:
+      case MyPageMenu.subscription:
+        break;
+
+      case MyPageMenu.favorite:
+      _requestFavoriteList();
+    }
+  }
+
+  Future<void> _requestFavoriteList() async {
+    // todo: 페이징 구현
+    List<InfoItemResponse> res = await _getFavoriteItemList(size: requestSize, cursorId: null);
+    favoriteItemList.value = res;
   }
 
   void onTapMenuItem(MyPageMenu menu) {
