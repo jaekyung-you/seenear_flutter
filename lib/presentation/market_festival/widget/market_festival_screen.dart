@@ -103,18 +103,20 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
                       itemCount: controller.marketList.length,
                       itemBuilder: (context, index) {
                         return MarketCell(
-                            item: InfoItemResponse(
-                              id: 608437709580928,
-                              itemId: 603851914389120,
-                              itemType: "MARKET",
-                              name: "MOCK MARKET",
-                              date: "DATE",
-                              imageSrc: "https://repill-dev.s3.ap-northeast-2.amazonaws.com/test/KakaoTalk_Photo_2023-07-30-18-44-36.jpeg",
-                              score: 5,
-                              reviewCount: 100,
-                            ),
-                            onTapItemCell: () {},
-                            onTapFavoriteIcon: () {});
+                          item: InfoItemResponse(
+                            id: 608437709580928,
+                            itemId: 603851914389120,
+                            itemType: "MARKET",
+                            name: "MOCK MARKET",
+                            date: "DATE",
+                            imageSrc: "https://repill-dev.s3.ap-northeast-2.amazonaws.com/test/KakaoTalk_Photo_2023-07-30-18-44-36.jpeg",
+                            score: 5,
+                            reviewCount: 100,
+                          ),
+                          onTapItemCell: () {},
+                          onTapFavoriteIcon: () {},
+                          onTapDelete: () {},
+                        );
                       })
               : controller.festivalList.isEmpty
                   ? emptyView()
@@ -134,6 +136,7 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
                           ),
                           onTapItemCell: () {},
                           onTapFavoriteIcon: () {},
+                          onTapDelete: () {},
                         );
                       },
                     ),

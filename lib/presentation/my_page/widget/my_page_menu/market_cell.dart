@@ -6,8 +6,9 @@ import '../../../../data/remote/response/info_item_response.dart';
 
 class MarketCell extends StatelessWidget {
   final InfoItemResponse item;
-  final Function() onTapItemCell;
-  final Function() onTapFavoriteIcon;
+  final Function onTapItemCell;
+  final Function onTapFavoriteIcon;
+  final Function onTapDelete;
   final bool? showDeleteButton;
 
   const MarketCell({
@@ -15,6 +16,7 @@ class MarketCell extends StatelessWidget {
     required this.item,
     required this.onTapItemCell,
     required this.onTapFavoriteIcon,
+    required this.onTapDelete,
     this.showDeleteButton = false,
   });
 

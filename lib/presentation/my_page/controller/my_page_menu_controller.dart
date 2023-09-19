@@ -92,19 +92,34 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
     }
   }
 
-  void onDeleteItem(MyPageMenu menu) {
+  void onDeleteItem({required MyPageMenu menu, required int id}) {
     if (menu.deleteBottomSheetTitle == null) return;
     Get.bottomSheet(
       BaseBottomSheet(
         title: menu.deleteBottomSheetTitle!,
         desc: menu.deleteBottomSheetDesc,
         buttonTitles: menu.deleteBottomSheetButtons,
-        onTapButton: (index) {
+        onTapButton: (index) async {
           Get.back();
+          bool res = await _requestDeleteItem(menu: menu, id: id);
+          if (!res) return; //  실패하면 토스트 팝업 안 띄움
           if (index == 1) SnackBarManager().showSnackBar(title: menu.deleteBottomSheetComplete);
         },
       ),
     );
+  }
+
+  // todo: menu에 따른 api 호출 필요
+  Future<bool> _requestDeleteItem({required MyPageMenu menu, required int id}) async {
+    switch (menu) {
+      case MyPageMenu.favorite:
+        bool res = await _deleteFavoriteItem(id: id);
+        return res;
+      case MyPageMenu.review:
+      case MyPageMenu.subscription:
+      case MyPageMenu.recentView:
+        return true; // todo: 각각 api 필요
+    }
   }
 
   void onTapBlockFollower() {

@@ -6,14 +6,16 @@ import '../../../../data/remote/response/info_item_response.dart';
 
 class FestivalCell extends StatelessWidget {
   final InfoItemResponse item;
-  final Function() onTapItemCell;
-  final Function() onTapFavoriteIcon;
+  final Function onTapItemCell;
+  final Function onTapFavoriteIcon;
+  final Function onTapDelete;
 
   const FestivalCell({
     super.key,
     required this.item,
     required this.onTapItemCell,
     required this.onTapFavoriteIcon,
+    required this.onTapDelete,
   });
 
   @override
@@ -71,7 +73,9 @@ class FestivalCell extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 4.0, left: 4.0),
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            onTapDelete();
+                          },
                           child: Image.asset(
                             'assets/images/close.png',
                             width: 24,

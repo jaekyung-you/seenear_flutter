@@ -130,8 +130,22 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
           itemCount: 10,
           itemBuilder: (context, index) {
             return controller.myPageTabController.index == 0
-                ? MarketCell(item: mock, onTapItemCell: () {}, onTapFavoriteIcon: () {})
-                : FestivalCell(item: mock, onTapItemCell: () {}, onTapFavoriteIcon: () {});
+                ? MarketCell(
+                    item: mock,
+                    onTapItemCell: () {},
+                    onTapFavoriteIcon: () {},
+                    onTapDelete: () {
+                      controller.onDeleteItem(menu: MyPageMenu.recentView, id: 1);
+                    },
+                  )
+                : FestivalCell(
+                    item: mock,
+                    onTapItemCell: () {},
+                    onTapFavoriteIcon: () {},
+                    onTapDelete: () {
+                      controller.onDeleteItem(menu: MyPageMenu.recentView, id: 1);
+                    },
+                  );
           },
         );
       case MyPageMenu.favorite:
@@ -150,8 +164,28 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
                 : controller.favoriteFavoriteItemList.length,
             itemBuilder: (context, index) {
               return controller.myPageTabController.index == 0
-                  ? MarketCell(item: controller.favoriteMarketItemList[index], onTapItemCell: () {}, onTapFavoriteIcon: () {})
-                  : FestivalCell(item: controller.favoriteFavoriteItemList[index], onTapItemCell: () {}, onTapFavoriteIcon: () {});
+                  ? MarketCell(
+                      item: controller.favoriteMarketItemList[index],
+                      onTapItemCell: () {},
+                      onTapFavoriteIcon: () {},
+                      onTapDelete: () {
+                        controller.onDeleteItem(
+                          menu: MyPageMenu.favorite,
+                          id: controller.favoriteMarketItemList[index].itemId,
+                        );
+                      },
+                    )
+                  : FestivalCell(
+                      item: controller.favoriteFavoriteItemList[index],
+                      onTapItemCell: () {},
+                      onTapFavoriteIcon: () {},
+                      onTapDelete: () {
+                        controller.onDeleteItem(
+                          menu: MyPageMenu.favorite,
+                          id: controller.favoriteFavoriteItemList[index].itemId,
+                        );
+                      },
+                    );
             },
           );
         });
