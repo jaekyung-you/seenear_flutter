@@ -6,8 +6,23 @@ import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_setting_controller.dart';
 
-class DeactiveAccountScreen extends GetView<MyPageSettingController> {
+import '../../../../data/remote/response/sign_out_reason_list.dart';
+
+class DeactiveAccountScreen extends StatefulWidget {
   const DeactiveAccountScreen({super.key});
+
+  @override
+  State<DeactiveAccountScreen> createState() => _DeactiveAccountScreenState();
+}
+
+class _DeactiveAccountScreenState extends State<DeactiveAccountScreen> {
+  final controller = Get.find<MyPageSettingController>();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.requestSignOutReason();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +74,11 @@ class DeactiveAccountScreen extends GetView<MyPageSettingController> {
                       const SizedBox(
                         height: 20,
                       ),
-                      for (String reason in controller.deactiveReasons)
+                      for (SignOutReason reason in controller.signOutReasonList)
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
                           child: BaseButton(
-                            buttonText: reason,
+                            buttonText: reason.displayText,
                             bgColor: controller.selectedReasons.contains(reason) ? SeenearColor.blue80 : SeenearColor.grey5,
                             fgColor: controller.selectedReasons.contains(reason) ? Colors.white : SeenearColor.grey50,
                             onPressed: () {
@@ -71,7 +86,7 @@ class DeactiveAccountScreen extends GetView<MyPageSettingController> {
                             },
                           ),
                         ),
-                      if (controller.selectedReasons.contains(controller.deactiveReasons.last))
+                      if (controller.selectedReasons.contains(controller.signOutReasonList.last))
                         SizedBox(
                           width: double.infinity,
                           height: 200,

@@ -80,7 +80,7 @@ class SubscriptionCell extends GetView<MyPageMenuController> {
                             imageColor: button.fgColor,
                             onTap: () {
                               if (button == SubscriptionButtonType.unfollow) {
-                                controller.onDeleteItem(MyPageMenu.subscription);
+                                controller.onDeleteItem(menu: MyPageMenu.subscription, id: 1);
                               }
 
                               if (button == SubscriptionButtonType.block) {

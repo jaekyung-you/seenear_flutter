@@ -6,6 +6,7 @@ import 'package:seenear/data/remote/api/check_nickname.dart';
 import 'package:seenear/data/remote/api/edit_my_profile.dart';
 import 'package:seenear/data/remote/api/get_sign_out_reasons.dart';
 import 'package:seenear/data/remote/api/logout.dart';
+import 'package:seenear/data/remote/api/sign_out_account.dart';
 import 'package:seenear/domain/util/snack_bar_manager.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/deactive_account_screen.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/deactive_complete_screen.dart';
@@ -13,6 +14,7 @@ import 'package:seenear/presentation/my_page/widget/my_setting_menu/nickname_edi
 import '../../../data/local/member.dart';
 import '../../../data/remote/api/get_my_profile.dart';
 import '../../../data/remote/response/member_detail_response.dart';
+import '../../../data/remote/response/sign_out_reason_list.dart';
 
 class MyPageSettingController extends GetxController {
   // property
@@ -26,16 +28,8 @@ class MyPageSettingController extends GetxController {
 
   List<String> noticeList = [];
 
-  List<String> deactiveReasons = [
-    '개인정보 노출이 걱정돼요',
-    '자주 사용하지 않아요',
-    '알림이 너무 자주 와요',
-    '콘텐츠 신뢰도가 낮아요',
-    '앱 이용이 어려워요',
-    '기타',
-  ];
-
-  RxList<String> selectedReasons = <String>[].obs;
+  RxList<SignOutReason> signOutReasonList = <SignOutReason>[].obs;
+  RxList<SignOutReason> selectedReasons = <SignOutReason>[].obs;
   TextEditingController customReasonInputController = TextEditingController();
   FocusNode focusNode = FocusNode();
 
@@ -50,9 +44,12 @@ class MyPageSettingController extends GetxController {
   // usecase
   final CheckNickname _checkNickname = CheckNickname();
   final EditMyProfile _editMyProfile = EditMyProfile();
-  final GetSignOutReasons _getSignOutReasons = GetSignOutReasons();
+
   final Logout _logout = Logout();
   final GetMyProfile _getMyProfile = GetMyProfile();
+
+  final GetSignOutReasons _getSignOutReasons = GetSignOutReasons();
+  final SignOutAccount _signOutAccount = SignOutAccount();
 
   @override
   void onInit() {
@@ -136,10 +133,11 @@ class MyPageSettingController extends GetxController {
         title: '정말 탈퇴 하시겠어요?',
         desc: '탈퇴시 회원님의 모든 정보는 즉시 폐기됩니다.',
         buttonTitles: const ['아니요', '탈퇴 완료'],
-        onTapButton: (index) {
+        onTapButton: (index) async {
           Get.back();
           if (index == 1) {
-            // todo: 탈퇴하기 api
+            bool res = await _requestSignOut();
+            if (!res) return;
             Get.to(() => const DeactiveCompleteScreen());
           }
         },
@@ -147,11 +145,24 @@ class MyPageSettingController extends GetxController {
     );
   }
 
-  void onTapDeactivateReason(String reason) {
+  void onTapDeactivateReason(SignOutReason reason) {
     if (selectedReasons.contains(reason)) {
       selectedReasons.remove(reason);
     } else {
       selectedReasons.add(reason);
     }
+  }
+
+  /// 탈퇴
+  Future<void> requestSignOutReason() async {
+    SignOutReasonList res = await _getSignOutReasons();
+    signOutReasonList.value = res.data;
+  }
+
+  Future<bool> _requestSignOut() async {
+    String additionalInformation = customReasonInputController.text.trim();
+    List<String> type = selectedReasons.map((e) => e.code).toList();
+    bool res = await _signOutAccount(additionalInformation: additionalInformation, type: type);
+    return res;
   }
 }
