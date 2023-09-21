@@ -16,6 +16,7 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
   /// property
   late TabController myPageTabController;
   int requestSize = 10;
+  RxBool isLoading = false.obs; // 네트워크 로딩중
 
   List<InfoItemResponse> favoriteItemList = <InfoItemResponse>[];
   RxList<InfoItemResponse> favoriteMarketItemList = <InfoItemResponse>[].obs;
@@ -72,9 +73,9 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
     }
   }
 
+  // todo: 스크롤 끝까지 내림 Visibility -> 페이징 구현 필요
   Future<void> _requestFavoriteList() async {
-    // todo: 페이징 구현
-    List<InfoItemResponse> res = await _getFavoriteItemList(size: requestSize, cursorId: null);
+    List<InfoItemResponse> res = await _getFavoriteItemList(size: requestSize, cursorId: lastFavoriteId);
     favoriteItemList = res;
     for (InfoItemResponse item in favoriteItemList) {
       if (item.itemType == "MARKET") {
@@ -83,13 +84,16 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
         favoriteFestivalItemList.add(item);
       }
     }
+
+    lastFavoriteId = favoriteItemList.last.itemId;
+    print("lastFavoriteId: $lastFavoriteId");
   }
 
   Future<void> _requestRecentViewList() async {
     // todo: 페이징 구현
     List<InfoItemResponse> res = await _getRecentViews(size: requestSize, cursorId: null);
     recentViewList = res;
-    for (InfoItemResponse item in favoriteItemList) {
+    for (InfoItemResponse item in recentViewList) {
       if (item.itemType == "MARKET") {
         recentMarketItemList                .add(item);
       } else if (item.itemType == "FESTIVAL") {

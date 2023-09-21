@@ -126,6 +126,7 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
     );
 
     switch (menu) {
+      // 최대 10개까지만 해서 페이징 없음
       case MyPageMenu.recentView:
         return Obx(() {
           if (controller.myPageTabController.index == 0 && controller.recentMarketItemList.isEmpty) {
@@ -151,6 +152,12 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
         });
       case MyPageMenu.favorite:
         return Obx(() {
+          if (controller.isLoading.value) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
           if (controller.myPageTabController.index == 0 && controller.favoriteMarketItemList.isEmpty) {
             return Center(child: EmptyView(text: MyPageMenu.favorite.contentEmptyTitle));
           }
@@ -234,6 +241,12 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
         });
       case MyPageMenu.favorite:
         return Obx(() {
+          if (controller.isLoading.value) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
           if (controller.myPageTabController.index == 0 && controller.favoriteMarketItemList.isEmpty) {
             return Center(child: EmptyView(text: MyPageMenu.favorite.contentEmptyTitle));
           }
