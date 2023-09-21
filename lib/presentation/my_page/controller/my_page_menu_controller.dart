@@ -4,7 +4,9 @@ import 'package:seenear/const/enum/my_page_menu.dart';
 import 'package:seenear/const/enum/my_page_setting.dart';
 import 'package:seenear/const/seenear_path.dart';
 import 'package:seenear/data/remote/api/delete_favorite_item.dart';
+import 'package:seenear/data/remote/api/delete_recent_item.dart';
 import 'package:seenear/data/remote/api/get_favorite_items.dart';
+import 'package:seenear/data/remote/api/get_recent_view_list.dart';
 import 'package:seenear/domain/util/snack_bar_manager.dart';
 import '../../../const/design_system/base_bottom_sheet.dart';
 import '../../../data/remote/response/info_item_response.dart';
@@ -17,11 +19,19 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
 
   List<InfoItemResponse> favoriteItemList = <InfoItemResponse>[];
   RxList<InfoItemResponse> favoriteMarketItemList = <InfoItemResponse>[].obs;
-  RxList<InfoItemResponse> favoriteFavoriteItemList = <InfoItemResponse>[].obs;
+  RxList<InfoItemResponse> favoriteFestivalItemList = <InfoItemResponse>[].obs;
+  int? lastFavoriteId; // cursor에 사용됨
+
+  List<InfoItemResponse> recentViewList = <InfoItemResponse>[]; // 최대 10개까지만 보여서 페이징 필요없을 것 같음
+  RxList<InfoItemResponse> recentMarketItemList = <InfoItemResponse>[].obs;
+  RxList<InfoItemResponse> recentFestivalItemList = <InfoItemResponse>[].obs;
 
   /// usecase
   final GetFavoriteItemList _getFavoriteItemList = GetFavoriteItemList();
   final DeleteFavoriteItem _deleteFavoriteItem = DeleteFavoriteItem();
+  final GetRecentViews _getRecentViews = GetRecentViews();
+  final DeleteRecentItem _deleteRecentItem = DeleteRecentItem();
+
 
   @override
   void onInit() {
@@ -45,20 +55,20 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
       case MyPageMenu.favorite:
         favoriteItemList.clear();
         favoriteMarketItemList.clear();
-        favoriteFavoriteItemList.clear();
+        favoriteFestivalItemList.clear();
     }
   }
 
 
   void requestListByMenu(MyPageMenu menu) {
     switch (menu) {
+      case MyPageMenu.favorite:
+        _requestFavoriteList();
       case MyPageMenu.recentView:
+        _requestRecentViewList();
       case MyPageMenu.review:
       case MyPageMenu.subscription:
         break;
-
-      case MyPageMenu.favorite:
-      _requestFavoriteList();
     }
   }
 
@@ -70,7 +80,20 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
       if (item.itemType == "MARKET") {
         favoriteMarketItemList.add(item);
       } else if (item.itemType == "FESTIVAL") {
-        favoriteFavoriteItemList.add(item);
+        favoriteFestivalItemList.add(item);
+      }
+    }
+  }
+
+  Future<void> _requestRecentViewList() async {
+    // todo: 페이징 구현
+    List<InfoItemResponse> res = await _getRecentViews(size: requestSize, cursorId: null);
+    recentViewList = res;
+    for (InfoItemResponse item in favoriteItemList) {
+      if (item.itemType == "MARKET") {
+        recentMarketItemList                .add(item);
+      } else if (item.itemType == "FESTIVAL") {
+        recentFestivalItemList.add(item);
       }
     }
   }
@@ -116,6 +139,8 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
         bool res = await _deleteFavoriteItem(id: id);
         return res;
       case MyPageMenu.review:
+        bool res = await _deleteRecentItem(id: id);
+        return res;
       case MyPageMenu.subscription:
       case MyPageMenu.recentView:
         return true; // todo: 각각 api 필요

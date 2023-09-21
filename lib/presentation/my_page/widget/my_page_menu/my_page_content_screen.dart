@@ -101,7 +101,8 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
             child: TabBarView(
               controller: controller.myPageTabController,
               children: [
-                contentView(widget.menu),
+                marketContentView(widget.menu),
+                festivalContentView(widget.menu),
               ],
             ),
           ),
@@ -110,7 +111,7 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
     );
   }
 
-  Widget contentView(MyPageMenu menu) {
+  Widget marketContentView(MyPageMenu menu) {
     // todo: menu에 따라 위에 헤더가 추가됨
 
     InfoItemResponse mock = InfoItemResponse(
@@ -126,66 +127,130 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
 
     switch (menu) {
       case MyPageMenu.recentView:
-        return ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return controller.myPageTabController.index == 0
-                ? MarketCell(
-                    item: mock,
-                    onTapItemCell: () {},
-                    onTapFavoriteIcon: () {},
-                    onTapDelete: () {
-                      controller.onDeleteItem(menu: MyPageMenu.recentView, id: 1);
-                    },
-                  )
-                : FestivalCell(
-                    item: mock,
-                    onTapItemCell: () {},
-                    onTapFavoriteIcon: () {},
-                    onTapDelete: () {
-                      controller.onDeleteItem(menu: MyPageMenu.recentView, id: 1);
-                    },
+        return Obx(() {
+          if (controller.myPageTabController.index == 0 && controller.recentMarketItemList.isEmpty) {
+            return Center(child: EmptyView(text: MyPageMenu.recentView.contentEmptyTitle));
+          }
+
+          return ListView.builder(
+            itemCount: controller.recentMarketItemList.length,
+            itemBuilder: (context, index) {
+              return MarketCell(
+                item: controller.recentMarketItemList[index],
+                onTapItemCell: () {},
+                onTapFavoriteIcon: () {},
+                onTapDelete: () {
+                  controller.onDeleteItem(
+                    menu: MyPageMenu.recentView,
+                    id: controller.recentMarketItemList[index].itemId,
                   );
-          },
-        );
+                },
+              );
+            },
+          );
+        });
       case MyPageMenu.favorite:
         return Obx(() {
           if (controller.myPageTabController.index == 0 && controller.favoriteMarketItemList.isEmpty) {
             return Center(child: EmptyView(text: MyPageMenu.favorite.contentEmptyTitle));
           }
 
-          if (controller.myPageTabController.index == 1 && controller.favoriteFavoriteItemList.isEmpty) {
-            return Center(child: EmptyView(text: MyPageMenu.favorite.contentEmptyTitle));
+          return ListView.builder(
+            itemCount: controller.favoriteMarketItemList.length,
+            itemBuilder: (context, index) {
+              return MarketCell(
+                item: controller.favoriteMarketItemList[index],
+                onTapItemCell: () {},
+                onTapFavoriteIcon: () {},
+                onTapDelete: () {
+                  controller.onDeleteItem(
+                    menu: MyPageMenu.favorite,
+                    id: controller.favoriteMarketItemList[index].itemId,
+                  );
+                },
+              );
+            },
+          );
+        });
+      case MyPageMenu.review:
+        return ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return ReviewCell(
+              onTapItemCell: () {},
+            );
+          },
+        );
+      case MyPageMenu.subscription:
+        return ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return SubscriptionCell(
+              isFollowing: false,
+              isMatched: true,
+            );
+          },
+        );
+    }
+  }
+
+  Widget festivalContentView(MyPageMenu menu) {
+    // todo: menu에 따라 위에 헤더가 추가됨
+
+    InfoItemResponse mock = InfoItemResponse(
+      id: 608437709580928,
+      itemId: 603851914389120,
+      itemType: "MARKET",
+      name: "MOCK MARKET",
+      date: "DATE",
+      imageSrc: "https://repill-dev.s3.ap-northeast-2.amazonaws.com/test/KakaoTalk_Photo_2023-07-30-18-44-36.jpeg",
+      score: 5,
+      reviewCount: 100,
+    );
+
+    switch (menu) {
+      case MyPageMenu.recentView:
+        return Obx(() {
+          if (controller.myPageTabController.index == 1 && controller.recentFestivalItemList.isEmpty) {
+            return Center(child: EmptyView(text: MyPageMenu.recentView.contentEmptyTitle));
           }
 
           return ListView.builder(
-            itemCount: controller.myPageTabController.index == 0
-                ? controller.favoriteMarketItemList.length
-                : controller.favoriteFavoriteItemList.length,
+            itemCount: controller.recentFestivalItemList.length,
             itemBuilder: (context, index) {
-              return controller.myPageTabController.index == 0
-                  ? MarketCell(
-                      item: controller.favoriteMarketItemList[index],
-                      onTapItemCell: () {},
-                      onTapFavoriteIcon: () {},
-                      onTapDelete: () {
-                        controller.onDeleteItem(
-                          menu: MyPageMenu.favorite,
-                          id: controller.favoriteMarketItemList[index].itemId,
-                        );
-                      },
-                    )
-                  : FestivalCell(
-                      item: controller.favoriteFavoriteItemList[index],
-                      onTapItemCell: () {},
-                      onTapFavoriteIcon: () {},
-                      onTapDelete: () {
-                        controller.onDeleteItem(
-                          menu: MyPageMenu.favorite,
-                          id: controller.favoriteFavoriteItemList[index].itemId,
-                        );
-                      },
-                    );
+              return FestivalCell(
+                item: controller.recentFestivalItemList[index],
+                onTapItemCell: () {},
+                onTapFavoriteIcon: () {},
+                onTapDelete: () {
+                  controller.onDeleteItem(
+                    menu: MyPageMenu.recentView,
+                    id: controller.recentFestivalItemList[index].itemId,
+                  );
+                },
+              );
+            },
+          );
+        });
+      case MyPageMenu.favorite:
+        return Obx(() {
+          if (controller.myPageTabController.index == 0 && controller.favoriteMarketItemList.isEmpty) {
+            return Center(child: EmptyView(text: MyPageMenu.favorite.contentEmptyTitle));
+          }
+          return ListView.builder(
+            itemCount: controller.favoriteFestivalItemList.length,
+            itemBuilder: (context, index) {
+              return FestivalCell(
+                item: controller.favoriteFestivalItemList[index],
+                onTapItemCell: () {},
+                onTapFavoriteIcon: () {},
+                onTapDelete: () {
+                  controller.onDeleteItem(
+                    menu: MyPageMenu.favorite,
+                    id: controller.favoriteFestivalItemList[index].itemId,
+                  );
+                },
+              );
             },
           );
         });

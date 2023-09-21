@@ -8,10 +8,10 @@ class GetRecentViews {
   Future<List<InfoItemResponse>> call({required int size, int? cursorId}) async {
     Response res = await ApiBase().get(
       '/member/api/v1/recently-views',
-      query: {'cursorId': cursorId, 'size': cursorId},
+      query: {'cursorId': cursorId, 'size': size},
     );
 
-    List<InfoItemResponse> list = res.data.map((e) => InfoItemResponse.fromJson(e)).toList();
+    List<InfoItemResponse> list = res.data.map<InfoItemResponse>((e) => InfoItemResponse.fromJson(e)).toList();
     return list;
   }
 }
