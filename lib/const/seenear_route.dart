@@ -15,6 +15,7 @@ import 'package:seenear/presentation/profile/widget/other_profile_detail_screen.
 import 'package:seenear/presentation/sign_up/controller/sign_up_controller.dart';
 import 'package:seenear/presentation/sign_up/widget/sign_up_screen.dart';
 import '../presentation/my_page/controller/help_desk_controller.dart';
+import '../presentation/my_page/controller/my_page_notice_controller.dart';
 import '../presentation/my_page/widget/my_page_menu/my_page_screen.dart';
 import '../presentation/my_page/widget/my_setting_menu/faq_screen.dart';
 import '../presentation/my_page/widget/my_setting_menu/help_desk_screen.dart';
@@ -95,7 +96,7 @@ class SeenearRoute {
       page: () => const NoticeScreen(),
       binding: BindingsBuilder(
         () {
-          Get.put(MyPageSettingController());
+          Get.put(MyPageNoticeController());
         },
       ),
     ),
