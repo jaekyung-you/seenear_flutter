@@ -138,7 +138,6 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
             itemBuilder: (context, index) {
               return MarketCell(
                 item: controller.recentMarketItemList[index],
-                onTapItemCell: () {},
                 onTapFavoriteIcon: () {},
                 onTapDelete: () {
                   controller.onDeleteItem(
@@ -167,7 +166,6 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
             itemBuilder: (context, index) {
               return MarketCell(
                 item: controller.favoriteMarketItemList[index],
-                onTapItemCell: () {},
                 onTapFavoriteIcon: () {},
                 onTapDelete: () {
                   controller.onDeleteItem(

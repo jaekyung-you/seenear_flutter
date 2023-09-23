@@ -97,10 +97,10 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
         ),
         Expanded(
           child: controller.isMarket
-              ? controller.marketList.isEmpty
+              ? false
                   ? emptyView()
                   : ListView.builder(
-                      itemCount: controller.marketList.length,
+                      itemCount: 10,
                       itemBuilder: (context, index) {
                         return MarketCell(
                           item: InfoItemResponse(
@@ -113,7 +113,6 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
                             score: 5,
                             reviewCount: 100,
                           ),
-                          onTapItemCell: () => controller.onTapMarketItemCell(id: controller.marketList[index].id),
                           onTapFavoriteIcon: () {},
                           onTapDelete: () {},
                         );

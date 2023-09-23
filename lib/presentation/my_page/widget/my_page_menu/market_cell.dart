@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/const/extension/int_extension.dart';
+import 'package:seenear/const/seenear_path.dart';
 
 import '../../../../data/remote/response/info_item_response.dart';
 
 class MarketCell extends StatelessWidget {
   final InfoItemResponse item;
-  final Function onTapItemCell;
   final Function onTapFavoriteIcon;
   final Function onTapDelete;
   final bool? showDeleteButton;
@@ -14,7 +15,6 @@ class MarketCell extends StatelessWidget {
   const MarketCell({
     super.key,
     required this.item,
-    required this.onTapItemCell,
     required this.onTapFavoriteIcon,
     required this.onTapDelete,
     this.showDeleteButton = false,
@@ -23,7 +23,9 @@ class MarketCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onTapItemCell(),
+      onTap: () {
+        Get.toNamed(SeenearPath.MARKET_DETAIL, arguments: {'id': item.id});
+      },
       child: Container(
         height: 140,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
