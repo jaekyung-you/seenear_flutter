@@ -113,7 +113,7 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
                             score: 5,
                             reviewCount: 100,
                           ),
-                          onTapItemCell: () {},
+                          onTapItemCell: () => controller.onTapMarketItemCell(id: controller.marketList[index].id),
                           onTapFavoriteIcon: () {},
                           onTapDelete: () {},
                         );

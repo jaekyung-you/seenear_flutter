@@ -16,5 +16,6 @@ class SeenearPath {
   static String MY_PAGE_NOTIFICATION = '/my_page/help_desk/notification';
 
   static String MARKET = '/market';
+  static String MARKET_DETAIL = '/market/detail';
   static String FESTIVAl = '/festival';
 }

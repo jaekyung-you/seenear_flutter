@@ -5,6 +5,7 @@ import 'package:seenear/presentation/home/widget/home_screen.dart';
 import 'package:seenear/presentation/login/controller/login_controller.dart';
 import 'package:seenear/presentation/login/widget/login_screen.dart';
 import 'package:seenear/presentation/market_festival/controller/market_festival_controller.dart';
+import 'package:seenear/presentation/market_festival/widget/market_detail_screen.dart';
 import 'package:seenear/presentation/market_festival/widget/market_festival_screen.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_menu_controller.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_setting_controller.dart';
@@ -14,6 +15,7 @@ import 'package:seenear/presentation/profile/controller/other_profile_detail_con
 import 'package:seenear/presentation/profile/widget/other_profile_detail_screen.dart';
 import 'package:seenear/presentation/sign_up/controller/sign_up_controller.dart';
 import 'package:seenear/presentation/sign_up/widget/sign_up_screen.dart';
+import '../presentation/market_festival/controller/market_detail_controller.dart';
 import '../presentation/my_page/controller/help_desk_controller.dart';
 import '../presentation/my_page/controller/my_page_notice_controller.dart';
 import '../presentation/my_page/widget/my_page_menu/my_page_screen.dart';
@@ -142,6 +144,15 @@ class SeenearRoute {
       binding: BindingsBuilder(
         () {
           Get.put(MarketFestivalController());
+        },
+      ),
+    ),
+    GetPage(
+      name: SeenearPath.MARKET_DETAIL,
+      page: () => const MarketDetailScreen(),
+      binding: BindingsBuilder(
+        () {
+          Get.put(MarketDetailController());
         },
       ),
     ),
