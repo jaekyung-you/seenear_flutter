@@ -97,10 +97,10 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
         ),
         Expanded(
           child: controller.isMarket
-              ? false
+              ? controller.marketList.isEmpty
                   ? emptyView()
                   : ListView.builder(
-                      itemCount: 10,
+                      itemCount: controller.marketList.length,
                       itemBuilder: (context, index) {
                         return MarketCell(
                           item: InfoItemResponse(

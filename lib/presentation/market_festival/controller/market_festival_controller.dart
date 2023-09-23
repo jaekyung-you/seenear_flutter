@@ -7,7 +7,6 @@ import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/data/remote/response/info_item_response.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../../const/define.dart';
-import '../../../const/seenear_path.dart';
 
 class MarketFestivalController extends GetxController {
   bool isMarket = true;
@@ -186,10 +185,5 @@ class MarketFestivalController extends GetxController {
     String dayOfWeek = DateFormat('E', 'ko_KR').format(args.value);
     date.value = '${args.value.toString().split(' ').first} ($dayOfWeek)';
     Get.back();
-  }
-
-  // 해당 아이템을 클릭했을 때, 장날 상세화면으로 이동
-  void onTapMarketItemCell({required int id}) {
-    Get.toNamed(SeenearPath.MARKET_DETAIL, arguments: {'id': id});
   }
 }
