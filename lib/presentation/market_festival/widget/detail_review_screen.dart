@@ -25,7 +25,7 @@ class DetailReviewScreen extends GetView<DetailReviewController> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Row(
                         children: [
                           profileImageSrc == null
