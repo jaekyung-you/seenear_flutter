@@ -139,9 +139,7 @@ class MarketDetailScreen extends GetView<MarketDetailController> {
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
               ),
               InkWell(
-                onTap: () {
-                  controller.onTapCopyAddress();
-                },
+                onTap: controller.onTapCopyAddress,
                 child: Row(
                   children: [
                     Image.asset(
@@ -279,9 +277,7 @@ class MarketDetailScreen extends GetView<MarketDetailController> {
               bgColor: SeenearColor.blue10,
               fgColor: SeenearColor.blue80,
               buttonText: '가는 길 바로 보기',
-              onPressed: () {
-                controller.onTapNavigate();
-              }),
+              onPressed: controller.onTapNavigate),
         ],
       ),
     );
@@ -304,9 +300,7 @@ class MarketDetailScreen extends GetView<MarketDetailController> {
                 ),
               ),
               InkWell(
-                onTap: () {
-                  controller.onTapWriteReview();
-                },
+                onTap: controller.onTapWriteReview,
                 child: Container(
                   width: 116,
                   height: 24,
@@ -349,8 +343,14 @@ class MarketDetailScreen extends GetView<MarketDetailController> {
               itemCount: 20,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                return Container(
-                  color: Colors.pink,
+                return InkWell(
+                  onTap: () {
+                    // todo: item id 넣기
+                    controller.onTapReviewDetail(id: 0);
+                  },
+                  child: Container(
+                    color: Colors.pink,
+                  ),
                 );
               },
             ),

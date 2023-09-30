@@ -18,4 +18,6 @@ class SeenearPath {
   static String MARKET = '/market';
   static String MARKET_DETAIL = '/market/detail';
   static String FESTIVAl = '/festival';
+
+  static String DETAIL_REVIEW = '/detail/review'; // 방문자 후기 화면
 }

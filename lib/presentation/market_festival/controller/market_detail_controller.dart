@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../../../const/seenear_path.dart';
+
 class MarketDetailController extends GetxController {
   int id = 0; // 조회하는 마켓 id
 
@@ -31,10 +33,13 @@ class MarketDetailController extends GetxController {
     // todo: 네비게이션 연결
   }
 
-  // '나도 후기 쓰기' 버사
+  // '나도 후기 쓰기' 버튼
   Future<void> onTapWriteReview() async {
 
   }
-
-
+  
+  // 방문자 후기 사진 클릭
+  Future<void> onTapReviewDetail({required int id}) async {
+    Get.toNamed(SeenearPath.DETAIL_REVIEW, arguments: {'id': id});
+  }
 }
