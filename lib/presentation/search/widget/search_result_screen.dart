@@ -24,23 +24,47 @@ class SearchResultScreen extends GetView<SearchScreenController> {
           }
 
           // chat
-          if (controller.searchResultList[index].itemType == "MARKET") {
+          if (controller.searchResultList[index].itemType == "CHAT") {
             return ReviewCell(onTapItemCell: () {});
           }
 
           if (controller.searchResultList[index].itemType == "HEADER") {
-            return headerView(title: controller.searchResultList[index].name);
+            return headerCell(title: controller.searchResultList[index].name);
+          }
+
+          if (controller.searchResultList[index].itemType == "FOOTER") {
+            return footerCell(title: controller.searchResultList[index].name);
           }
         });
   }
 
-  Widget headerView({required String title}) {
+  Widget headerCell({required String title}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
       color: SeenearColor.grey5,
       child: Text(
         title,
         style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18, color: SeenearColor.grey60),
+      ),
+    );
+  }
+
+  Widget footerCell({required String title}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '$title 검색 결과 더보기',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: SeenearColor.grey30),
+          ),
+          Image.asset(
+            'assets/images/arrow_right.png',
+            color: SeenearColor.grey30,
+            width: 22,
+          )
+        ],
       ),
     );
   }

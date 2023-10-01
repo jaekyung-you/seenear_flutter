@@ -32,6 +32,8 @@ class SearchScreenController extends GetxController with GetSingleTickerProvider
 
   Future<void> _requestSearchResult({required String keyword}) async {
     // todo: 임의로.. itemType이 달라지면 헤더를 넣어줌
+    searchResultList.clear();
+
     // 1. api 호출
 
     // 2. 성공하면 searchResultList에 넣기
@@ -91,6 +93,7 @@ class SearchScreenController extends GetxController with GetSingleTickerProvider
       score: 9,
     );
 
+    // header
     InfoItemResponse chatHeader = InfoItemResponse(
       date: "",
       id: 0, // listview에서 id 중복되어도 되는가?
@@ -122,6 +125,38 @@ class SearchScreenController extends GetxController with GetSingleTickerProvider
       score: 0,
     );
 
+    // footer
+    InfoItemResponse chatFooter = InfoItemResponse(
+      date: "",
+      id: 0, // listview에서 id 중복되어도 되는가?
+      imageSrc: "",
+      itemId: 0,
+      itemType: "FOOTER",
+      name: "이야기방",
+      reviewCount: 0,
+      score: 0,
+    );
+    InfoItemResponse marketFooter = InfoItemResponse(
+      date: "",
+      id: 0, // listview에서 id 중복되어도 되는가?
+      imageSrc: "",
+      itemId: 0,
+      itemType: "FOOTER",
+      name: "전국 장날",
+      reviewCount: 0,
+      score: 0,
+    );
+    InfoItemResponse festivalFooter = InfoItemResponse(
+      date: "",
+      id: 0, // listview에서 id 중복되어도 되는가?
+      imageSrc: "",
+      itemId: 0,
+      itemType: "FOOTER",
+      name: "축제/행사",
+      reviewCount: 0,
+      score: 0,
+    );
+
     for (var element in [mock1, mock2, mock3, mock4, mock5]) {
       searchResultList.add(element);
       int index = searchResultList.indexOf(element);
@@ -141,7 +176,7 @@ class SearchScreenController extends GetxController with GetSingleTickerProvider
           searchResultList.insert(0, festivalHeader);
         }
       } else if (prevIndex > 0 && searchResultList[index].itemType != searchResultList[prevIndex].itemType) {
-        // 이전과 현재의 itemType이 다르면, 현재 itemType  헤더 넣어줌
+        // 이전과 현재의 itemType이 다르면, 현재 itemType 헤더 넣어줌
         if (searchResultList[index].itemType == "CHAT") {
           searchResultList.insert(index, chatHeader);
         }
@@ -153,16 +188,20 @@ class SearchScreenController extends GetxController with GetSingleTickerProvider
         if (searchResultList[index].itemType == "FESTIVAL") {
           searchResultList.insert(index, festivalHeader);
         }
+
+        // 푸터 넣어줌
+        if (searchResultList[prevIndex].itemType == "CHAT") {
+          searchResultList.insert(index, chatFooter);
+        }
+
+        if (searchResultList[prevIndex].itemType == "MARKET") {
+          searchResultList.insert(index, marketFooter);
+        }
+
+        if (searchResultList[prevIndex].itemType == "FESTIVAL") {
+          searchResultList.insert(index, festivalFooter);
+        }
       }
-
-
-
-
-
     }
-
-    // 3. for-loop으로 헤더 넣기
-
-
   }
 }
