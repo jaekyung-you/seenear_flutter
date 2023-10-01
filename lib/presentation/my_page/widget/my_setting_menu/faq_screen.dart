@@ -53,6 +53,7 @@ class FAQScreen extends GetView<HelpDeskController> {
         child: TextField(
           controller: controller.searchInputController,
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.zero,
             prefixIcon: Icon(
               Icons.search,
               color: SeenearColor.grey50,
