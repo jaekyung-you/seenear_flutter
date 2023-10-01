@@ -23,7 +23,6 @@ class SearchResultScreen extends GetView<SearchScreenController> {
                 item: controller.searchResultList[index], onTapItemCell: () {}, onTapFavoriteIcon: () {}, onTapDelete: () {});
           }
 
-          // chat
           if (controller.searchResultList[index].itemType == "CHAT") {
             return ReviewCell(onTapItemCell: () {});
           }

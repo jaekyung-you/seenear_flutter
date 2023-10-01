@@ -176,7 +176,7 @@ class SearchScreenController extends GetxController with GetSingleTickerProvider
           searchResultList.insert(0, festivalHeader);
         }
       } else if (prevIndex > 0 && searchResultList[index].itemType != searchResultList[prevIndex].itemType) {
-        // 이전과 현재의 itemType이 다르면, 현재 itemType 헤더 넣어줌
+      // 이전과 현재의 itemType이 다르면, 현재 itemType 헤더 넣어줌
         if (searchResultList[index].itemType == "CHAT") {
           searchResultList.insert(index, chatHeader);
         }
@@ -202,6 +202,18 @@ class SearchScreenController extends GetxController with GetSingleTickerProvider
           searchResultList.insert(index, festivalFooter);
         }
       }
+    }
+
+    if (searchResultList.last.itemType == "CHAT") {
+      searchResultList.add(chatFooter);
+    }
+
+    if (searchResultList.last.itemType == "MARKET") {
+      searchResultList.add(marketFooter);
+    }
+
+    if (searchResultList.last.itemType == "FESTIVAL") {
+      searchResultList.add(festivalFooter);
     }
   }
 }
