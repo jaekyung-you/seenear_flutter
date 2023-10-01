@@ -7,6 +7,7 @@ class SearchResultScreen extends GetView<SearchScreenController> {
 
   @override
   Widget build(BuildContext context) {
+    // todo: ListView로 ?!
     return const Placeholder();
   }
 }

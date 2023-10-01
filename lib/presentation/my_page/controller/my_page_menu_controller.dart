@@ -116,6 +116,22 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
         Get.toNamed(SeenearPath.MY_PAGE_HELP_DESK);
       case MyPageSetting.notification:
         Get.toNamed(SeenearPath.MY_PAGE_NOTIFICATION);
+      case MyPageSetting.logout:
+        Get.bottomSheet(
+          BaseBottomSheet(
+            title: '정말 로그아웃 하시겠어요?',
+            desc: '로그아웃 시 일부 기능 사용이 불가할 수 있어요!',
+            buttonTitles: const ['아니요', '로그아웃'],
+            onTapButton: (index) async {
+              Get.back();
+              if (index == 1) {
+                SnackBarManager().showSnackBar(title: '로그아웃이 완료되었습니다.');
+                Get.offAllNamed(SeenearPath.LOGIN);
+              }
+            },
+          ),
+        );
+
     }
   }
 

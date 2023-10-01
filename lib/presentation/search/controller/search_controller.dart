@@ -9,6 +9,7 @@ class SearchScreenController extends GetxController with GetSingleTickerProvider
   List<String> tabList = ['인기 검색어', '최근 검색어'];
   RxBool showResult = false.obs;
 
+
   @override
   void onInit() {
     super.onInit();
