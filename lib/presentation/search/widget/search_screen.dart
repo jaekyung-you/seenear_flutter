@@ -32,7 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
             child: BaseHeader(title: '검색'),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.all(16.0),
             child: SizedBox(
               height: 48,
               child: TextField(
@@ -88,17 +88,97 @@ class _SearchScreenState extends State<SearchScreen> {
             child: TabBarView(
               controller: controller.tabController,
               children: [
-                Container(
-                  color: Colors.blue,
-                ),
-                Container(
-                  color: Colors.pink,
-                ),
+                searchPopularWidget(),
+                searchRecentWidget(),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  Widget searchPopularWidget() {
+    return ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return SizedBox(
+            height: 50,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 20,
+                    child: Center(
+                      child: Text(
+                        '${index + 1}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: SeenearColor.blue60,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    '인기 검색어',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                      color: SeenearColor.grey70,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  Widget searchRecentWidget() {
+    return ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return SizedBox(
+            height: 50,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 20,
+                    child: Center(
+                      child: Text(
+                        '${index + 1}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: SeenearColor.blue60,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    '최근 검색어',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                      color: SeenearColor.grey70,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }
