@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "713728190618",
+    "project_id": "seenear-fce79",
+    "storage_bucket": "seenear-fce79.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713728190618:android:2de4504b85c4ec55215723",
+        "android_client_info": {
+          "package_name": "com.example.seenear"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcW4kTInjHHpjY0UDJdJZsCnn1b-UGGko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
