@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:seenear/data/remote/api/api_base.dart';
 
-import '../response/info_item_response.dart';
+import '../../response/info_item_response.dart';
 
 /// 내 정보 > 최근 본 목록 호출
 class GetRecentViews {
