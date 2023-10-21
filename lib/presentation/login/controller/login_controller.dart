@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
-import '../../../data/remote/api/login.dart';
+import '../../../data/remote/api/setting/login.dart';
 
 class LoginController extends GetxController {
   User? user; // kakao_sdk에서 제공하는 사용자 정보
