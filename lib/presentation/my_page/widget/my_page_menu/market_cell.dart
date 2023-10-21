@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/const/extension/int_extension.dart';
 import 'package:seenear/const/seenear_path.dart';
-
 import '../../../../data/remote/response/info_item_response.dart';
 
 class MarketCell extends StatelessWidget {
@@ -24,7 +23,7 @@ class MarketCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(SeenearPath.MARKET_DETAIL, arguments: {'id': item.id});
+        Get.toNamed(SeenearPath.MARKET_DETAIL, arguments: {'id': item.itemId});
       },
       child: Container(
         height: 140,
@@ -141,7 +140,7 @@ class MarketCell extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 144 / 112,
       child: Image.network(
-        item.imageSrc.isNotEmpty ? item.imageSrc : 'https://picsum.photos/200/303',
+        item.images?.first.isNotEmpty == true ? item.images!.first : 'https://picsum.photos/200/303',
         fit: BoxFit.cover,
       ),
     );

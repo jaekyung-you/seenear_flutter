@@ -1,45 +1,23 @@
-class InfoItemResponse {
-  String date;
-  int id;
-  String imageSrc;
-  int itemId;
-  String itemType; // "FESTIVAL", "MARKET"
-  String name;
-  int reviewCount;
-  int score;
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-  InfoItemResponse({
-    required this.date,
-    required this.id,
-    required this.imageSrc,
-    required this.itemId,
-    required this.itemType,
-    required this.name,
-    required this.reviewCount,
-    required this.score,
-  });
+part 'info_item_response.freezed.dart';
+part 'info_item_response.g.dart';
 
-  factory InfoItemResponse.fromJson(Map<String, dynamic> json) {
-    return InfoItemResponse(
-      date: json['date'],
-      id: json['id'],
-      imageSrc: json['imageSrc'],
-      itemId: json['itemId'],
-      itemType: json['itemType'],
-      name: json['name'],
-      reviewCount: json['reviewCount'],
-      score: json['score'],
-    );
-  }
+@freezed
+class InfoItemResponse with _$InfoItemResponse {
+  const factory InfoItemResponse({
+    String? createdAt,
+    required String date,
+    List<String>? images,
+    required int itemId,
+    required String itemType, // "FESTIVAL", "MARKET"
+    required String name,
+    required int reviewCount,
+    required int score,
+    String? updatedAt,
+  }) = _InfoItemResponse;
 
-  Map<String, dynamic> toJson() => {
-        'date': date,
-        'id': id,
-        'imageSrc': imageSrc,
-        'itemId': itemId,
-        'itemType': itemType,
-        'name': name,
-        'reviewCount': reviewCount,
-        'score': score,
-      };
+  factory InfoItemResponse.fromJson(Map<String, Object?> json)
+      => _$InfoItemResponseFromJson(json);
 }

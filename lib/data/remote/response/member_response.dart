@@ -1,21 +1,17 @@
-class MemberResponse {
-  String? imageSrc;
-  String? name;
-  int? memberId;
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-  MemberResponse({required this.imageSrc, required this.name, required this.memberId});
+part 'member_response.freezed.dart';
+part 'member_response.g.dart';
 
-  factory MemberResponse.fromJson(Map<String, dynamic> json) {
-    return MemberResponse(
-      imageSrc: json['imageSrc'],
-      name: json['name'],
-      memberId: json['memberId'],
-    );
-  }
+@freezed
+class MemberResponse with _$MemberResponse {
+  const factory MemberResponse({
+    String? imageSrc,
+    required String name,
+    required int memberId,
+  }) = _MemberResponse;
 
-  Map<String, dynamic> toJson() => {
-        'imageSrc': imageSrc,
-        'name': name,
-        'memberId': memberId,
-      };
+  factory MemberResponse.fromJson(Map<String, Object?> json)
+      => _$MemberResponseFromJson(json);
 }

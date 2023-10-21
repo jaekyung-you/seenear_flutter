@@ -37,6 +37,8 @@ abstract class $HealthCheckResponseCopyWith<$Res> {
       _$HealthCheckResponseCopyWithImpl<$Res, HealthCheckResponse>;
   @useResult
   $Res call({String accessToken, bool member, MemberResponse? memberView});
+
+  $MemberResponseCopyWith<$Res>? get memberView;
 }
 
 /// @nodoc
@@ -71,6 +73,18 @@ class _$HealthCheckResponseCopyWithImpl<$Res, $Val extends HealthCheckResponse>
               as MemberResponse?,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MemberResponseCopyWith<$Res>? get memberView {
+    if (_value.memberView == null) {
+      return null;
+    }
+
+    return $MemberResponseCopyWith<$Res>(_value.memberView!, (value) {
+      return _then(_value.copyWith(memberView: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -82,6 +96,9 @@ abstract class _$$HealthCheckResponseImplCopyWith<$Res>
   @override
   @useResult
   $Res call({String accessToken, bool member, MemberResponse? memberView});
+
+  @override
+  $MemberResponseCopyWith<$Res>? get memberView;
 }
 
 /// @nodoc

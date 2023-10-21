@@ -104,12 +104,11 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
                       itemBuilder: (context, index) {
                         return MarketCell(
                           item: InfoItemResponse(
-                            id: 608437709580928,
                             itemId: 603851914389120,
                             itemType: "MARKET",
                             name: "MOCK MARKET",
                             date: "DATE",
-                            imageSrc: "https://repill-dev.s3.ap-northeast-2.amazonaws.com/test/KakaoTalk_Photo_2023-07-30-18-44-36.jpeg",
+                            images: ["https://repill-dev.s3.ap-northeast-2.amazonaws.com/test/KakaoTalk_Photo_2023-07-30-18-44-36.jpeg"],
                             score: 5,
                             reviewCount: 100,
                           ),
@@ -124,12 +123,13 @@ class MarketFestivalScreen extends GetView<MarketFestivalController> {
                       itemBuilder: (context, index) {
                         return FestivalCell(
                           item: InfoItemResponse(
-                            id: 608437709580928,
                             itemId: 603851914389120,
                             itemType: "MARKET",
                             name: "MOCK MARKET",
                             date: "DATE",
-                            imageSrc: "https://repill-dev.s3.ap-northeast-2.amazonaws.com/test/KakaoTalk_Photo_2023-07-30-18-44-36.jpeg",
+                            images: [
+                              "https://repill-dev.s3.ap-northeast-2.amazonaws.com/test/KakaoTalk_Photo_2023-07-30-18-44-36.jpeg",
+                            ],
                             score: 5,
                             reviewCount: 100,
                           ),

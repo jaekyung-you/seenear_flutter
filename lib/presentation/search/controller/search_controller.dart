@@ -39,123 +39,125 @@ class SearchScreenController extends GetxController with GetSingleTickerProvider
     // 2. 성공하면 searchResultList에 넣기
     // 임의로 mock data
     InfoItemResponse mock1 = InfoItemResponse(
-      date: "2023-08-14",
-      id: 1,
-      imageSrc: "https://picsum.photos/id/37/200/300",
-      itemId: 101,
-      itemType: "FESTIVAL",
-      name: "Sample Festival 1",
-      reviewCount: 15,
-      score: 4,
-    );
+        date: "2023-08-14",
+        itemId: 1,
+        itemType: "FESTIVAL",
+        name: "Sample Festival 1",
+        reviewCount: 15,
+        score: 4,
+        images: [
+          "https://picsum.photos/id/37/200/300",
+        ]);
 
     InfoItemResponse mock2 = InfoItemResponse(
-      date: "2023-08-14",
-      id: 2,
-      imageSrc: "https://picsum.photos/id/27/200/300",
-      itemId: 101,
-      itemType: "FESTIVAL",
-      name: "Sample Festival 1",
-      reviewCount: 15,
-      score: 4,
-    );
+        date: "2023-08-14",
+        itemId: 1,
+        itemType: "FESTIVAL",
+        name: "Sample Festival 1",
+        reviewCount: 15,
+        score: 4,
+        images: [
+          "https://picsum.photos/id/37/200/300",
+        ]);
 
     InfoItemResponse mock3 = InfoItemResponse(
-      date: "2023-08-14",
-      id: 3,
-      imageSrc: "https://picsum.photos/id/23/200/300",
-      itemId: 101,
-      itemType: "MARKET",
-      name: "Sample MARKET 1",
-      reviewCount: 15,
-      score: 9,
-    );
+        date: "2023-08-14",
+        itemId: 1,
+        itemType: "FESTIVAL",
+        name: "Sample Festival 1",
+        reviewCount: 15,
+        score: 4,
+        images: [
+          "https://picsum.photos/id/37/200/300",
+        ]);
 
     InfoItemResponse mock4 = InfoItemResponse(
-      date: "2023-08-14",
-      id: 4,
-      imageSrc: "https://picsum.photos/id/7/200/300",
-      itemId: 101,
-      itemType: "MARKET",
-      name: "Sample MARKET 1",
-      reviewCount: 15,
-      score: 4,
-    );
+        date: "2023-08-14",
+        itemId: 1,
+        itemType: "FESTIVAL",
+        name: "Sample Festival 1",
+        reviewCount: 15,
+        score: 4,
+        images: [
+          "https://picsum.photos/id/37/200/300",
+        ]);
 
     InfoItemResponse mock5 = InfoItemResponse(
-      date: "2023-08-14",
-      id: 5,
-      imageSrc: "https://picsum.photos/id/3/200/300",
-      itemId: 101,
-      itemType: "CHAT",
-      name: "Sample ChAT 1",
-      reviewCount: 11,
-      score: 9,
-    );
+        date: "2023-08-14",
+        itemId: 1,
+        itemType: "FESTIVAL",
+        name: "Sample Festival 1",
+        reviewCount: 15,
+        score: 4,
+        images: [
+          "https://picsum.photos/id/37/200/300",
+        ]);
 
     // header
     InfoItemResponse chatHeader = InfoItemResponse(
-      date: "",
-      id: 0, // listview에서 id 중복되어도 되는가?
-      imageSrc: "",
-      itemId: 0,
-      itemType: "HEADER",
-      name: "이야기방",
-      reviewCount: 0,
-      score: 0,
-    );
+        date: "2023-08-14",
+        itemId: 1,
+        itemType: "FESTIVAL",
+        name: "Sample Festival 1",
+        reviewCount: 15,
+        score: 4,
+        images: [
+          "https://picsum.photos/id/37/200/300",
+        ]);
+
     InfoItemResponse marketHeader = InfoItemResponse(
-      date: "",
-      id: 0, // listview에서 id 중복되어도 되는가?
-      imageSrc: "",
-      itemId: 0,
-      itemType: "HEADER",
-      name: "전국 장날",
-      reviewCount: 0,
-      score: 0,
-    );
+        date: "2023-08-14",
+        itemId: 1,
+        itemType: "FESTIVAL",
+        name: "Sample Festival 1",
+        reviewCount: 15,
+        score: 4,
+        images: [
+          "https://picsum.photos/id/37/200/300",
+        ]);
+
     InfoItemResponse festivalHeader = InfoItemResponse(
-      date: "",
-      id: 0, // listview에서 id 중복되어도 되는가?
-      imageSrc: "",
-      itemId: 0,
-      itemType: "HEADER",
-      name: "축제/행사",
-      reviewCount: 0,
-      score: 0,
-    );
+            date: "2023-08-14",
+            itemId: 1,
+            itemType: "FESTIVAL",
+            name: "Sample Festival 1",
+            reviewCount: 15,
+            score: 4,
+            images: [
+              "https://picsum.photos/id/37/200/300",
+            ]);
 
     // footer
     InfoItemResponse chatFooter = InfoItemResponse(
-      date: "",
-      id: 0, // listview에서 id 중복되어도 되는가?
-      imageSrc: "",
-      itemId: 0,
-      itemType: "FOOTER",
-      name: "이야기방",
-      reviewCount: 0,
-      score: 0,
-    );
+            date: "2023-08-14",
+            itemId: 1,
+            itemType: "FESTIVAL",
+            name: "Sample Festival 1",
+            reviewCount: 15,
+            score: 4,
+            images: [
+              "https://picsum.photos/id/37/200/300",
+            ]);
     InfoItemResponse marketFooter = InfoItemResponse(
-      date: "",
-      id: 0, // listview에서 id 중복되어도 되는가?
-      imageSrc: "",
-      itemId: 0,
-      itemType: "FOOTER",
-      name: "전국 장날",
-      reviewCount: 0,
-      score: 0,
-    );
+            date: "2023-08-14",
+            itemId: 1,
+            itemType: "FESTIVAL",
+            name: "Sample Festival 1",
+            reviewCount: 15,
+            score: 4,
+            images: [
+              "https://picsum.photos/id/37/200/300",
+            ]);
     InfoItemResponse festivalFooter = InfoItemResponse(
-      date: "",
-      id: 0, // listview에서 id 중복되어도 되는가?
-      imageSrc: "",
-      itemId: 0,
-      itemType: "FOOTER",
-      name: "축제/행사",
-      reviewCount: 0,
-      score: 0,
-    );
+            date: "2023-08-14",
+            itemId: 1,
+            itemType: "FESTIVAL",
+            name: "Sample Festival 1",
+            reviewCount: 15,
+            score: 4,
+            images: [
+              "https://picsum.photos/id/37/200/300",
+            ]);
 
     for (var element in [mock1, mock2, mock3, mock4, mock5]) {
       searchResultList.add(element);
@@ -176,7 +178,7 @@ class SearchScreenController extends GetxController with GetSingleTickerProvider
           searchResultList.insert(0, festivalHeader);
         }
       } else if (prevIndex > 0 && searchResultList[index].itemType != searchResultList[prevIndex].itemType) {
-      // 이전과 현재의 itemType이 다르면, 현재 itemType 헤더 넣어줌
+        // 이전과 현재의 itemType이 다르면, 현재 itemType 헤더 넣어줌
         if (searchResultList[index].itemType == "CHAT") {
           searchResultList.insert(index, chatHeader);
         }

@@ -1,18 +1,16 @@
-import 'main_category_response.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
+import 'package:seenear/data/remote/response/main_category_response.dart';
 
-class MainResponse {
-  List<MainCategoryResponse> categoryList;
+part 'main_response.freezed.dart';
+part 'main_response.g.dart';
 
-  MainResponse({required this.categoryList});
+@freezed
+class MainResponse with _$MainResponse {
+  const factory MainResponse({
+    required List<MainCategoryResponse> categoryList,
+  }) = _MainResponse;
 
-  factory MainResponse.fromJson(Map<String, dynamic> json) {
-    return MainResponse(
-      // MainCategoryResponse
-      categoryList: json['categoryList'].map<MainCategoryResponse>((e) => MainCategoryResponse.fromJson(e)).toList(),
-    );
-  }
-
-  Map<String, dynamic> toJson() => {
-        'categoryList': categoryList.map((e) => e.toJson()).toList(),
-      };
+  factory MainResponse.fromJson(Map<String, Object?> json)
+      => _$MainResponseFromJson(json);
 }

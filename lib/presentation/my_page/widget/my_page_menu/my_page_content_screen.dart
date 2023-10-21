@@ -11,7 +11,6 @@ import 'package:seenear/presentation/my_page/widget/my_page_menu/review_cell.dar
 import 'package:seenear/presentation/my_page/widget/my_page_menu/subscription_cell.dart';
 import 'package:styled_text/styled_text.dart';
 import '../../../../const/design_system/seenear_color.dart';
-import '../../../../data/remote/response/info_item_response.dart';
 
 class MyPageContentScreen extends StatefulWidget {
   final MyPageMenu menu;
@@ -113,18 +112,6 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
 
   Widget marketContentView(MyPageMenu menu) {
     // todo: menu에 따라 위에 헤더가 추가됨
-
-    InfoItemResponse mock = InfoItemResponse(
-      id: 608437709580928,
-      itemId: 603851914389120,
-      itemType: "MARKET",
-      name: "MOCK MARKET",
-      date: "DATE",
-      imageSrc: "https://repill-dev.s3.ap-northeast-2.amazonaws.com/test/KakaoTalk_Photo_2023-07-30-18-44-36.jpeg",
-      score: 5,
-      reviewCount: 100,
-    );
-
     switch (menu) {
       // 최대 10개까지만 해서 페이징 없음
       case MyPageMenu.recentView:
@@ -201,18 +188,6 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
 
   Widget festivalContentView(MyPageMenu menu) {
     // todo: menu에 따라 위에 헤더가 추가됨
-
-    InfoItemResponse mock = InfoItemResponse(
-      id: 608437709580928,
-      itemId: 603851914389120,
-      itemType: "MARKET",
-      name: "MOCK MARKET",
-      date: "DATE",
-      imageSrc: "https://repill-dev.s3.ap-northeast-2.amazonaws.com/test/KakaoTalk_Photo_2023-07-30-18-44-36.jpeg",
-      score: 5,
-      reviewCount: 100,
-    );
-
     switch (menu) {
       case MyPageMenu.recentView:
         return Obx(() {

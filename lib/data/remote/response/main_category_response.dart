@@ -1,23 +1,17 @@
-class MainCategoryResponse {
-  final String mainName;
-  final String? subName;
-  final bool isActive;
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-  MainCategoryResponse({required this.mainName, this.subName, required this.isActive});
+part 'main_category_response.freezed.dart';
+part 'main_category_response.g.dart';
 
-  factory MainCategoryResponse.fromJson(Map<String, dynamic> json) {
-    return MainCategoryResponse(
-      mainName: json['mainName'],
-      subName: json['subName'],
-      isActive: json['isActive'],
-    );
-  }
+@freezed
+class MainCategoryResponse with _$MainCategoryResponse {
+  const factory MainCategoryResponse({
+    required String mainName,
+    required bool isActive,
+    String? subName,
+  }) = _MainCategoryResponse;
 
-  Map<String, dynamic> toJson() {
-    return {
-      'subName': subName,
-      'mainName': mainName,
-      'isActive': isActive,
-    };
-  }
+  factory MainCategoryResponse.fromJson(Map<String, Object?> json)
+      => _$MainCategoryResponseFromJson(json);
 }
