@@ -1,23 +1,19 @@
-import 'package:seenear/data/remote/response/member_response.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-class HealthCheckResponse {
-  String accessToken; // 발급받은 토큰
-  bool member;
-  MemberResponse memberView;
+import 'member_response.dart';
 
-  HealthCheckResponse({required this.accessToken, required this.member, required this.memberView});
+part 'health_check_response.freezed.dart';
+part 'health_check_response.g.dart';
 
-  factory HealthCheckResponse.fromJson(Map<String, dynamic> json) {
-    return HealthCheckResponse(
-      accessToken: json['accessToken'],
-      member: json['member'],
-      memberView: MemberResponse.fromJson(json['memberView']),
-    );
-  }
+@freezed
+class HealthCheckResponse with _$HealthCheckResponse {
+  const factory HealthCheckResponse({
+    required String accessToken, // 발급받은 토큰
+    required bool member,
+    MemberResponse? memberView,
+  }) = _HealthCheckResponse;
 
-  Map<String, dynamic> toJson() => {
-        'accessToken': accessToken,
-        'member': member,
-        'memberView': memberView.toJson(),
-      };
+  factory HealthCheckResponse.fromJson(Map<String, Object?> json)
+      => _$HealthCheckResponseFromJson(json);
 }

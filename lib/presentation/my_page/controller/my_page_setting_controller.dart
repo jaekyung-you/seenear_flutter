@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:seenear/const/design_system/base_bottom_sheet.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
-import 'package:seenear/data/remote/api/check_nickname.dart';
+import 'package:seenear/data/remote/api/member/check_nickname_duplicate.dart';
 import 'package:seenear/data/remote/api/edit_my_profile.dart';
 import 'package:seenear/data/remote/api/get_sign_out_reasons.dart';
 import 'package:seenear/data/remote/api/logout.dart';
@@ -42,7 +42,7 @@ class MyPageSettingController extends GetxController {
   };
 
   // usecase
-  final CheckNickname _checkNickname = CheckNickname();
+  final CheckNicknameDuplicate _checkNickname = CheckNicknameDuplicate();
   final EditMyProfile _editMyProfile = EditMyProfile();
 
   final Logout _logout = Logout();

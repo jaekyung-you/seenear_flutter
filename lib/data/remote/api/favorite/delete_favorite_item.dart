@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'api_base.dart';
+import '../api_base.dart';
 
 class DeleteFavoriteItem {
   Future<bool> call({required int id}) async {

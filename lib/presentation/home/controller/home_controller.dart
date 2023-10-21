@@ -3,13 +3,13 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:get/get.dart';
 import 'package:seenear/data/local/member.dart';
 import 'package:seenear/data/remote/api/api_base.dart';
-import 'package:seenear/data/remote/api/get_main_list.dart';
+import 'package:seenear/data/remote/api/main/get_main_list.dart';
 import 'package:seenear/data/remote/response/main_category_response.dart';
 import 'package:seenear/data/remote/response/main_response.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../const/enum/home_menu.dart';
 import '../../../const/seenear_path.dart';
-import '../../../data/remote/api/get_health_check.dart';
+import '../../../data/remote/api/main/get_health_check.dart';
 import '../../../data/remote/response/health_check_response.dart';
 
 class HomeController extends GetxController {
@@ -49,7 +49,9 @@ class HomeController extends GetxController {
     HealthCheckResponse res = await checkHealth(deviceId: deviceId);
     isMember = res.member;
     // ApiBase 헤더에 jwt 토큰 저장
-    Member().setMember(res.memberView);
+    if (res.memberView != null) {
+      Member().setMember(res.memberView!);
+    }
     ApiBase().setAuthTokenHeader(res.accessToken);
   }
 

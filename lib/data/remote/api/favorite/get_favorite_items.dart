@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
-
-import '../response/info_item_response.dart';
-import 'api_base.dart';
+import '../../response/info_item_response.dart';
+import '../api_base.dart';
 
 class GetFavoriteItemList {
   Future<List<InfoItemResponse>> call({required int size, int? cursorId}) async {
