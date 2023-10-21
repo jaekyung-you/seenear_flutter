@@ -129,7 +129,8 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
                 onTapDelete: () {
                   controller.onDeleteItem(
                     menu: MyPageMenu.recentView,
-                    id: controller.recentMarketItemList[index].itemId,
+                    itemId: controller.recentMarketItemList[index].itemId,
+                    itemType: controller.recentMarketItemList[index].itemType,
                   );
                 },
               );
@@ -157,7 +158,8 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
                 onTapDelete: () {
                   controller.onDeleteItem(
                     menu: MyPageMenu.favorite,
-                    id: controller.favoriteMarketItemList[index].itemId,
+                    itemId: controller.favoriteMarketItemList[index].itemId,
+                    itemType: controller.favoriteMarketItemList[index].itemType,
                   );
                 },
               );
@@ -205,7 +207,8 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
                 onTapDelete: () {
                   controller.onDeleteItem(
                     menu: MyPageMenu.recentView,
-                    id: controller.recentFestivalItemList[index].itemId,
+                    itemId: controller.recentFestivalItemList[index].itemId,
+                    itemType: controller.recentFestivalItemList[index].itemType,
                   );
                 },
               );
@@ -233,7 +236,8 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
                 onTapDelete: () {
                   controller.onDeleteItem(
                     menu: MyPageMenu.favorite,
-                    id: controller.favoriteFestivalItemList[index].itemId,
+                    itemId: controller.favoriteFestivalItemList[index].itemId,
+                    itemType: controller.favoriteFestivalItemList[index].itemType,
                   );
                 },
               );

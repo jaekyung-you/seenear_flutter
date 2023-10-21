@@ -135,7 +135,7 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
     }
   }
 
-  void onDeleteItem({required MyPageMenu menu, required int id}) {
+  void onDeleteItem({required MyPageMenu menu, required int itemId, required String itemType}) {
     if (menu.deleteBottomSheetTitle == null) return;
     Get.bottomSheet(
       BaseBottomSheet(
@@ -144,7 +144,7 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
         buttonTitles: menu.deleteBottomSheetButtons,
         onTapButton: (index) async {
           Get.back();
-          bool res = await _requestDeleteItem(menu: menu, id: id);
+          bool res = await _requestDeleteItem(menu: menu, itemId: itemId, itemType: itemType);
           if (!res) return; //  실패하면 토스트 팝업 안 띄움
           if (index == 1) SnackBarManager().showSnackBar(title: menu.deleteBottomSheetComplete);
         },
@@ -153,13 +153,13 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
   }
 
   // todo: menu에 따른 api 호출 필요
-  Future<bool> _requestDeleteItem({required MyPageMenu menu, required int id}) async {
+  Future<bool> _requestDeleteItem({required MyPageMenu menu, required int itemId, required String itemType}) async {
     switch (menu) {
       case MyPageMenu.favorite:
-        bool res = await _deleteFavoriteItem(id: id);
+        bool res = await _deleteFavoriteItem(itemId: itemId, itemType: itemType);
         return res;
       case MyPageMenu.review:
-        bool res = await _deleteRecentItem(id: id);
+        bool res = await _deleteRecentItem(itemId: itemId, itemType: itemType);
         return res;
       case MyPageMenu.subscription:
       case MyPageMenu.recentView:
