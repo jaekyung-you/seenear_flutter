@@ -3,13 +3,22 @@ import 'package:get/get.dart';
 import 'package:seenear/const/enum/my_page_menu.dart';
 import 'package:seenear/const/enum/my_page_setting.dart';
 import 'package:seenear/const/seenear_path.dart';
+import 'package:seenear/data/remote/api/favorite/add_favorite_item.dart';
 import 'package:seenear/data/remote/api/favorite/delete_favorite_item.dart';
+import 'package:seenear/data/remote/api/follower/add_follower.dart';
+import 'package:seenear/data/remote/api/follower/delete_follower.dart';
+import 'package:seenear/data/remote/api/follower/get_follower_list.dart';
+import 'package:seenear/data/remote/api/recent/add_recent_item.dart';
 import 'package:seenear/data/remote/api/recent/delete_recent_item.dart';
 import 'package:seenear/data/remote/api/favorite/get_favorite_items.dart';
 import 'package:seenear/data/remote/api/recent/get_recent_view_list.dart';
+import 'package:seenear/data/remote/api/review/get_review_detail.dart';
+import 'package:seenear/data/remote/api/review/get_review_list.dart';
+import 'package:seenear/data/remote/response/review_item_response.dart';
 import 'package:seenear/domain/util/snack_bar_manager.dart';
 import '../../../const/design_system/base_bottom_sheet.dart';
 import '../../../data/remote/response/info_item_response.dart';
+import '../../../data/remote/response/member_response.dart';
 import '../widget/my_page_menu/my_page_content_screen.dart';
 
 class MyPageMenuController extends GetxController with GetSingleTickerProviderStateMixin {
@@ -18,21 +27,39 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
   int requestSize = 10;
   RxBool isLoading = false.obs; // 네트워크 로딩중
 
+  /// usecase
+  // 찜 목록
+  final GetFavoriteItemList _getFavoriteItemList = GetFavoriteItemList();
+  final DeleteFavoriteItem _deleteFavoriteItem = DeleteFavoriteItem();
+  final AddFavoriteItem _addFavoriteItem = AddFavoriteItem();
   List<InfoItemResponse> favoriteItemList = <InfoItemResponse>[];
   RxList<InfoItemResponse> favoriteMarketItemList = <InfoItemResponse>[].obs;
   RxList<InfoItemResponse> favoriteFestivalItemList = <InfoItemResponse>[].obs;
   int? lastFavoriteId; // cursor에 사용됨
 
+  // 최근 본 목록
+  final GetRecentViews _getRecentViews = GetRecentViews();
+  final DeleteRecentItem _deleteRecentItem = DeleteRecentItem();
+  final AddRecentItem _addRecentItem = AddRecentItem();
   List<InfoItemResponse> recentViewList = <InfoItemResponse>[]; // 최대 10개까지만 보여서 페이징 필요없을 것 같음
   RxList<InfoItemResponse> recentMarketItemList = <InfoItemResponse>[].obs;
   RxList<InfoItemResponse> recentFestivalItemList = <InfoItemResponse>[].obs;
 
-  /// usecase
-  final GetFavoriteItemList _getFavoriteItemList = GetFavoriteItemList();
-  final DeleteFavoriteItem _deleteFavoriteItem = DeleteFavoriteItem();
-  final GetRecentViews _getRecentViews = GetRecentViews();
-  final DeleteRecentItem _deleteRecentItem = DeleteRecentItem();
 
+  // 리뷰 관리
+  final GetReviewList _getReviewList = GetReviewList();
+  final GetReviewDetail _getReviewDetail = GetReviewDetail();
+  List<ReviewItemResponse> reviewList = <ReviewItemResponse>[];
+  RxList<ReviewItemResponse> reviewMarketItemList = <ReviewItemResponse>[].obs;
+  RxList<ReviewItemResponse> reviewFestivalItemList = <ReviewItemResponse>[].obs;
+
+  // 구독 관리
+  final GetFollowerList _getFollowerList = GetFollowerList();
+  final AddFollower _addFollower = AddFollower();
+  final DeleteFollower _deleteFollower = DeleteFollower();
+  List<MemberResponse> followerList = <MemberResponse>[];
+  RxList<MemberResponse> myFollowerList = <MemberResponse>[].obs;
+  RxList<MemberResponse> myFollowingList = <MemberResponse>[].obs;
 
   @override
   void onInit() {
@@ -68,8 +95,9 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
       case MyPageMenu.recentView:
         _requestRecentViewList();
       case MyPageMenu.review:
+        _requestReviewList();
       case MyPageMenu.subscription:
-        break;
+        _requestFollowerList();
     }
   }
 
@@ -100,6 +128,34 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
         recentFestivalItemList.add(item);
       }
     }
+  }
+
+  Future<void> _requestReviewList() async {
+    // todo: 페이징 구현
+    List<ReviewItemResponse> res = await _getReviewList(size: requestSize, type: '', cursorId: null);
+    reviewList = res;
+    for (ReviewItemResponse item in reviewList) {
+      // todo: 서버 쪽에서 타입 분리 필요
+      // if (item.itemType == "MARKET") {
+      //   recentMarketItemList.add(item);
+      // } else if (item.itemType == "FESTIVAL") {
+      //   recentFestivalItemList.add(item);
+      // }
+    }
+  }
+
+  Future<void> _requestFollowerList() async {
+    // todo: 페이징 구현
+    List<MemberResponse> res = await _getFollowerList(size: 0, cursorId: null);
+    followerList = res;
+    // todo: 서버 쪽에서 타입 분리 필요
+    // for (MemberResponse item in followerList) {
+    //   if (item.itemType == "MARKET") {
+    //     recentMarketItemList                .add(item);
+    //   } else if (item.itemType == "FESTIVAL") {
+    //     recentFestivalItemList.add(item);
+    //   }
+    // }
   }
 
   void onTapMenuItem(MyPageMenu menu) {

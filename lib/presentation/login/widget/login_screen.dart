@@ -33,10 +33,10 @@ class LoginScreen extends GetView<LoginController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        '귀찮은 정보 입력 없이, 3초 만에 로그인하기!',
+                        '카카오로 쉽고 빠르게 로그인하기!',
                         style: TextStyle(
                           fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                           color: SeenearColor.grey50,
                         ),
                       ),
