@@ -5,6 +5,7 @@ import 'package:seenear/const/design_system/base_header.dart';
 import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
 import 'package:styled_text/styled_text.dart';
 import '../../../const/design_system/seenear_color.dart';
+import '../../base_widget/circle_profile_image.dart';
 import '../controller/detail_review_controller.dart';
 
 class DetailReviewScreen extends GetView<DetailReviewController> {
@@ -28,17 +29,10 @@ class DetailReviewScreen extends GetView<DetailReviewController> {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Row(
                         children: [
-                          profileImageSrc == null
-                              ? Image.asset(
-                                  'assets/images/default_profile.png',
-                                  width: 42,
-                                )
-                              : CircleAvatar(
-                                  radius: 21,
-                                  backgroundImage: NetworkImage(
-                                    profileImageSrc!,
-                                  ),
-                                ),
+                          CircleProfileImage(
+                            imageUrl: profileImageSrc,
+                            width: 42,
+                          ),
                           const SizedBox(
                             width: 8,
                           ),
@@ -269,17 +263,10 @@ class DetailReviewScreen extends GetView<DetailReviewController> {
             const SizedBox(
               width: 32,
             ),
-          profileImageSrc == null
-              ? Image.asset(
-                  'assets/images/default_profile.png',
-                  width: 36,
-                )
-              : CircleAvatar(
-                  radius: 18,
-                  backgroundImage: NetworkImage(
-                    profileImageSrc!,
-                  ),
-                ),
+          CircleProfileImage(
+            imageUrl: profileImageSrc,
+            width: 36,
+          ),
           const SizedBox(
             width: 8,
           ),

@@ -7,6 +7,7 @@ import 'package:seenear/presentation/my_page/controller/my_page_setting_controll
 import 'package:styled_text/styled_text.dart';
 
 import '../../../../const/design_system/seenear_color.dart';
+import '../../../base_widget/circle_profile_image.dart';
 
 class MyAccountScreen extends GetView<MyPageSettingController> {
   const MyAccountScreen({super.key});
@@ -29,16 +30,9 @@ class MyAccountScreen extends GetView<MyPageSettingController> {
                   return Stack(
                     alignment: Alignment.bottomRight,
                     children: [
-                      controller.profileImageSrc.isEmpty
-                          ? Image.asset(
-                        'assets/images/default_profile.png',
+                      CircleProfileImage(
+                        imageUrl: controller.profileImageSrc.value,
                         width: 100,
-                      )
-                          : CircleAvatar(
-                        radius: 50,
-                        backgroundImage: NetworkImage(
-                          controller.profileImageSrc.value,
-                        ),
                       ),
                       InkWell(
                         onTap: () {

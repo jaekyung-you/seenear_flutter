@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:seenear/const/design_system/rounded_widget.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/const/enum/subscription_button_type.dart';
+import 'package:seenear/presentation/base_widget/circle_profile_image.dart';
 import 'package:seenear/presentation/my_page/controller/my_page_menu_controller.dart';
 import '../../../../const/enum/my_page_menu.dart';
 import '../../../../const/seenear_path.dart';
@@ -34,12 +35,7 @@ class SubscriptionCell extends GetView<MyPageMenuController> {
         height: 90,
         child: Row(
           children: [
-            CircleAvatar(
-              radius: 32,
-              backgroundImage: NetworkImage(
-                'https://picsum.photos/200/303',
-              ),
-            ),
+            CircleProfileImage(imageUrl: null, width: 64),
             const SizedBox(
               width: 20,
             ),

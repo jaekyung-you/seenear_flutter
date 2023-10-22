@@ -9,6 +9,7 @@ import 'package:seenear/presentation/my_page/controller/my_page_menu_controller.
 import 'package:styled_text/styled_text.dart';
 
 import '../../../../data/local/member.dart';
+import '../../../base_widget/circle_profile_image.dart';
 
 class MyPageScreen extends GetView<MyPageMenuController> {
   const MyPageScreen({super.key});
@@ -61,17 +62,10 @@ class MyPageScreen extends GetView<MyPageMenuController> {
               ),
             },
           ),
-          Member().profileImageSrc == null
-              ? Image.asset(
-                  'assets/images/default_profile.png',
-                  width: 64,
-                )
-              : CircleAvatar(
-                  radius: 32,
-                  backgroundImage: NetworkImage(
-                    Member().profileImageSrc!,
-                  ),
-                ),
+          CircleProfileImage(
+            imageUrl: Member().profileImageSrc,
+            width: 64,
+          ),
         ],
       ),
     );
