@@ -45,7 +45,6 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
   RxList<InfoItemResponse> recentMarketItemList = <InfoItemResponse>[].obs;
   RxList<InfoItemResponse> recentFestivalItemList = <InfoItemResponse>[].obs;
 
-
   // 리뷰 관리
   final GetReviewList _getReviewList = GetReviewList();
   final GetReviewDetail _getReviewDetail = GetReviewDetail();
@@ -76,9 +75,19 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
   void clearList(MyPageMenu menu) {
     switch (menu) {
       case MyPageMenu.recentView:
+        recentViewList.clear();
+        recentMarketItemList.clear();
+        recentFestivalItemList.clear();
+
       case MyPageMenu.review:
+        reviewList.clear();
+        reviewFestivalItemList.clear();
+        reviewMarketItemList.clear();
+
       case MyPageMenu.subscription:
-        break;
+        followerList.clear();
+        myFollowerList.clear();
+        myFollowingList.clear();
 
       case MyPageMenu.favorite:
         favoriteItemList.clear();
@@ -86,7 +95,6 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
         favoriteFestivalItemList.clear();
     }
   }
-
 
   void requestListByMenu(MyPageMenu menu) {
     switch (menu) {
@@ -114,7 +122,6 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
     }
 
     lastFavoriteId = favoriteItemList.last.itemId;
-    print("lastFavoriteId: $lastFavoriteId");
   }
 
   Future<void> _requestRecentViewList() async {
@@ -123,7 +130,7 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
     recentViewList = res;
     for (InfoItemResponse item in recentViewList) {
       if (item.itemType == "MARKET") {
-        recentMarketItemList                .add(item);
+        recentMarketItemList.add(item);
       } else if (item.itemType == "FESTIVAL") {
         recentFestivalItemList.add(item);
       }
@@ -187,7 +194,6 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
             },
           ),
         );
-
     }
   }
 
@@ -201,25 +207,58 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
         onTapButton: (index) async {
           Get.back();
           bool res = await _requestDeleteItem(menu: menu, itemId: itemId, itemType: itemType);
-          if (!res) return; //  실패하면 토스트 팝업 안 띄움
-          if (index == 1) SnackBarManager().showSnackBar(title: menu.deleteBottomSheetComplete);
+          SnackBarManager().showSnackBar(title: res ? menu.deleteBottomSheetComplete : '일시적 오류가 발생했습니다.');
         },
       ),
     );
   }
 
   // todo: menu에 따른 api 호출 필요
-  Future<bool> _requestDeleteItem({required MyPageMenu menu, required int itemId, required String itemType}) async {
+  Future<bool> _requestDeleteItem({required MyPageMenu menu, int? itemId, String? itemType, int? memberId}) async {
+    bool result;
+
     switch (menu) {
       case MyPageMenu.favorite:
-        bool res = await _deleteFavoriteItem(itemId: itemId, itemType: itemType);
-        return res;
+        if (itemId == null || itemType == null) return false;
+        result = await _deleteFavoriteItem(itemId: itemId, itemType: itemType);
+        if (result) {
+          if (itemType == "MARKET") {
+            favoriteMarketItemList.removeWhere((element) => element.itemId == itemId);
+          } else if (itemType == "FESTIVAL") {
+            favoriteFestivalItemList.removeWhere((element) => element.itemId == itemId);
+          }
+          return true;
+        }
+        return false;
       case MyPageMenu.review:
-        bool res = await _deleteRecentItem(itemId: itemId, itemType: itemType);
-        return res;
+        if (itemId == null || itemType == null) return false;
+        result = await _deleteRecentItem(itemId: itemId, itemType: itemType);
+        if (result) {
+          if (itemType == "MARKET") {
+            reviewMarketItemList.removeWhere((element) => element.itemId == itemId);
+          } else if (itemType == "FESTIVAL") {
+            reviewFestivalItemList.removeWhere((element) => element.itemId == itemId);
+          }
+          return true;
+        }
+        return false;
       case MyPageMenu.subscription:
+        if (memberId == null) return false;
+        result = await _deleteFollower(memberId: memberId);
+        // todo: itemType과 같은 것이 필요함 서버 작업 필요
+        return false;
       case MyPageMenu.recentView:
-        return true; // todo: 각각 api 필요
+        if (itemId == null || itemType == null) return false;
+        result = await _deleteRecentItem(itemId: itemId, itemType: itemType);
+        if (result) {
+          if (itemType == "MARKET") {
+            recentMarketItemList.removeWhere((element) => element.itemId == itemId);
+          } else if (itemType == "FESTIVAL") {
+            recentFestivalItemList.removeWhere((element) => element.itemId == itemId);
+          }
+          return true;
+        }
+        return false;
     }
   }
 
