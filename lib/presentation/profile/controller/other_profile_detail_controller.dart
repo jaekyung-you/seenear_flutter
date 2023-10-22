@@ -8,12 +8,12 @@ class OtherProfileDetailController extends GetxController with GetSingleTickerPr
   List<OtherProfileTabMenu> tabMenu = OtherProfileTabMenu.values;
   List<String> reviewList = ['a', 'b', 'c', 'd,' 'e', 'a', 'b', 'c', 'd,' 'e'];
   List<String> communityList = [];
-  int userId = 0;
+  int memberId = 0;
 
   @override
   void onInit() {
     super.onInit();
-    userId = Get.arguments['userId'];
+    memberId = Get.arguments['id'];
     tabController = TabController(vsync: this, length: 2);
   }
 

@@ -10,8 +10,9 @@ import '../../../../const/seenear_path.dart';
 class SubscriptionCell extends GetView<MyPageMenuController> {
   final bool isFollowing; // true: '내가 구독한 사람'
   final bool isMatched; // 서로 구독중인 경우
+  final int memberId;
 
-  const SubscriptionCell({super.key, required this.isFollowing, required this.isMatched});
+  const SubscriptionCell({super.key, required this.isFollowing, required this.isMatched, required this.memberId});
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +89,7 @@ class SubscriptionCell extends GetView<MyPageMenuController> {
                               }
 
                               if (button == SubscriptionButtonType.follow) {
-                                // todo: '나도 구독하기' 를 누른 경우, 동작 기획
+                                controller.onTapAddFollower(memberId: memberId);
                               }
                             },
                           ),

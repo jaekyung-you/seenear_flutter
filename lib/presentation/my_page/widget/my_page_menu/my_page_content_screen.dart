@@ -125,7 +125,13 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
             itemBuilder: (context, index) {
               return MarketCell(
                 item: controller.recentMarketItemList[index],
-                onTapFavoriteIcon: () {},
+                onTapFavoriteIcon: () {
+                  controller.onTapFavoriteIcon(
+                    menu: MyPageMenu.recentView,
+                    itemId: controller.recentMarketItemList[index].itemId,
+                    itemType: controller.recentMarketItemList[index].itemType,
+                  );
+                },
                 onTapDelete: () {
                   controller.onDeleteItem(
                     menu: MyPageMenu.recentView,
@@ -154,7 +160,13 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
             itemBuilder: (context, index) {
               return MarketCell(
                 item: controller.favoriteMarketItemList[index],
-                onTapFavoriteIcon: () {},
+                onTapFavoriteIcon: () {
+                  controller.onTapFavoriteIcon(
+                    menu: MyPageMenu.favorite,
+                    itemId: controller.favoriteMarketItemList[index].itemId,
+                    itemType: controller.favoriteFestivalItemList[index].itemType,
+                  );
+                },
                 onTapDelete: () {
                   controller.onDeleteItem(
                     menu: MyPageMenu.favorite,
@@ -171,7 +183,9 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
           itemCount: 10,
           itemBuilder: (context, index) {
             return ReviewCell(
-              onTapItemCell: () {},
+              onTapItemCell: () {
+                controller.onTapReviewItem(id: controller.reviewList[index].itemId);
+              },
             );
           },
         );
@@ -182,6 +196,7 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
             return SubscriptionCell(
               isFollowing: false,
               isMatched: true,
+              memberId: controller.followerList[index].memberId,
             );
           },
         );
@@ -260,6 +275,7 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
             return SubscriptionCell(
               isFollowing: false,
               isMatched: true,
+              memberId: controller.followerList[index].memberId,
             );
           },
         );

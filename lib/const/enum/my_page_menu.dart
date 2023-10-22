@@ -96,9 +96,9 @@ enum MyPageMenu {
   List<String> get deleteBottomSheetButtons {
     switch (this) {
       case MyPageMenu.subscription:
-        return ['아니요', '네 취소할래요'];
+        return ['아니요', '취소할래요'];
       default:
-        return ['취소', '확인'];
+        return ['아니요', '삭제할래요'];
     }
   }
 

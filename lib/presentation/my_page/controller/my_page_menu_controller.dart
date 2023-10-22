@@ -12,7 +12,6 @@ import 'package:seenear/data/remote/api/recent/add_recent_item.dart';
 import 'package:seenear/data/remote/api/recent/delete_recent_item.dart';
 import 'package:seenear/data/remote/api/favorite/get_favorite_items.dart';
 import 'package:seenear/data/remote/api/recent/get_recent_view_list.dart';
-import 'package:seenear/data/remote/api/review/get_review_detail.dart';
 import 'package:seenear/data/remote/api/review/get_review_list.dart';
 import 'package:seenear/data/remote/response/review_item_response.dart';
 import 'package:seenear/domain/util/snack_bar_manager.dart';
@@ -47,7 +46,6 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
 
   // 리뷰 관리
   final GetReviewList _getReviewList = GetReviewList();
-  final GetReviewDetail _getReviewDetail = GetReviewDetail();
   List<ReviewItemResponse> reviewList = <ReviewItemResponse>[];
   RxList<ReviewItemResponse> reviewMarketItemList = <ReviewItemResponse>[].obs;
   RxList<ReviewItemResponse> reviewFestivalItemList = <ReviewItemResponse>[].obs;
@@ -274,5 +272,26 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
         },
       ),
     );
+  }
+
+  Future<void> onTapFavoriteIcon({required MyPageMenu menu, required int itemId, required String itemType}) async {
+    switch (menu) {
+      case MyPageMenu.recentView:
+        bool res = await _addRecentItem(itemId: itemId, itemType: itemType);
+      case MyPageMenu.favorite:
+        bool res = await _addFavoriteItem(itemId: itemId, itemType: itemType);
+      default:
+        // 나머지 (리뷰 관리, 구독 관리) 에서는 찜 기능이 없어서 패스
+        break;
+    }
+  }
+
+  Future<void> onTapReviewItem({required int id}) async {
+    Get.toNamed(SeenearPath.DETAIL_REVIEW, arguments: {'id': id});
+  }
+
+  Future<void> onTapAddFollower({required int memberId}) async {
+    bool res = await _addFollower(memberId: memberId);
+    SnackBarManager().showSnackBar(title: res ? '구독이 완료되었습니다.' : '일시적 오류가 발생했습니다.');
   }
 }

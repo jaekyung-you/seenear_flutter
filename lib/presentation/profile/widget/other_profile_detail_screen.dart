@@ -21,7 +21,7 @@ class OtherProfileDetailScreen extends GetView<OtherProfileDetailController> {
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: BaseHeader(title: '닉네임 님이 작성한 글'),
           ),
-          SubscriptionCell(isFollowing: false, isMatched: false),
+          SubscriptionCell(isFollowing: false, isMatched: false, memberId: controller.memberId),
           const SizedBox(
             height: 20,
           ),
