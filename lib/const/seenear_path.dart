@@ -21,4 +21,6 @@ class SeenearPath {
   static String DETAIL_REVIEW = '/detail/review'; // 방문자 후기 화면
 
   static String SEARCH = '/search'; // 검색 화면
+
+  static String COMMUNITY = '/community'; // 이모저모 이야기방
 }

@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:seenear/const/seenear_path.dart';
+import 'package:seenear/presentation/community/controller/community_main_controller.dart';
+import 'package:seenear/presentation/community/widget/community_main_screen.dart';
 import 'package:seenear/presentation/home/controller/home_controller.dart';
 import 'package:seenear/presentation/home/widget/home_screen.dart';
 import 'package:seenear/presentation/login/controller/login_controller.dart';
@@ -184,6 +186,15 @@ class SeenearRoute {
       binding: BindingsBuilder(
             () {
           Get.put(SearchScreenController());
+        },
+      ),
+    ),
+    GetPage(
+      name: SeenearPath.COMMUNITY,
+      page: () => const CommunityMainScreen(),
+      binding: BindingsBuilder(
+            () {
+          Get.put(CommunityMainController());
         },
       ),
     ),

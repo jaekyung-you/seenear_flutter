@@ -6,7 +6,6 @@ import 'package:seenear/data/remote/api/api_base.dart';
 import 'package:seenear/data/remote/api/main/get_main_list.dart';
 import 'package:seenear/data/remote/response/main_category_response.dart';
 import 'package:seenear/data/remote/response/main_response.dart';
-import 'package:share_plus/share_plus.dart';
 import '../../../const/enum/home_menu.dart';
 import '../../../const/seenear_path.dart';
 import '../../../data/remote/api/main/get_health_check.dart';
@@ -62,7 +61,8 @@ class HomeController extends GetxController {
         break;
       case HomeMenu.community:
         // 커뮤니티 진입, 화면 미기획
-        Share.share('check out my website https://example.com');
+        // Share.share('check out my website https://example.com');
+        Get.toNamed(SeenearPath.COMMUNITY);
         break;
       case HomeMenu.myInfo:
         Get.toNamed(isMember ? SeenearPath.MY_PAGE : SeenearPath.LOGIN);
