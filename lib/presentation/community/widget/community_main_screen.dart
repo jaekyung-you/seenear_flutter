@@ -16,6 +16,39 @@ class CommunityMainScreen extends GetView<CommunityMainController> {
   @override
   Widget build(BuildContext context) {
     return SeenearBaseScaffold(
+      floatingActionButton: InkWell(
+        onTap: () {
+          // Get.toNamed()
+        },
+        child: Container(
+          width: 88,
+          height: 40,
+          alignment: Alignment.centerRight,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(40.0),
+          ),
+          child: const Row(
+            children: [
+              SizedBox(
+                width: 8,
+              ),
+              Icon(
+                Icons.edit,
+                color: Colors.white,
+                size: 18,
+              ),
+              SizedBox(
+                width: 2,
+              ),
+              Text(
+                '글쓰기',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400, color: Colors.white),
+              )
+            ],
+          ),
+        ),
+      ),
       child: Column(
         children: [
           const Padding(

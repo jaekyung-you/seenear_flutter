@@ -7,8 +7,9 @@ import '../../const/seenear_path.dart';
 class SeenearBaseScaffold extends StatefulWidget {
   final Widget child;
   final double? padding;
+  final Widget? floatingActionButton;
 
-  const SeenearBaseScaffold({super.key, required this.child, this.padding});
+  const SeenearBaseScaffold({super.key, required this.child, this.padding, this.floatingActionButton});
 
   @override
   State<SeenearBaseScaffold> createState() => _SeenearBaseScaffoldState();
@@ -26,6 +27,7 @@ class _SeenearBaseScaffoldState extends State<SeenearBaseScaffold> {
           FocusScope.of(context).unfocus();
         },
         child: Scaffold(
+          floatingActionButton: widget.floatingActionButton,
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             unselectedItemColor: SeenearColor.grey50,

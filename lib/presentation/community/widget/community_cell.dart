@@ -47,39 +47,65 @@ class CommunityCell extends GetView<CommunityMainController> {
               const SizedBox(
                 width: 8,
               ),
-              InkWell(
-                onTap: () {
-                  controller.onTapFollow(memberId: -1, memberName: '상어가좋아좋아');
-                },
-                child: Container(
-                  width: 86,
-                  height: 24,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: SeenearColor.blue60,
-                    ),
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/add.png',
-                        color: SeenearColor.blue60,
-                        width: 14,
-                      ),
-                      Text(
-                        '구독하기',
-                        style: TextStyle(
-                          color: SeenearColor.blue60,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
+              Obx(() {
+                return controller.isFollowing.value
+                    ? InkWell(
+                        onTap: () {
+                          controller.onTapUnfollow(memberId: -1, memberName: '상어가좋아좋아');
+                        },
+                        child: Container(
+                          width: 86,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            color: SeenearColor.blue10,
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '구독중',
+                              style: TextStyle(
+                                color: SeenearColor.blue80,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
                         ),
                       )
-                    ],
-                  ),
-                ),
-              )
+                    : InkWell(
+                        onTap: () {
+                          controller.onTapFollow(memberId: -1, memberName: '상어가좋아좋아');
+                        },
+                        child: Container(
+                          width: 86,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: SeenearColor.blue60,
+                            ),
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/images/add.png',
+                                color: SeenearColor.blue60,
+                                width: 14,
+                              ),
+                              Text(
+                                '구독하기',
+                                style: TextStyle(
+                                  color: SeenearColor.blue60,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+              })
             ],
           ),
           const SizedBox(
@@ -102,7 +128,7 @@ class CommunityCell extends GetView<CommunityMainController> {
                 ),
                 SizedBox(
                   width: double.infinity,
-                  height: (height * 2) / 3,
+                  height: (height * 2) / 3, // 글 없으면 height 꽉 채워서
                   child: Image.network(
                     "https://picsum.photos/200/300",
                     fit: BoxFit.cover,
