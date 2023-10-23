@@ -72,14 +72,16 @@ class CommunityMainScreen extends GetView<CommunityMainController> {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
             children: [
-              Text(
-                '총 100개',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  color: SeenearColor.grey60,
-                ),
-              ),
+              Obx(() {
+                return Text(
+                  '총 ${controller.totalCount.value}개',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: SeenearColor.grey60,
+                  ),
+                );
+              }),
               const Spacer(),
               Row(
                 children: [

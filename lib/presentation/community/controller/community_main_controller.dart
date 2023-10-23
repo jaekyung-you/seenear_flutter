@@ -10,6 +10,7 @@ class CommunityMainController extends GetxController {
   // property
   Rx<CommunityTabType> selectedTab = CommunityTabType.all.obs; // 디폴트 : 전체 글
   Rx<CommunityFilterType> selectedFilter = CommunityFilterType.recent.obs; // 디폴트 : 최신순
+  RxInt totalCount = 101.obs;
 
   // usecase
   final AddFollower _addFollower = AddFollower();

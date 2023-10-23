@@ -9,6 +9,8 @@ class CommunityCell extends GetView<CommunityMainController> {
 
   @override
   Widget build(BuildContext context) {
+    const height = 246.0;
+
     return Container(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -68,7 +70,11 @@ class CommunityCell extends GetView<CommunityMainController> {
                       ),
                       Text(
                         '구독하기',
-                        style: TextStyle(color: SeenearColor.blue60, fontSize: 14, fontWeight: FontWeight.w700),
+                        style: TextStyle(
+                          color: SeenearColor.blue60,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                        ),
                       )
                     ],
                   ),
@@ -80,8 +86,30 @@ class CommunityCell extends GetView<CommunityMainController> {
             height: 16,
           ),
           Container(
-            color: Colors.pink,
-            height: 100,
+            height: height,
+            child: Column(
+              children: [
+                Text(
+                  'when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with',
+                  style: TextStyle(
+                    overflow: TextOverflow.ellipsis,
+                    fontSize: 20,
+                  ),
+                  maxLines: 2,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: (height * 2) / 3,
+                  child: Image.network(
+                    "https://picsum.photos/200/300",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
+            ),
           ),
           const SizedBox(
             height: 16,
@@ -98,14 +126,10 @@ class CommunityCell extends GetView<CommunityMainController> {
                       width: 14,
                     ),
                     Text(
-                      '공감',
-                      style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: SeenearColor.grey50),
-                    ),
-                    Text(
-                      '10',
+                      '공감 10',
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 14,
                         color: SeenearColor.grey50,
                       ),
                     ),
@@ -123,14 +147,10 @@ class CommunityCell extends GetView<CommunityMainController> {
                       width: 14,
                     ),
                     Text(
-                      '댓글',
-                      style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: SeenearColor.grey50),
-                    ),
-                    Text(
-                      '2',
+                      '댓글 2',
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 14,
                         color: SeenearColor.grey50,
                       ),
                     ),
