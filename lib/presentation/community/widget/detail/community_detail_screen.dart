@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seenear/const/design_system/base_header.dart';
 import 'package:seenear/presentation/community/controller/community_detail_controller.dart';
 import 'package:seenear/presentation/community/widget/detail/community_detail_comment.dart';
 import 'package:seenear/presentation/community/widget/detail/community_detail_content.dart';
@@ -15,12 +16,19 @@ class CommunityDetailScreen extends GetView<CommunityDetailController> {
     return SeenearBaseScaffold(
       child: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: BaseHeader(title: '이모저모 이야기방'),
+          ),
+          Divider(),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   CommunityDetailHeader(),
+                  Divider(),
                   CommunityDetailContent(),
+                  Divider(),
                   CommunityDetailComment(),
                 ],
               ),
