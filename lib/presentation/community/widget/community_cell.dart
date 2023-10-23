@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/presentation/base_widget/circle_profile_image.dart';
+import 'package:seenear/presentation/community/controller/community_main_controller.dart';
 
-class CommunityCell extends StatelessWidget {
+class CommunityCell extends GetView<CommunityMainController> {
   const CommunityCell({super.key});
 
   @override
@@ -43,28 +45,33 @@ class CommunityCell extends StatelessWidget {
               const SizedBox(
                 width: 8,
               ),
-              Container(
-                width: 86,
-                height: 24,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: SeenearColor.blue60,
-                  ),
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/add.png',
+              InkWell(
+                onTap: () {
+                  controller.onTapFollow(memberId: -1, memberName: '상어가좋아좋아');
+                },
+                child: Container(
+                  width: 86,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    border: Border.all(
                       color: SeenearColor.blue60,
-                      width: 14,
                     ),
-                    Text(
-                      '구독하기',
-                      style: TextStyle(color: SeenearColor.blue60, fontSize: 14, fontWeight: FontWeight.w700),
-                    )
-                  ],
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/add.png',
+                        color: SeenearColor.blue60,
+                        width: 14,
+                      ),
+                      Text(
+                        '구독하기',
+                        style: TextStyle(color: SeenearColor.blue60, fontSize: 14, fontWeight: FontWeight.w700),
+                      )
+                    ],
+                  ),
                 ),
               )
             ],

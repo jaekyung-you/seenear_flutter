@@ -18,21 +18,19 @@ class CommunityMainScreen extends GetView<CommunityMainController> {
     return SeenearBaseScaffold(
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: const BaseHeader(title: '이모저모 이야기방'),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: BaseHeader(title: '이모저모 이야기방'),
           ),
           communityHeader(),
           Expanded(
             child: ListView.separated(
               itemCount: 10,
               itemBuilder: (context, index) {
-                return CommunityCell();
+                return const CommunityCell();
               },
               separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  height: 20,
-                );
+                return const SizedBox(height: 20);
               },
             ),
           ),
