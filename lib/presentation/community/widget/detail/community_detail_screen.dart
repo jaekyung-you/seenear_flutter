@@ -34,7 +34,10 @@ class CommunityDetailScreen extends GetView<CommunityDetailController> {
               ),
             ),
           ),
-          TextInputCell(),
+          TextInputCell(
+            textEditingController: controller.editingController,
+            onTapComplete: controller.onTapInputComplete,
+          ),
         ],
       ),
     );

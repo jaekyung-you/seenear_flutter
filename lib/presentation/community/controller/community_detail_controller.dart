@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../const/design_system/base_bottom_sheet.dart';
@@ -9,6 +10,7 @@ class CommunityDetailController extends GetxController {
   // property
   int? id; // 게시물 id
   RxBool isFollowing = false.obs;
+  TextEditingController editingController = TextEditingController();
 
   // usecase
   final DeleteFollower _deleteFollower = DeleteFollower();
@@ -61,5 +63,13 @@ class CommunityDetailController extends GetxController {
         },
       ),
     );
+  }
+
+  void onTapInputComplete() {
+    String comment = editingController.text.trim();
+
+    // todo: 댓글 남기는 usecase
+    FocusScope.of(Get.context!).unfocus();
+    SnackBarManager().showSnackBar(title: '댓글을 남겼어요!');
   }
 }
