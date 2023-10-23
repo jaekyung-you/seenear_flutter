@@ -6,7 +6,7 @@ class CommunityDetailController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    if (Get.arguments) {
+    if (Get.arguments != null) {
       id = Get.arguments['id'];
       _requestDetail(id: id);
     }
