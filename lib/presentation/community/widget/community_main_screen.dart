@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seenear/const/design_system/base_button.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
-
 import '../../../const/design_system/base_header.dart';
+import '../../../const/enum/community_filter_type.dart';
+import '../../../const/enum/community_tab_type.dart';
 import '../../base_widget/seenear_base_scaffold.dart';
 import '../controller/community_main_controller.dart';
 import 'community_cell.dart';
@@ -17,7 +18,10 @@ class CommunityMainScreen extends GetView<CommunityMainController> {
     return SeenearBaseScaffold(
       child: Column(
         children: [
-          const BaseHeader(title: '이모저모 이야기방'),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: const BaseHeader(title: '이모저모 이야기방'),
+          ),
           communityHeader(),
           Expanded(
             child: ListView.separated(
@@ -44,30 +48,23 @@ class CommunityMainScreen extends GetView<CommunityMainController> {
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
           child: Row(
             children: [
-              Expanded(
-                  child: BaseButton(
-                buttonText: '전체 글',
-                onPressed: () {},
-                height: 44,
-              )),
-              const SizedBox(
-                width: 14,
-              ),
-              Expanded(
-                  child: BaseButton(
-                buttonText: '구독 글',
-                onPressed: () {},
-                height: 44,
-              )),
-              const SizedBox(
-                width: 14,
-              ),
-              Expanded(
-                  child: BaseButton(
-                buttonText: '내 글',
-                onPressed: () {},
-                height: 44,
-              )),
+              for (CommunityTabType tab in CommunityTabType.values)
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 7.0),
+                    child: Obx(() {
+                      return BaseButton(
+                        buttonText: tab.title,
+                        bgColor: controller.selectedTab.value == tab ? SeenearColor.blue80 : SeenearColor.blue10,
+                        fgColor: controller.selectedTab.value == tab ? Colors.white : SeenearColor.blue80,
+                        onPressed: () {
+                          controller.selectedTab.value = tab;
+                        },
+                        height: 44,
+                      );
+                    }),
+                  ),
+                ),
             ],
           ),
         ),
@@ -88,40 +85,32 @@ class CommunityMainScreen extends GetView<CommunityMainController> {
               const Spacer(),
               Row(
                 children: [
-                  Text(
-                    '최신순',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                      color: SeenearColor.grey60, // or blue80
+                  for (CommunityFilterType filter in CommunityFilterType.values)
+                    Row(
+                      children: [
+                        Obx(() {
+                          return InkWell(
+                            onTap: () {
+                              controller.selectedFilter.value = filter;
+                            },
+                            child: Text(
+                              filter.title,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                                color: controller.selectedFilter.value == filter ? SeenearColor.blue80 : SeenearColor.grey60, // or blue80
+                              ),
+                            ),
+                          );
+                        }),
+                        if (filter == CommunityFilterType.recent || filter == CommunityFilterType.like)
+                          Container(
+                            height: 16,
+                            padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                            child: VerticalDivider(color: SeenearColor.grey20, width: 5),
+                          ),
+                      ],
                     ),
-                  ),
-                  Container(
-                    height: 21,
-                    padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                    child: VerticalDivider(color: SeenearColor.grey20, width: 5),
-                  ),
-                  Text(
-                    '공감순',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                      color: SeenearColor.grey60,
-                    ),
-                  ),
-                  Container(
-                    height: 21,
-                    padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                    child: VerticalDivider(color: SeenearColor.grey20, width: 5),
-                  ),
-                  Text(
-                    '댓글순',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                      color: SeenearColor.grey60,
-                    ),
-                  ),
                 ],
               )
             ],
