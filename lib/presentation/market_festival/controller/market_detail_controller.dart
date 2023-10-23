@@ -40,6 +40,6 @@ class MarketDetailController extends GetxController {
   
   // 방문자 후기 사진 클릭
   Future<void> onTapReviewDetail({required int id}) async {
-    Get.toNamed(SeenearPath.DETAIL_REVIEW, arguments: {'id': id});
+    Get.toNamed(SeenearPath.REVIEW_DETAIL, arguments: {'id': id});
   }
 }

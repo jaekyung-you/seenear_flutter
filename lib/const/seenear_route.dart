@@ -17,6 +17,8 @@ import 'package:seenear/presentation/profile/controller/other_profile_detail_con
 import 'package:seenear/presentation/profile/widget/other_profile_detail_screen.dart';
 import 'package:seenear/presentation/sign_up/controller/sign_up_controller.dart';
 import 'package:seenear/presentation/sign_up/widget/sign_up_screen.dart';
+import '../presentation/community/controller/community_detail_controller.dart';
+import '../presentation/community/widget/community_detail_screen.dart';
 import '../presentation/market_festival/controller/detail_review_controller.dart';
 import '../presentation/market_festival/controller/market_detail_controller.dart';
 import '../presentation/market_festival/widget/detail_review_screen.dart';
@@ -172,7 +174,7 @@ class SeenearRoute {
       ),
     ),
     GetPage(
-      name: SeenearPath.DETAIL_REVIEW,
+      name: SeenearPath.REVIEW_DETAIL,
       page: () => const DetailReviewScreen(),
       binding: BindingsBuilder(
             () {
@@ -195,6 +197,15 @@ class SeenearRoute {
       binding: BindingsBuilder(
             () {
           Get.put(CommunityMainController());
+        },
+      ),
+    ),
+    GetPage(
+      name: SeenearPath.COMMUNITY_DETAIL,
+      page: () => const CommunityDetailScreen(),
+      binding: BindingsBuilder(
+            () {
+          Get.put(CommunityDetailController());
         },
       ),
     ),

@@ -287,7 +287,7 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
   }
 
   Future<void> onTapReviewItem({required int id}) async {
-    Get.toNamed(SeenearPath.DETAIL_REVIEW, arguments: {'id': id});
+    Get.toNamed(SeenearPath.REVIEW_DETAIL, arguments: {'id': id});
   }
 
   Future<void> onTapAddFollower({required int memberId}) async {

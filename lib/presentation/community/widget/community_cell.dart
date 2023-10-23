@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
+import 'package:seenear/const/seenear_path.dart';
 import 'package:seenear/presentation/base_widget/circle_profile_image.dart';
 import 'package:seenear/presentation/community/controller/community_main_controller.dart';
 
@@ -111,30 +112,35 @@ class CommunityCell extends GetView<CommunityMainController> {
           const SizedBox(
             height: 16,
           ),
-          Container(
-            height: height,
-            child: Column(
-              children: [
-                Text(
-                  'when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with',
-                  style: TextStyle(
-                    overflow: TextOverflow.ellipsis,
-                    fontSize: 20,
+          InkWell(
+            onTap: () {
+              Get.toNamed(SeenearPath.COMMUNITY_DETAIL, arguments: {'id': 0});
+            },
+            child: Container(
+              height: height,
+              child: Column(
+                children: [
+                  Text(
+                    'when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with',
+                    style: TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                      fontSize: 20,
+                    ),
+                    maxLines: 2,
                   ),
-                  maxLines: 2,
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: (height * 2) / 3, // 글 없으면 height 꽉 채워서
-                  child: Image.network(
-                    "https://picsum.photos/200/300",
-                    fit: BoxFit.cover,
+                  const SizedBox(
+                    height: 16,
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: double.infinity,
+                    height: (height * 2) / 3, // 글 없으면 height 꽉 채워서
+                    child: Image.network(
+                      "https://picsum.photos/200/300",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(
