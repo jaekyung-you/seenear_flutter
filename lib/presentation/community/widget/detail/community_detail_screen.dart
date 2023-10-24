@@ -24,6 +24,7 @@ class CommunityDetailScreen extends GetView<CommunityDetailController> {
           Expanded(
             child: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CommunityDetailHeader(),
                   Divider(),
