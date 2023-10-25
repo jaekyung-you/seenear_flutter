@@ -9,7 +9,7 @@ part of 'member_response.dart';
 _$MemberResponseImpl _$$MemberResponseImplFromJson(Map<String, dynamic> json) =>
     _$MemberResponseImpl(
       imageSrc: json['imageSrc'] as String?,
-      name: json['name'] as String,
+      name: json['name'] as String?,
       memberId: json['memberId'] as int,
     );
 

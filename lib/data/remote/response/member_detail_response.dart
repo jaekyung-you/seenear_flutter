@@ -8,7 +8,7 @@ part 'member_detail_response.g.dart';
 class MemberDetailResponse with _$MemberDetailResponse {
   const factory MemberDetailResponse({
     required int id, // 멤버id
-    required String nickname, // 닉네임
+    required String nickName, // 닉네임
     String? profileImageSrc,
     String? loginType,
   }) = _MemberDetailResponse;

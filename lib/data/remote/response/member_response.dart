@@ -8,7 +8,7 @@ part 'member_response.g.dart';
 class MemberResponse with _$MemberResponse {
   const factory MemberResponse({
     String? imageSrc,
-    required String name,
+    String? name,
     required int memberId,
   }) = _MemberResponse;
 

@@ -62,6 +62,7 @@ class HomeController extends GetxController {
       case HomeMenu.community:
         // Share.share('check out my website https://example.com');
         Get.toNamed(SeenearPath.COMMUNITY);
+        // Get.toNamed(SeenearPath.SIGN_UP);
         break;
       case HomeMenu.myInfo:
         Get.toNamed(isMember ? SeenearPath.MY_PAGE : SeenearPath.LOGIN);

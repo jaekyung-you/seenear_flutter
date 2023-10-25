@@ -7,7 +7,7 @@ class CheckNicknameDuplicate {
   Future<bool> call({required String nickname, bool? useKakaoNickname}) async {
     Response res = await ApiBase().get(
       '/member/api/v1/check-duplicated-nickname',
-      query: {'insertedNickname': nickname, 'useKakaoNickname': useKakaoNickname},
+      query: {'insertedNickname': nickname, 'useKakaoNickname': useKakaoNickname ?? false},
     );
     return res.data;
   }

@@ -9,7 +9,7 @@ class InterestCategoryResponse with _$InterestCategoryResponse {
   const factory InterestCategoryResponse({
     required String code,
     required String displayText,
-    required String suggestion,
+    required String imageSrc,
   }) = _InterestCategoryResponse;
 
   factory InterestCategoryResponse.fromJson(Map<String, Object?> json)

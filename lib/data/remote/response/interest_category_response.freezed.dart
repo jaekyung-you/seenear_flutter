@@ -23,7 +23,7 @@ InterestCategoryResponse _$InterestCategoryResponseFromJson(
 mixin _$InterestCategoryResponse {
   String get code => throw _privateConstructorUsedError;
   String get displayText => throw _privateConstructorUsedError;
-  String get suggestion => throw _privateConstructorUsedError;
+  String get imageSrc => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $InterestCategoryResponseCopyWith<$Res> {
           $Res Function(InterestCategoryResponse) then) =
       _$InterestCategoryResponseCopyWithImpl<$Res, InterestCategoryResponse>;
   @useResult
-  $Res call({String code, String displayText, String suggestion});
+  $Res call({String code, String displayText, String imageSrc});
 }
 
 /// @nodoc
@@ -56,7 +56,7 @@ class _$InterestCategoryResponseCopyWithImpl<$Res,
   $Res call({
     Object? code = null,
     Object? displayText = null,
-    Object? suggestion = null,
+    Object? imageSrc = null,
   }) {
     return _then(_value.copyWith(
       code: null == code
@@ -67,9 +67,9 @@ class _$InterestCategoryResponseCopyWithImpl<$Res,
           ? _value.displayText
           : displayText // ignore: cast_nullable_to_non_nullable
               as String,
-      suggestion: null == suggestion
-          ? _value.suggestion
-          : suggestion // ignore: cast_nullable_to_non_nullable
+      imageSrc: null == imageSrc
+          ? _value.imageSrc
+          : imageSrc // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -84,7 +84,7 @@ abstract class _$$InterestCategoryResponseImplCopyWith<$Res>
       __$$InterestCategoryResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String code, String displayText, String suggestion});
+  $Res call({String code, String displayText, String imageSrc});
 }
 
 /// @nodoc
@@ -102,7 +102,7 @@ class __$$InterestCategoryResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? code = null,
     Object? displayText = null,
-    Object? suggestion = null,
+    Object? imageSrc = null,
   }) {
     return _then(_$InterestCategoryResponseImpl(
       code: null == code
@@ -113,9 +113,9 @@ class __$$InterestCategoryResponseImplCopyWithImpl<$Res>
           ? _value.displayText
           : displayText // ignore: cast_nullable_to_non_nullable
               as String,
-      suggestion: null == suggestion
-          ? _value.suggestion
-          : suggestion // ignore: cast_nullable_to_non_nullable
+      imageSrc: null == imageSrc
+          ? _value.imageSrc
+          : imageSrc // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -127,9 +127,7 @@ class _$InterestCategoryResponseImpl
     with DiagnosticableTreeMixin
     implements _InterestCategoryResponse {
   const _$InterestCategoryResponseImpl(
-      {required this.code,
-      required this.displayText,
-      required this.suggestion});
+      {required this.code, required this.displayText, required this.imageSrc});
 
   factory _$InterestCategoryResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$InterestCategoryResponseImplFromJson(json);
@@ -139,11 +137,11 @@ class _$InterestCategoryResponseImpl
   @override
   final String displayText;
   @override
-  final String suggestion;
+  final String imageSrc;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'InterestCategoryResponse(code: $code, displayText: $displayText, suggestion: $suggestion)';
+    return 'InterestCategoryResponse(code: $code, displayText: $displayText, imageSrc: $imageSrc)';
   }
 
   @override
@@ -153,7 +151,7 @@ class _$InterestCategoryResponseImpl
       ..add(DiagnosticsProperty('type', 'InterestCategoryResponse'))
       ..add(DiagnosticsProperty('code', code))
       ..add(DiagnosticsProperty('displayText', displayText))
-      ..add(DiagnosticsProperty('suggestion', suggestion));
+      ..add(DiagnosticsProperty('imageSrc', imageSrc));
   }
 
   @override
@@ -164,13 +162,13 @@ class _$InterestCategoryResponseImpl
             (identical(other.code, code) || other.code == code) &&
             (identical(other.displayText, displayText) ||
                 other.displayText == displayText) &&
-            (identical(other.suggestion, suggestion) ||
-                other.suggestion == suggestion));
+            (identical(other.imageSrc, imageSrc) ||
+                other.imageSrc == imageSrc));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, code, displayText, suggestion);
+  int get hashCode => Object.hash(runtimeType, code, displayText, imageSrc);
 
   @JsonKey(ignore: true)
   @override
@@ -191,7 +189,7 @@ abstract class _InterestCategoryResponse implements InterestCategoryResponse {
   const factory _InterestCategoryResponse(
       {required final String code,
       required final String displayText,
-      required final String suggestion}) = _$InterestCategoryResponseImpl;
+      required final String imageSrc}) = _$InterestCategoryResponseImpl;
 
   factory _InterestCategoryResponse.fromJson(Map<String, dynamic> json) =
       _$InterestCategoryResponseImpl.fromJson;
@@ -201,7 +199,7 @@ abstract class _InterestCategoryResponse implements InterestCategoryResponse {
   @override
   String get displayText;
   @override
-  String get suggestion;
+  String get imageSrc;
   @override
   @JsonKey(ignore: true)
   _$$InterestCategoryResponseImplCopyWith<_$InterestCategoryResponseImpl>

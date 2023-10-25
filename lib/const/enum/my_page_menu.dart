@@ -1,3 +1,5 @@
+import '../../data/local/member.dart';
+
 enum MyPageMenu {
   recentView,
   favorite,
@@ -33,13 +35,13 @@ enum MyPageMenu {
   String get contentTitle {
     switch (this) {
       case MyPageMenu.recentView:
-        return '<b>닉네임</b> 님의 최근 본 목록이에요.';
+        return '<b>${Member().nickname}</b> 님의 최근 본 목록이에요.';
       case MyPageMenu.favorite:
-        return '<b>닉네임</b> 님의 찜 목록이에요.';
+        return '<b>${Member().nickname}</b> 님의 찜 목록이에요.';
       case MyPageMenu.review:
-        return '<b>닉네임</b> 님이 작성하신 리뷰에요.';
+        return '<b>${Member().nickname}</b> 님이 작성하신 리뷰에요.';
       case MyPageMenu.subscription:
-        return '<b>닉네임</b> 님의 구독 현황이에요.';
+        return '<b>${Member().nickname}</b> 님의 구독 현황이에요.';
     }
   }
 

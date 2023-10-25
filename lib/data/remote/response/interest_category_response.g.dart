@@ -11,7 +11,7 @@ _$InterestCategoryResponseImpl _$$InterestCategoryResponseImplFromJson(
     _$InterestCategoryResponseImpl(
       code: json['code'] as String,
       displayText: json['displayText'] as String,
-      suggestion: json['suggestion'] as String,
+      imageSrc: json['imageSrc'] as String,
     );
 
 Map<String, dynamic> _$$InterestCategoryResponseImplToJson(
@@ -19,5 +19,5 @@ Map<String, dynamic> _$$InterestCategoryResponseImplToJson(
     <String, dynamic>{
       'code': instance.code,
       'displayText': instance.displayText,
-      'suggestion': instance.suggestion,
+      'imageSrc': instance.imageSrc,
     };

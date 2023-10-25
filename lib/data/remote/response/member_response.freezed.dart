@@ -21,7 +21,7 @@ MemberResponse _$MemberResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MemberResponse {
   String? get imageSrc => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   int get memberId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $MemberResponseCopyWith<$Res> {
           MemberResponse value, $Res Function(MemberResponse) then) =
       _$MemberResponseCopyWithImpl<$Res, MemberResponse>;
   @useResult
-  $Res call({String? imageSrc, String name, int memberId});
+  $Res call({String? imageSrc, String? name, int memberId});
 }
 
 /// @nodoc
@@ -53,7 +53,7 @@ class _$MemberResponseCopyWithImpl<$Res, $Val extends MemberResponse>
   @override
   $Res call({
     Object? imageSrc = freezed,
-    Object? name = null,
+    Object? name = freezed,
     Object? memberId = null,
   }) {
     return _then(_value.copyWith(
@@ -61,10 +61,10 @@ class _$MemberResponseCopyWithImpl<$Res, $Val extends MemberResponse>
           ? _value.imageSrc
           : imageSrc // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       memberId: null == memberId
           ? _value.memberId
           : memberId // ignore: cast_nullable_to_non_nullable
@@ -81,7 +81,7 @@ abstract class _$$MemberResponseImplCopyWith<$Res>
       __$$MemberResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? imageSrc, String name, int memberId});
+  $Res call({String? imageSrc, String? name, int memberId});
 }
 
 /// @nodoc
@@ -96,7 +96,7 @@ class __$$MemberResponseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? imageSrc = freezed,
-    Object? name = null,
+    Object? name = freezed,
     Object? memberId = null,
   }) {
     return _then(_$MemberResponseImpl(
@@ -104,10 +104,10 @@ class __$$MemberResponseImplCopyWithImpl<$Res>
           ? _value.imageSrc
           : imageSrc // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       memberId: null == memberId
           ? _value.memberId
           : memberId // ignore: cast_nullable_to_non_nullable
@@ -122,7 +122,7 @@ class _$MemberResponseImpl
     with DiagnosticableTreeMixin
     implements _MemberResponse {
   const _$MemberResponseImpl(
-      {this.imageSrc, required this.name, required this.memberId});
+      {this.imageSrc, this.name, required this.memberId});
 
   factory _$MemberResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$MemberResponseImplFromJson(json);
@@ -130,7 +130,7 @@ class _$MemberResponseImpl
   @override
   final String? imageSrc;
   @override
-  final String name;
+  final String? name;
   @override
   final int memberId;
 
@@ -183,7 +183,7 @@ class _$MemberResponseImpl
 abstract class _MemberResponse implements MemberResponse {
   const factory _MemberResponse(
       {final String? imageSrc,
-      required final String name,
+      final String? name,
       required final int memberId}) = _$MemberResponseImpl;
 
   factory _MemberResponse.fromJson(Map<String, dynamic> json) =
@@ -192,7 +192,7 @@ abstract class _MemberResponse implements MemberResponse {
   @override
   String? get imageSrc;
   @override
-  String get name;
+  String? get name;
   @override
   int get memberId;
   @override

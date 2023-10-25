@@ -74,7 +74,7 @@ class MyPageSettingController extends GetxController {
 
   Future<void> _requestMyProfile() async {
     MemberDetailResponse res = await _getMyProfile();
-    nickname.value = res.nickname;
+    nickname.value = res.nickName;
     loginType.value = res.loginType == 'KAKAO' ? '카카오로그인' : '';
     profileImageSrc.value = res.profileImageSrc ?? '';
   }

@@ -67,32 +67,48 @@ class SignUpScreen extends GetView<SignUpController> {
       case SignUpProcessStage.region:
       case SignUpProcessStage.interest:
       case SignUpProcessStage.interestRegion:
-        return GridView.builder(
-          itemCount: itemCount,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, //1 개의 행에 보여줄 item 개수
-            childAspectRatio: controller.currentStage == SignUpProcessStage.interest ? 80 / 103 : 1,
-            mainAxisSpacing: 30, //수평 Padding
-            crossAxisSpacing: 30, //수직 Padding
-          ),
-          itemBuilder: (context, index) {
-            if (controller.currentStage == SignUpProcessStage.interest) {
+      return GridView.builder(
+        itemCount: itemCount,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3, //1 개의 행에 보여줄 item 개수
+          childAspectRatio: controller.currentStage == SignUpProcessStage.interest ? 80 / 103 : 1,
+          mainAxisSpacing: 30, //수평 Padding
+          crossAxisSpacing: 30, //수직 Padding
+        ),
+        itemBuilder: (context, index) {
+          switch (controller.currentStage) {
+          // 관심사 (최대 5개)
+            case SignUpProcessStage.interest:
               return SelectImageItemCell(
-                isSelected: false,
-                imageUrl: 'https://picsum.photos/200/30$index',
-                title: controller.currentStage == SignUpProcessStage.interest
-                    ? controller.interestList[index].displayText
-                    : Defines.signUpRegionList[index],
+                isSelected: controller.selectedInterest.contains(controller.interestList[index]),
+                imageUrl: controller.interestList[index].imageSrc,
+                title: controller.interestList[index].displayText,
               );
-            }
 
-            return SelectTextItemCell(
-              text: controller.currentStage == SignUpProcessStage.interest
-                  ? controller.interestList[index].displayText
-                  : Defines.signUpRegionList[index],
-            );
-          },
-        );
+            case SignUpProcessStage.interestRegion:
+            // 관심지역 (최대 5개)
+              return SelectTextItemCell(
+                fgColor: controller.selectedRegion.value.contains(Defines.signUpRegionList[index]) ? Colors.white : SeenearColor.grey50,
+                bgColor: controller.selectedRegion.value.contains(Defines.signUpRegionList[index])
+                    ? SeenearColor.blue60
+                    : SeenearColor.grey5,
+                text: Defines.signUpRegionList[index],
+                onTap: () {},
+              );
+
+            case SignUpProcessStage.region:
+            // 거주 지역
+              return SelectTextItemCell(
+                fgColor: controller.selectedRegion.value == Defines.signUpRegionList[index] ? Colors.white : SeenearColor.grey50,
+                bgColor: controller.selectedRegion.value == Defines.signUpRegionList[index] ? SeenearColor.blue60 : SeenearColor.grey5,
+                text: Defines.signUpRegionList[index],
+                onTap: () {},
+              );
+            default:
+              return Container();
+          }
+        },
+      );
       case SignUpProcessStage.nickname:
         return TextFieldWithHelperText(
           editingController: controller.nicknameController,

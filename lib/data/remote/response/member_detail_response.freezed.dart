@@ -21,7 +21,7 @@ MemberDetailResponse _$MemberDetailResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MemberDetailResponse {
   int get id => throw _privateConstructorUsedError; // 멤버id
-  String get nickname => throw _privateConstructorUsedError; // 닉네임
+  String get nickName => throw _privateConstructorUsedError; // 닉네임
   String? get profileImageSrc => throw _privateConstructorUsedError;
   String? get loginType => throw _privateConstructorUsedError;
 
@@ -38,7 +38,7 @@ abstract class $MemberDetailResponseCopyWith<$Res> {
       _$MemberDetailResponseCopyWithImpl<$Res, MemberDetailResponse>;
   @useResult
   $Res call(
-      {int id, String nickname, String? profileImageSrc, String? loginType});
+      {int id, String nickName, String? profileImageSrc, String? loginType});
 }
 
 /// @nodoc
@@ -56,7 +56,7 @@ class _$MemberDetailResponseCopyWithImpl<$Res,
   @override
   $Res call({
     Object? id = null,
-    Object? nickname = null,
+    Object? nickName = null,
     Object? profileImageSrc = freezed,
     Object? loginType = freezed,
   }) {
@@ -65,9 +65,9 @@ class _$MemberDetailResponseCopyWithImpl<$Res,
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      nickname: null == nickname
-          ? _value.nickname
-          : nickname // ignore: cast_nullable_to_non_nullable
+      nickName: null == nickName
+          ? _value.nickName
+          : nickName // ignore: cast_nullable_to_non_nullable
               as String,
       profileImageSrc: freezed == profileImageSrc
           ? _value.profileImageSrc
@@ -90,7 +90,7 @@ abstract class _$$MemberDetailResponseImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id, String nickname, String? profileImageSrc, String? loginType});
+      {int id, String nickName, String? profileImageSrc, String? loginType});
 }
 
 /// @nodoc
@@ -105,7 +105,7 @@ class __$$MemberDetailResponseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? nickname = null,
+    Object? nickName = null,
     Object? profileImageSrc = freezed,
     Object? loginType = freezed,
   }) {
@@ -114,9 +114,9 @@ class __$$MemberDetailResponseImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      nickname: null == nickname
-          ? _value.nickname
-          : nickname // ignore: cast_nullable_to_non_nullable
+      nickName: null == nickName
+          ? _value.nickName
+          : nickName // ignore: cast_nullable_to_non_nullable
               as String,
       profileImageSrc: freezed == profileImageSrc
           ? _value.profileImageSrc
@@ -137,7 +137,7 @@ class _$MemberDetailResponseImpl
     implements _MemberDetailResponse {
   const _$MemberDetailResponseImpl(
       {required this.id,
-      required this.nickname,
+      required this.nickName,
       this.profileImageSrc,
       this.loginType});
 
@@ -148,7 +148,7 @@ class _$MemberDetailResponseImpl
   final int id;
 // 멤버id
   @override
-  final String nickname;
+  final String nickName;
 // 닉네임
   @override
   final String? profileImageSrc;
@@ -157,7 +157,7 @@ class _$MemberDetailResponseImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MemberDetailResponse(id: $id, nickname: $nickname, profileImageSrc: $profileImageSrc, loginType: $loginType)';
+    return 'MemberDetailResponse(id: $id, nickName: $nickName, profileImageSrc: $profileImageSrc, loginType: $loginType)';
   }
 
   @override
@@ -166,7 +166,7 @@ class _$MemberDetailResponseImpl
     properties
       ..add(DiagnosticsProperty('type', 'MemberDetailResponse'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('nickname', nickname))
+      ..add(DiagnosticsProperty('nickName', nickName))
       ..add(DiagnosticsProperty('profileImageSrc', profileImageSrc))
       ..add(DiagnosticsProperty('loginType', loginType));
   }
@@ -177,8 +177,8 @@ class _$MemberDetailResponseImpl
         (other.runtimeType == runtimeType &&
             other is _$MemberDetailResponseImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.nickname, nickname) ||
-                other.nickname == nickname) &&
+            (identical(other.nickName, nickName) ||
+                other.nickName == nickName) &&
             (identical(other.profileImageSrc, profileImageSrc) ||
                 other.profileImageSrc == profileImageSrc) &&
             (identical(other.loginType, loginType) ||
@@ -188,7 +188,7 @@ class _$MemberDetailResponseImpl
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, nickname, profileImageSrc, loginType);
+      Object.hash(runtimeType, id, nickName, profileImageSrc, loginType);
 
   @JsonKey(ignore: true)
   @override
@@ -209,7 +209,7 @@ class _$MemberDetailResponseImpl
 abstract class _MemberDetailResponse implements MemberDetailResponse {
   const factory _MemberDetailResponse(
       {required final int id,
-      required final String nickname,
+      required final String nickName,
       final String? profileImageSrc,
       final String? loginType}) = _$MemberDetailResponseImpl;
 
@@ -219,7 +219,7 @@ abstract class _MemberDetailResponse implements MemberDetailResponse {
   @override
   int get id;
   @override // 멤버id
-  String get nickname;
+  String get nickName;
   @override // 닉네임
   String? get profileImageSrc;
   @override
