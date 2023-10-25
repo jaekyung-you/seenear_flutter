@@ -20,8 +20,8 @@ ReviewItemResponse _$ReviewItemResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ReviewItemResponse {
-  int get id => throw _privateConstructorUsedError;
-  int get itemId => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError; // 리뷰 자체 id
+  int get itemId => throw _privateConstructorUsedError; // 리뷰를 단 게시물에 대한 itemId
   int? get commentCount => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
   String? get date => throw _privateConstructorUsedError;
@@ -193,8 +193,10 @@ class _$ReviewItemResponseImpl
 
   @override
   final int id;
+// 리뷰 자체 id
   @override
   final int itemId;
+// 리뷰를 단 게시물에 대한 itemId
   @override
   final int? commentCount;
   @override
@@ -276,9 +278,9 @@ abstract class _ReviewItemResponse implements ReviewItemResponse {
 
   @override
   int get id;
-  @override
+  @override // 리뷰 자체 id
   int get itemId;
-  @override
+  @override // 리뷰를 단 게시물에 대한 itemId
   int? get commentCount;
   @override
   String? get content;
