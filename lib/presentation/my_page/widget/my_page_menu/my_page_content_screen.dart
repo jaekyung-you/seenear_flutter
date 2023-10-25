@@ -113,7 +113,7 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
   Widget marketContentView(MyPageMenu menu) {
     // todo: menu에 따라 위에 헤더가 추가됨
     switch (menu) {
-      // 최대 10개까지만 해서 페이징 없음
+    // 최대 10개까지만 해서 페이징 없음
       case MyPageMenu.recentView:
         return Obx(() {
           if (controller.myPageTabController.index == 0 && controller.recentMarketItemList.isEmpty) {
@@ -179,27 +179,52 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
           );
         });
       case MyPageMenu.review:
-        return ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return ReviewCell(
-              onTapItemCell: () {
-                controller.onTapReviewItem(id: controller.reviewList[index].itemId);
-              },
+        return Obx(() {
+          if (controller.isLoading.value) {
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          },
-        );
+          }
+
+          if (controller.myPageTabController.index == 0 && controller.reviewMarketItemList.isEmpty) {
+            return Center(child: EmptyView(text: MyPageMenu.review.contentEmptyTitle));
+          }
+
+          return ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return ReviewCell(
+                onTapItemCell: () {
+                  controller.onTapReviewItem(id: controller.reviewMarketItemList[index].itemId);
+                },
+              );
+            },
+          );
+        });
       case MyPageMenu.subscription:
-        return ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return SubscriptionCell(
-              isFollowing: false,
-              isMatched: true,
-              memberId: controller.followerList[index].memberId,
+        // 내가 구독한 사람
+        return Obx(() {
+          if (controller.isLoading.value) {
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          },
-        );
+          }
+
+          if (controller.myPageTabController.index == 0 && controller.myFollowingList.isEmpty) {
+            return Center(child: EmptyView(text: MyPageMenu.subscription.contentEmptyTitle));
+          }
+
+          return ListView.builder(
+            itemCount: controller.myFollowingList.length,
+            itemBuilder: (context, index) {
+              return SubscriptionCell(
+                isFollowing: false,
+                isMatched: true,
+                memberId: controller.myFollowingList[index].memberId,
+              );
+            },
+          );
+        });
     }
   }
 
@@ -238,7 +263,7 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
             );
           }
 
-          if (controller.myPageTabController.index == 0 && controller.favoriteMarketItemList.isEmpty) {
+          if (controller.myPageTabController.index == 1 && controller.favoriteMarketItemList.isEmpty) {
             return Center(child: EmptyView(text: MyPageMenu.favorite.contentEmptyTitle));
           }
           return ListView.builder(
@@ -260,25 +285,50 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
           );
         });
       case MyPageMenu.review:
-        return ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return ReviewCell(
-              onTapItemCell: () {},
+        return Obx(() {
+          if (controller.isLoading.value) {
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          },
-        );
+          }
+
+          if (controller.myPageTabController.index == 1 && controller.reviewFestivalItemList.isEmpty) {
+            return Center(child: EmptyView(text: MyPageMenu.favorite.contentEmptyTitle));
+          }
+
+          return ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return ReviewCell(
+                onTapItemCell: () {},
+              );
+            },
+          );
+        });
       case MyPageMenu.subscription:
-        return ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return SubscriptionCell(
-              isFollowing: false,
-              isMatched: true,
-              memberId: controller.followerList[index].memberId,
+        // 나를 구독한 사람
+        return Obx(() {
+          if (controller.isLoading.value) {
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          },
-        );
+          }
+
+          if (controller.myPageTabController.index == 1 && controller.myFollowerList.isEmpty) {
+            return Center(child: EmptyView(text: MyPageMenu.subscription.contentEmptyTitle));
+          }
+
+          return ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return SubscriptionCell(
+                isFollowing: false,
+                isMatched: true,
+                memberId: controller.myFollowerList[index].memberId,
+              );
+            },
+          );
+        });
     }
   }
 }
