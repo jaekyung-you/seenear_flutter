@@ -109,7 +109,7 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
 
   // todo: 스크롤 끝까지 내림 Visibility -> 페이징 구현 필요
   Future<void> _requestFavoriteList() async {
-    List<InfoItemResponse> res = await _getFavoriteItemList(size: requestSize, cursorId: lastFavoriteId);
+    List<InfoItemResponse> res = await _getFavoriteItemList(size: requestSize);
     favoriteItemList = res;
     for (InfoItemResponse item in favoriteItemList) {
       if (item.itemType == "MARKET") {
@@ -124,7 +124,7 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
 
   Future<void> _requestRecentViewList() async {
     // todo: 페이징 구현
-    List<InfoItemResponse> res = await _getRecentViews(size: requestSize, cursorId: null);
+    List<InfoItemResponse> res = await _getRecentViews(size: requestSize);
     recentViewList = res;
     for (InfoItemResponse item in recentViewList) {
       if (item.itemType == "MARKET") {
@@ -137,7 +137,7 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
 
   Future<void> _requestReviewList() async {
     // todo: 페이징 구현
-    List<ReviewItemResponse> res = await _getReviewList(size: requestSize, type: '', cursorId: null);
+    List<ReviewItemResponse> res = await _getReviewList(size: requestSize, type: '');
     reviewList = res;
     for (ReviewItemResponse item in reviewList) {
       // todo: 서버 쪽에서 타입 분리 필요
@@ -151,7 +151,7 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
 
   Future<void> _requestFollowerList() async {
     // todo: 페이징 구현
-    List<MemberResponse> res = await _getFollowerList(size: 0, cursorId: null);
+    List<MemberResponse> res = await _getFollowerList(size: 0);
     followerList = res;
     // todo: 서버 쪽에서 타입 분리 필요
     // for (MemberResponse item in followerList) {

@@ -3,10 +3,10 @@ import '../../response/info_item_response.dart';
 import '../api_base.dart';
 
 class GetFavoriteItemList {
-  Future<List<InfoItemResponse>> call({required int size, int? cursorId}) async {
+  Future<List<InfoItemResponse>> call({required int size, int? page = 0}) async {
     Response res = await ApiBase().get(
       '/member/api/v1/favorite-items',
-      query: {'cursorId': cursorId, 'size': size},
+      query: {'page': page, 'size': size},
     );
 
     List<InfoItemResponse> list = res.data.map<InfoItemResponse>((e) => InfoItemResponse.fromJson(e)).toList();
