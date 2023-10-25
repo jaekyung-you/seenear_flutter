@@ -9,11 +9,11 @@ enum SignUpProcessStage {
   String get title {
     switch (this) {
       case SignUpProcessStage.region:
-        return '🏠 거주 지역 선택';
+        return '거주 지역 선택';
       case SignUpProcessStage.interest:
-        return '💜 관심사 선택';
+        return '관심사 선택';
       case SignUpProcessStage.interestRegion:
-        return '💜 관심지역 선택';
+        return '관심지역 선택';
       case SignUpProcessStage.nickname:
         return '닉네임 입력';
     }

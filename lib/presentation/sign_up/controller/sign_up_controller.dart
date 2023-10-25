@@ -2,15 +2,37 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
-
+import 'package:seenear/data/remote/api/setting/get_interest_category_list.dart';
+import 'package:seenear/data/remote/api/setting/register_additional_info.dart';
 import '../../../const/design_system/base_bottom_sheet.dart';
 import '../../../const/enum/sign_up_process_stage.dart';
+import '../../../data/remote/response/interest_category_response.dart';
 
 class SignUpController extends GetxController {
+  // property
   SignUpProcessStage currentStage = SignUpProcessStage.region;
   bool enableNextButton = false;
   TextEditingController nicknameController = TextEditingController();
   HelperTextType helperTextType = HelperTextType(isError: false, helperText: '닉네임을 입력하지 않으면,\n카카오톡에 등록된 이름으로 자동 설정돼요!');
+
+  RxString selectedRegion = ''.obs; // 살고 있는 거주 지역
+  RxList<String> selectedRegionList = <String>[].obs; // 선택한 관심 지역 (최대5개)
+  RxList<InterestCategoryResponse> interestList = <InterestCategoryResponse>[].obs;
+  RxList<InterestCategoryResponse> selectedInterest = <InterestCategoryResponse>[].obs; // 관심사 선택 (최대5개)
+
+  // usecase
+  final GetInterestCategory _getInterestCategory = GetInterestCategory(); // 관심사 받아오기
+  final RegisterAdditionalInfo _registerAdditionalInfo = RegisterAdditionalInfo(); // 추가 정보 등록
+
+  @override
+  void onInit() {
+    super.onInit();
+    _requestInterestList();
+  }
+
+  Future<void> _requestInterestList() async {
+    interestList.value = await _getInterestCategory();
+  }
 
   void onTapSelectItem() {
     // todo: api 호출

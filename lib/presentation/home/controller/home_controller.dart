@@ -60,14 +60,11 @@ class HomeController extends GetxController {
         Get.toNamed(SeenearPath.MARKET, arguments: {'type': 'market'});
         break;
       case HomeMenu.community:
-        // 커뮤니티 진입, 화면 미기획
         // Share.share('check out my website https://example.com');
         Get.toNamed(SeenearPath.COMMUNITY);
         break;
       case HomeMenu.myInfo:
         Get.toNamed(isMember ? SeenearPath.MY_PAGE : SeenearPath.LOGIN);
-        // Get.toNamed(SeenearPath.LOGIN);
-        // Get.toNamed(SeenearPath.MY_PAGE);
         break;
       case HomeMenu.festival:
         Get.toNamed(SeenearPath.FESTIVAl, arguments: {'type': 'festival'});

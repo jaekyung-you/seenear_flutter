@@ -9,7 +9,8 @@ class GetInterestCategory {
       '/operation/api/v1/categories',
     );
 
-    List<InterestCategoryResponse> list = res.data.map<InterestCategoryResponse>((e) => InterestCategoryResponse.fromJson(e)).toList();
+    List<InterestCategoryResponse> list =
+        res.data['data'].map<InterestCategoryResponse>((e) => InterestCategoryResponse.fromJson(e)).toList();
     return list;
   }
 }

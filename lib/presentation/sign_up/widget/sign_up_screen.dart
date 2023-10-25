@@ -10,6 +10,8 @@ import 'package:seenear/const/enum/sign_up_process_stage.dart';
 import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
 import 'package:seenear/presentation/sign_up/controller/sign_up_controller.dart';
 
+import '../../../const/define.dart';
+
 // GetPage에서 put했으니 GetView사용해도 될 듯 (이미 put되어야함, GetView는 find하는 wrapper)
 class SignUpScreen extends GetView<SignUpController> {
   const SignUpScreen({super.key});
@@ -23,26 +25,23 @@ class SignUpScreen extends GetView<SignUpController> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BaseHeader(title: controller.currentStage.title, onTapBack: () {
-                controller.onTapBack();
-              },),
+              BaseHeader(
+                title: controller.currentStage.title,
+                onTapBack: () {
+                  controller.onTapBack();
+                },
+              ),
               const SizedBox(
                 height: 26,
               ),
               Text(
                 controller.currentStage.subtitle,
-                style: TextStyle(
-                    fontSize: 23,
-                    fontWeight: FontWeight.w600,
-                    color: SeenearColor.grey70),
+                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600, color: SeenearColor.grey70),
               ),
               if (controller.currentStage.desc != null)
                 Text(
                   controller.currentStage.desc!,
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: SeenearColor.grey50),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: SeenearColor.grey50),
                 ),
               const SizedBox(
                 height: 22,
@@ -60,12 +59,16 @@ class SignUpScreen extends GetView<SignUpController> {
   }
 
   Widget contentView() {
+    // 거주 지역, 관심지역/관심사 선택
+    int itemCount =
+        controller.currentStage == SignUpProcessStage.interest ? controller.interestList.length : Defines.signUpRegionList.length;
+
     switch (controller.currentStage) {
       case SignUpProcessStage.region:
       case SignUpProcessStage.interest:
       case SignUpProcessStage.interestRegion:
         return GridView.builder(
-          itemCount: controller.currentStage.itemList.length,
+          itemCount: itemCount,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3, //1 개의 행에 보여줄 item 개수
             childAspectRatio: controller.currentStage == SignUpProcessStage.interest ? 80 / 103 : 1,
@@ -77,11 +80,17 @@ class SignUpScreen extends GetView<SignUpController> {
               return SelectImageItemCell(
                 isSelected: false,
                 imageUrl: 'https://picsum.photos/200/30$index',
-                title: controller.currentStage.itemList[index],
+                title: controller.currentStage == SignUpProcessStage.interest
+                    ? controller.interestList[index].displayText
+                    : Defines.signUpRegionList[index],
               );
             }
 
-            return SelectTextItemCell(text: controller.currentStage.itemList[index]);
+            return SelectTextItemCell(
+              text: controller.currentStage == SignUpProcessStage.interest
+                  ? controller.interestList[index].displayText
+                  : Defines.signUpRegionList[index],
+            );
           },
         );
       case SignUpProcessStage.nickname:
@@ -116,13 +125,8 @@ class SignUpScreen extends GetView<SignUpController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  controller.currentStage != SignUpProcessStage.nickname
-                      ? '건너뛰기'
-                      : '카카오톡 이름 사용하기',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: SeenearColor.grey30),
+                  controller.currentStage != SignUpProcessStage.nickname ? '건너뛰기' : '카카오톡 이름 사용하기',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: SeenearColor.grey30),
                 ),
                 Image.asset(
                   'assets/images/arrow_right.png',

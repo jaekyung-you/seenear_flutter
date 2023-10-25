@@ -18,6 +18,7 @@ class Defines {
     '전주/\n전북',
     '제주'
   ];
+  // 필터링 걸린 지역들
   static List<String> selectRegionList = [
     '전체',
     '서울',
