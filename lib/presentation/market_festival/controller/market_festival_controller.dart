@@ -4,23 +4,31 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:seenear/const/design_system/one_button_bottom_sheet.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
+import 'package:seenear/data/remote/api/setting/get_address_list.dart';
 import 'package:seenear/data/remote/response/info_item_response.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../../const/define.dart';
+import '../../../data/remote/response/address_response.dart';
 
 class MarketFestivalController extends GetxController {
+  // property
   bool isMarket = true;
   RxList<InfoItemResponse> marketList = <InfoItemResponse>[].obs;
   RxList<InfoItemResponse> festivalList = <InfoItemResponse>[].obs;
-
-  // property
   RxInt totalCount = 10.obs;
-  RxString region = ''.obs; // 지역
-  RxString location = ''.obs; // 동네
-  RxString date = ''.obs; // 2023-10-07 (월) 이런식
+
+  RxString selectedRegion = ''.obs; // 지역
+  RxString selectedLocation = ''.obs; // 동네
+  RxString selectedDate = ''.obs; // 2023-10-07 (월) 이런식
 
   RxList<String> filterList = <String>[].obs;
   RxString sort = '거리순'.obs; // or 인기순
+
+  List<String> regionList = []; // 서버에서 받은 값
+  List<String> locationList = []; // 서버에서 받은 값
+
+  // usecase
+  final GetAddressList _getAddressList = GetAddressList(); // 주소 선택을 위해 목록 받아오기
 
   @override
   void onInit() {
@@ -33,9 +41,9 @@ class MarketFestivalController extends GetxController {
   }
 
   void onTapResetButton() {
-    region.value = '';
-    location.value = '';
-    date.value = '';
+    selectedRegion.value = '';
+    selectedLocation.value = '';
+    selectedDate.value = '';
     filterList.value = [];
   }
 
@@ -51,16 +59,26 @@ class MarketFestivalController extends GetxController {
     return;
   }
 
-  void onTapFilterCell({required int index}) {
+  Future<void> _requestAddressList() async {
+    List<AddressResponse> addressList = await _getAddressList();
+
+    addressList.map((e) => e.addressDetailA).toSet().toList().forEach((element) {
+      regionList.add(Defines().convertRegion(region: element));
+    });
+  }
+
+  Future<void> onTapFilterCell({required int index}) async {
     String title = '';
     Widget? content;
+
+    await _requestAddressList();
 
     if (index == 0) {
       title = '지역을 선택해주세요';
       content = SizedBox(
         height: Get.height / 1.9,
         child: GridView.builder(
-            itemCount: Defines.selectRegionList.length,
+            itemCount: regionList.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, //1 개의 행에 보여줄 item 개수
               mainAxisSpacing: 16, //수평 Padding
@@ -70,7 +88,7 @@ class MarketFestivalController extends GetxController {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                  region.value = Defines.selectRegionList[index];
+                  selectedRegion.value = regionList[index];
                   Get.back();
                 },
                 child: Obx(() {
@@ -78,17 +96,17 @@ class MarketFestivalController extends GetxController {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        Defines.selectRegionList[index],
+                        regionList[index],
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16,
-                          color: region.value == Defines.selectRegionList[index] ? SeenearColor.blue80 : SeenearColor.grey80, //
+                          color: selectedRegion.value == regionList[index] ? SeenearColor.blue80 : SeenearColor.grey80, //
                         ),
                       ),
                       const SizedBox(
                         width: 4,
                       ),
-                      if (region.value == Defines.selectRegionList[index])
+                      if (selectedRegion.value == regionList[index])
                         Image.asset(
                           'assets/images/check_filled.png',
                           width: 22,
@@ -151,10 +169,9 @@ class MarketFestivalController extends GetxController {
             showNavigationArrow: true,
             todayHighlightColor: SeenearColor.blue80,
             yearCellStyle: const DateRangePickerYearCellStyle(
-              cellDecoration: BoxDecoration(
-                color: Colors.transparent,
-              )
-            ),
+                cellDecoration: BoxDecoration(
+              color: Colors.transparent,
+            )),
             headerStyle: DateRangePickerHeaderStyle(
               textAlign: TextAlign.center,
               textStyle: TextStyle(
@@ -183,7 +200,7 @@ class MarketFestivalController extends GetxController {
 
   void _onSelectChanged(DateRangePickerSelectionChangedArgs args) {
     String dayOfWeek = DateFormat('E', 'ko_KR').format(args.value);
-    date.value = '${args.value.toString().split(' ').first} ($dayOfWeek)';
+    selectedDate.value = '${args.value.toString().split(' ').first} ($dayOfWeek)';
     Get.back();
   }
 }

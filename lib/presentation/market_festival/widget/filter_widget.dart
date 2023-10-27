@@ -14,7 +14,7 @@ class FilterWidget extends GetView<MarketFestivalController> {
         children: [
           Obx(() {
             return selectCell(
-              title: controller.region.isEmpty ? '지역을 선택해주세요' : controller.region.value,
+              title: controller.selectedRegion.isEmpty ? '지역을 선택해주세요' : controller.selectedRegion.value,
               onTap: () {
                 controller.onTapFilterCell(index: 0);
               },
@@ -25,7 +25,7 @@ class FilterWidget extends GetView<MarketFestivalController> {
           ),
           Obx(() {
             return selectCell(
-              title: controller.location.isEmpty ? '동네를 선택해주세요' : controller.location.value,
+              title: controller.selectedLocation.isEmpty ? '동네를 선택해주세요' : controller.selectedLocation.value,
               onTap: () {
                 controller.onTapFilterCell(index: 1);
               },
@@ -36,7 +36,7 @@ class FilterWidget extends GetView<MarketFestivalController> {
           ),
           Obx(() {
             return selectCell(
-              title: controller.date.isEmpty ? '방문 일자를 선택해주세요' : controller.date.value,
+              title: controller.selectedDate.isEmpty ? '방문 일자를 선택해주세요' : controller.selectedDate.value,
               imageName: 'date_available',
               onTap: () {
                 controller.onTapFilterCell(index: 2);
@@ -48,25 +48,25 @@ class FilterWidget extends GetView<MarketFestivalController> {
             child: Obx(() {
               return Row(
                 children: [
-                  if (controller.region.value.isNotEmpty)
+                  if (controller.selectedRegion.value.isNotEmpty)
                     selectedFilter(
-                      title: controller.region.value,
+                      title: controller.selectedRegion.value,
                       onTap: () {
-                        controller.region.value = '';
+                        controller.selectedRegion.value = '';
                       },
                     ),
-                  if (controller.location.value.isNotEmpty)
+                  if (controller.selectedLocation.value.isNotEmpty)
                     selectedFilter(
-                      title: controller.location.value,
+                      title: controller.selectedLocation.value,
                       onTap: () {
-                        controller.location.value = '';
+                        controller.selectedLocation.value = '';
                       },
                     ),
-                  if (controller.date.value.isNotEmpty)
+                  if (controller.selectedDate.value.isNotEmpty)
                     selectedFilter(
-                      title: controller.date.value,
+                      title: controller.selectedDate.value,
                       onTap: () {
-                        controller.date.value = '';
+                        controller.selectedDate.value = '';
                       },
                     ),
                   const Spacer(),
