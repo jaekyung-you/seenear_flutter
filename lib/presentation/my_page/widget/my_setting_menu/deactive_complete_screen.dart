@@ -50,7 +50,7 @@ class DeactiveCompleteScreen extends StatelessWidget {
             child: BaseButton(
               buttonText: '홈 화면으로 이동',
               onPressed: () {
-                Get.offAllNamed(SeenearPath.MAIN);
+                Get.offAllNamed(SeenearPath.HOME);
               },
             ),
           )

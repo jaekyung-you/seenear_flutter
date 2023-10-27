@@ -30,11 +30,11 @@ class HomeScreen extends GetView<HomeController> {
                 const SizedBox(
                   height: 40,
                 ),
-                Text('음력 9월 9일', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: SeenearColor.blue60)),
+                Text('음력 9월 13일', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: SeenearColor.blue60)),
                 const SizedBox(
                   height: 4,
                 ),
-                Text('오늘은 10월 23일 목요일', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 23, color: SeenearColor.grey70)),
+                Text('오늘은 10월 27일 금요일', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 23, color: SeenearColor.grey70)),
                 const SizedBox(
                   height: 4,
                 ),

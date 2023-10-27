@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
+import '../../../const/seenear_path.dart';
 import '../../../data/remote/api/setting/login.dart';
 
 class LoginController extends GetxController {
@@ -17,8 +18,7 @@ class LoginController extends GetxController {
       if (user == null) return;
       await _login(user: user!);
       print("user: $user");
-
-      // todo: 내 정보 화면으로 전환 ??
+      Get.toNamed(SeenearPath.SIGN_UP);
     }
   }
 

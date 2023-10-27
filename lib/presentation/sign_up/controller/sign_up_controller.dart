@@ -12,8 +12,7 @@ import '../../../data/remote/response/interest_category_response.dart';
 
 class SignUpController extends GetxController {
   // property
-  SignUpProcessStage currentStage = SignUpProcessStage.region;
-  bool enableNextButton = false;
+  Rx<SignUpProcessStage> currentStage = SignUpProcessStage.region.obs;
   TextEditingController nicknameController = TextEditingController();
   HelperTextType helperTextType = HelperTextType(isError: false, helperText: '닉네임을 입력하지 않으면,\n카카오톡에 등록된 이름으로 자동 설정돼요!');
 
@@ -39,47 +38,30 @@ class SignUpController extends GetxController {
     interestList.value = await _getInterestCategory();
   }
 
-  void onTapSelectItem() {
-    // todo: api 호출 (_registerAdditionalInfo)
-    switch (currentStage) {
-      case SignUpProcessStage.region:
-        break;
-      case SignUpProcessStage.interest:
-        break;
-      case SignUpProcessStage.interestRegion:
-        break;
-      case SignUpProcessStage.nickname:
-        break;
-    }
-
-    // 성공 시,
-    moveToNextStage();
-  }
-
   void moveToNextStage() {
-    int index = SignUpProcessStage.values.indexOf(currentStage);
+    int index = SignUpProcessStage.values.indexOf(currentStage.value);
+    //
+    // print("======= currentStage : $currentStage, index: $index");
 
     // 마지막 단계: 닉네임 입력 화면에서 '선택완료' 누르면 api 호출 & 회원가입 완료 화면
     if (index == SignUpProcessStage.values.length - 1) {
       // 회원가입 완료 화면
       // todo: api 호출 (_registerAdditionalInfo) -> 지역의 경우 변환 필요
-      // Get.toNamed(SeenearPath.SIGN_UP_COMPLETE);
+      Get.toNamed(SeenearPath.SIGN_UP_COMPLETE);
       return;
     }
 
-    currentStage = SignUpProcessStage.values[index + 1];
-    if (currentStage == SignUpProcessStage.nickname) {
+    currentStage.value = SignUpProcessStage.values[index + 1];
+    if (currentStage.value == SignUpProcessStage.nickname) {
       // 닉네임 단계에서 랜덤 닉네임 api 호출하기
       _requestRandomNickname();
     }
-    enableNextButton = false;
-    // update();
   }
 
   void onTapSkipPage() {
     Get.bottomSheet(
       BaseBottomSheet(
-        title: '${currentStage.bottomSheetTitle} 선택하지 않으시면\n정확한 맞춤 정보를\n제공 받으실 수 없어요.',
+        title: '${currentStage.value.bottomSheetTitle} 선택하지 않으시면\n정확한 맞춤 정보를\n제공 받으실 수 없어요.',
         buttonTitles: const ['지금 선택하기', '건너뛰기'],
         onTapButton: (index) {
           Get.back();
@@ -90,16 +72,13 @@ class SignUpController extends GetxController {
   }
 
   void onTapBack() {
-    int index = SignUpProcessStage.values.indexOf(currentStage);
+    int index = SignUpProcessStage.values.indexOf(currentStage.value);
     // 마지막 단계
     if (index == 0) {
       Get.back();
       return;
     }
-
-    currentStage = SignUpProcessStage.values[index - 1];
-    enableNextButton = true; // 선택 값의 유무에 따라
-    update();
+    currentStage.value = SignUpProcessStage.values[index - 1];
   }
 
   // 카카오 이름 사용하기
@@ -113,6 +92,11 @@ class SignUpController extends GetxController {
   // 리스트 최대 5개까지 추가하는 함수
   void selectListUpToFive({required dynamic item, required bool isInterest}) {
     List<dynamic> list = isInterest ? selectedInterest : selectedRegionList;
-    list.contains(item) ? list.remove(item) : list.add(item);
+    if (list.contains(item)) {
+      list.remove(item);
+    } else {
+      if (list.length >= 5) return;
+      list.add(item);
+    }
   }
 }
