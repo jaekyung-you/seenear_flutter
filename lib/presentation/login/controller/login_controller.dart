@@ -17,6 +17,10 @@ class LoginController extends GetxController {
       if (user == null) return;
       await _login(user: user!);
       print("user: $user");
+
+      // todo: 여기서 이미 회원이면
+
+      // todo: 회원이 아니면, sing_up 플로우로
       Get.toNamed(SeenearPath.SIGN_UP);
     }
   }
