@@ -24,8 +24,9 @@ class MarketFestivalController extends GetxController {
   RxList<String> filterList = <String>[].obs;
   RxString sort = '거리순'.obs; // or 인기순
 
-  List<String> regionList = []; // 서버에서 받은 값
-  List<String> locationList = []; // 서버에서 받은 값
+  List<AddressResponse> addressList = []; // 서버에서 받은 값
+  List<String> regionList = []; // 서버에서 받은 값 (addressDetailA에 해당)
+  List<String> locationList = []; // 서버에서 받은 값 (addressDetailB에 해당)
 
   // usecase
   final GetAddressList _getAddressList = GetAddressList(); // 주소 선택을 위해 목록 받아오기
@@ -60,10 +61,22 @@ class MarketFestivalController extends GetxController {
   }
 
   Future<void> _requestAddressList() async {
-    List<AddressResponse> addressList = await _getAddressList();
+    addressList.clear();
+    regionList.clear();
 
+    addressList = await _getAddressList();
+    regionList.add("전체");
     addressList.map((e) => e.addressDetailA).toSet().toList().forEach((element) {
       regionList.add(Defines().convertRegion(region: element));
+    });
+  }
+
+  // 선택한 addressDetailA 로부터 addressDetailB 리스트 추출
+  Future<void> _getLocationList() async {
+    locationList.clear();
+
+    addressList.where((e) => Defines().convertRegion(region: e.addressDetailA) == selectedRegion.value).toList().forEach((element) {
+      locationList.add(element.addressDetailB);
     });
   }
 
@@ -71,9 +84,8 @@ class MarketFestivalController extends GetxController {
     String title = '';
     Widget? content;
 
-    await _requestAddressList();
-
     if (index == 0) {
+      await _requestAddressList();
       title = '지역을 선택해주세요';
       content = SizedBox(
         height: Get.height / 1.9,
@@ -88,6 +100,9 @@ class MarketFestivalController extends GetxController {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
+                  if (selectedRegion.value != regionList[index]) {
+                    selectedLocation.value = ''; // selectedRegion.value 바뀌면 addressDetailB도 리셋
+                  }
                   selectedRegion.value = regionList[index];
                   Get.back();
                 },
@@ -118,10 +133,50 @@ class MarketFestivalController extends GetxController {
             }),
       );
     } else if (index == 1) {
+      await _getLocationList();
       title = '동네를 선택해주세요';
-      content = Container(
-        color: Colors.purple,
-        height: 370,
+      content = SizedBox(
+        height: Get.height / 1.9,
+        child: GridView.builder(
+            itemCount: locationList.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, //1 개의 행에 보여줄 item 개수
+              mainAxisSpacing: 16, //수평 Padding
+              crossAxisSpacing: 6,
+              mainAxisExtent: 36, //수직 Padding
+            ),
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  selectedLocation.value = locationList[index];
+                  print('selectedLocation: ${selectedLocation.value}');
+                  Get.back();
+                },
+                child: Obx(() {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        locationList[index],
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: selectedRegion.value == locationList[index] ? SeenearColor.blue80 : SeenearColor.grey80, //
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      if (selectedLocation.value == locationList[index])
+                        Image.asset(
+                          'assets/images/check_filled.png',
+                          width: 22,
+                        ),
+                    ],
+                  );
+                }),
+              );
+            }),
       );
     } else if (index == 2) {
       if (isMarket) {

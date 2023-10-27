@@ -52,8 +52,12 @@ class Defines {
       return "인천";
     } else if (region == "광주광역시") {
       return "광주";
+    } else if (region == "전주광역시") {
+      return "전주";
     } else if (region == "대전광역시") {
       return "대전";
+    } else if (region == "울산광역시") {
+      return "울산";
     } else if (region == "세종특별자치시") {
       return "세종";
     } else if (region == "경기도") {
@@ -62,6 +66,8 @@ class Defines {
       return "강원";
     } else if (region == "충청북도") {
       return "충북";
+    } else if (region == "충청남도") {
+      return "충남";
     } else if (region == "전라북도") {
       return "전북";
     } else if (region == "전라남도") {
@@ -70,7 +76,7 @@ class Defines {
       return "경북";
     } else if (region == "경상남도") {
       return "경남";
-    } else if (region == "제주특별시") {
+    } else if (region == "제주특별자치도") {
       return "제주";
     }
     return showAll ? "전체" : "";
@@ -88,6 +94,10 @@ class Defines {
       return "인천광역시";
     } else if (region == "광주") {
       return "광주광역시";
+    } else if (region == "전주") {
+      return "전주광역시";
+    } else if (region == "울산") {
+      return "울산광역시";
     } else if (region == "대전") {
       return "대전광역시";
     } else if (region == "세종") {
@@ -98,7 +108,9 @@ class Defines {
       return "강원도";
     } else if (region == "충북") {
       return "충청북도";
-    } else if (region == "전북") {
+    } else if (region == "충남") {
+      return "충청남도";
+    }else if (region == "전북") {
       return "전라북도";
     } else if (region == "전남") {
       return "전라남도";
@@ -107,7 +119,7 @@ class Defines {
     } else if (region == "경남") {
       return "경상남도";
     } else if (region == "제주") {
-      return "제주특별시";
+      return "제주특별자치도";
     }
     return "";
   }
