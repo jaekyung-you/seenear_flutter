@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
-
 import '../../../const/seenear_path.dart';
 import '../../../data/remote/api/setting/login.dart';
 
@@ -75,22 +74,6 @@ class LoginController extends GetxController {
         print("❌ 로그인 실패 $error");
         return false;
       }
-    }
-  }
-
-  Future<void> onTapLogout() async {
-    await _logout();
-    isLogined = false;
-    user = null;
-  }
-
-  Future<bool> _logout() async {
-    try {
-      await UserApi.instance.unlink();
-      // todo: 우리 서버 logout 찌르기
-      return true;
-    } catch (e) {
-      return false;
     }
   }
 }

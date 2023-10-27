@@ -12,6 +12,7 @@ class Member {
   int? memberId;
   String? nickname;
   String? profileImageSrc;
+  bool isMember = false;
 
   void setMember(MemberResponse res) {
     memberId = res.memberId;

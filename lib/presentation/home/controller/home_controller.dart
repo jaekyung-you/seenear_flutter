@@ -46,7 +46,7 @@ class HomeController extends GetxController {
     await _getDeviceInfo();
     String deviceId = Platform.isAndroid ? _androidDeviceInfo?.id ?? "" : _iosDeviceInfo?.identifierForVendor ?? ""; // device uuid
     HealthCheckResponse res = await checkHealth(deviceId: deviceId);
-    isMember = res.member;
+    Member().isMember = res.member;
     // ApiBase 헤더에 jwt 토큰 저장
     if (res.memberView != null) {
       Member().setMember(res.memberView!);
@@ -65,8 +65,8 @@ class HomeController extends GetxController {
         // Get.toNamed(SeenearPath.SIGN_UP);
         break;
       case HomeMenu.myInfo:
-        Get.toNamed(SeenearPath.SIGN_UP);
-        // Get.toNamed(isMember ? SeenearPath.MY_PAGE : SeenearPath.LOGIN);
+        // Get.toNamed(SeenearPath.SIGN_UP);
+        Get.toNamed(Member().isMember ? SeenearPath.MY_PAGE : SeenearPath.LOGIN);
         break;
       case HomeMenu.festival:
         Get.toNamed(SeenearPath.FESTIVAl, arguments: {'type': 'festival'});

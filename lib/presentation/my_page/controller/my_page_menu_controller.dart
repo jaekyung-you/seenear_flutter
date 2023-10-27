@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:seenear/const/enum/my_page_menu.dart';
 import 'package:seenear/const/enum/my_page_setting.dart';
 import 'package:seenear/const/seenear_path.dart';
+import 'package:seenear/data/local/member.dart';
 import 'package:seenear/data/remote/api/favorite/add_favorite_item.dart';
 import 'package:seenear/data/remote/api/favorite/delete_favorite_item.dart';
 import 'package:seenear/data/remote/api/follower/add_follower.dart';
@@ -16,6 +17,7 @@ import 'package:seenear/data/remote/api/review/get_review_list.dart';
 import 'package:seenear/data/remote/response/review_item_response.dart';
 import 'package:seenear/domain/util/snack_bar_manager.dart';
 import '../../../const/design_system/base_bottom_sheet.dart';
+import '../../../data/remote/api/setting/logout.dart';
 import '../../../data/remote/response/info_item_response.dart';
 import '../../../data/remote/response/member_response.dart';
 import '../widget/my_page_menu/my_page_content_screen.dart';
@@ -57,6 +59,9 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
   List<MemberResponse> followerList = <MemberResponse>[];
   RxList<MemberResponse> myFollowerList = <MemberResponse>[].obs;
   RxList<MemberResponse> myFollowingList = <MemberResponse>[].obs;
+
+  // 로그아웃
+  final Logout _logout = Logout();
 
   @override
   void onInit() {
@@ -186,8 +191,14 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
             onTapButton: (index) async {
               Get.back();
               if (index == 1) {
-                SnackBarManager().showSnackBar(title: '로그아웃이 완료되었습니다.');
-                Get.offAllNamed(SeenearPath.LOGIN);
+                bool result = await requestLogout();
+                if (result) {
+                  SnackBarManager().showSnackBar(title: '로그아웃이 완료되었습니다.');
+                  Member().isMember = false;
+                  Get.offAllNamed(SeenearPath.LOGIN);
+                } else {
+                  Get.snackbar('', '로그아웃에 실패했습니다.');
+                }
               }
             },
           ),
@@ -293,5 +304,16 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
   Future<void> onTapAddFollower({required int memberId}) async {
     bool res = await _addFollower(memberId: memberId);
     SnackBarManager().showSnackBar(title: res ? '구독이 완료되었습니다.' : '일시적 오류가 발생했습니다.');
+  }
+
+  Future<bool> requestLogout() async {
+    try {
+      // await UserApi.instance.unlink();
+      bool result = await _logout();
+      return result;
+    } catch (e) {
+      print('e: $e');
+      return false;
+    }
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seenear/const/design_system/base_header.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
+import 'package:seenear/const/seenear_path.dart';
 import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
 import 'package:seenear/presentation/login/controller/login_controller.dart';
 
@@ -16,7 +17,12 @@ class LoginScreen extends GetView<LoginController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const BaseHeader(title: '로그인'),
+            BaseHeader(
+              title: '로그인',
+              onTapBack: () {
+                Get.offAllNamed(SeenearPath.HOME);
+              },
+            ),
             Expanded(
               child: Stack(
                 alignment: Alignment.topLeft,
@@ -49,12 +55,12 @@ class LoginScreen extends GetView<LoginController> {
                         },
                         child: Image.asset('assets/images/kakao_login_button.png'),
                       ),
-                      InkWell(
-                        onTap: () {
-                          controller.onTapLogout();
-                        },
-                        child: Text('임시 로그아웃'),
-                      ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     controller.onTapLogout();
+                      //   },
+                      //   child: Text('임시 로그아웃'),
+                      // ),
                     ],
                   ),
                 ],

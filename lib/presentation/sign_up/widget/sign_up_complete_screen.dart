@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:seenear/const/design_system/base_button.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
 import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
 import 'package:styled_text/styled_text.dart';
+
+import '../../../const/seenear_path.dart';
 
 class SignUpCompleteScreen extends StatelessWidget {
   const SignUpCompleteScreen({super.key});
@@ -17,10 +20,7 @@ class SignUpCompleteScreen extends StatelessWidget {
             height: 48,
             child: Text(
               '회원가입 완료!',
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 21,
-                  color: SeenearColor.grey60),
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 21, color: SeenearColor.grey60),
             ),
           ),
           Expanded(
@@ -72,7 +72,11 @@ class SignUpCompleteScreen extends StatelessWidget {
             ),
           ),
           BaseButton(
-              buttonText: '홈 화면으로 이동', isDisabled: false, onPressed: () {}),
+              buttonText: '홈 화면으로 이동',
+              isDisabled: false,
+              onPressed: () {
+                Get.offAllNamed(SeenearPath.HOME);
+              }),
           const SizedBox(
             height: 20,
           ),
