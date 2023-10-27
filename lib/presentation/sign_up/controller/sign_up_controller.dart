@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seenear/const/seenear_path.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
+import 'package:seenear/data/remote/api/member/get_random_nickname.dart';
 import 'package:seenear/data/remote/api/setting/get_interest_category_list.dart';
 import 'package:seenear/data/remote/api/setting/register_additional_info.dart';
 import '../../../const/design_system/base_bottom_sheet.dart';
@@ -20,8 +22,11 @@ class SignUpController extends GetxController {
   RxList<InterestCategoryResponse> interestList = <InterestCategoryResponse>[].obs;
   RxList<InterestCategoryResponse> selectedInterest = <InterestCategoryResponse>[].obs; // 관심사 선택 (최대5개)
 
+  RxString nickname = ''.obs;
+
   // usecase
   final GetInterestCategory _getInterestCategory = GetInterestCategory(); // 관심사 받아오기
+  final GetRandomNickname _getRandomNickname = GetRandomNickname(); // 랜덤 닉네임 받아오기
   final RegisterAdditionalInfo _registerAdditionalInfo = RegisterAdditionalInfo(); // 추가 정보 등록
 
   @override
@@ -35,7 +40,7 @@ class SignUpController extends GetxController {
   }
 
   void onTapSelectItem() {
-    // todo: api 호출
+    // todo: api 호출 (_registerAdditionalInfo)
     switch (currentStage) {
       case SignUpProcessStage.region:
         break;
@@ -54,15 +59,21 @@ class SignUpController extends GetxController {
   void moveToNextStage() {
     int index = SignUpProcessStage.values.indexOf(currentStage);
 
-    // 마지막 단계
+    // 마지막 단계: 닉네임 입력 화면에서 '선택완료' 누르면 api 호출 & 회원가입 완료 화면
     if (index == SignUpProcessStage.values.length - 1) {
       // 회원가입 완료 화면
+      // todo: api 호출 (_registerAdditionalInfo) -> 지역의 경우 변환 필요
+      // Get.toNamed(SeenearPath.SIGN_UP_COMPLETE);
       return;
     }
 
     currentStage = SignUpProcessStage.values[index + 1];
+    if (currentStage == SignUpProcessStage.nickname) {
+      // 닉네임 단계에서 랜덤 닉네임 api 호출하기
+      _requestRandomNickname();
+    }
     enableNextButton = false;
-    update();
+    // update();
   }
 
   void onTapSkipPage() {
@@ -91,5 +102,17 @@ class SignUpController extends GetxController {
     update();
   }
 
+  // 카카오 이름 사용하기
   void useKakaoName() {}
+
+  Future<void> _requestRandomNickname() async {
+    nickname.value = await _getRandomNickname();
+    nicknameController.text = nickname.value;
+  }
+
+  // 리스트 최대 5개까지 추가하는 함수
+  void selectListUpToFive({required dynamic item, required bool isInterest}) {
+    List<dynamic> list = isInterest ? selectedInterest : selectedRegionList;
+    list.contains(item) ? list.remove(item) : list.add(item);
+  }
 }

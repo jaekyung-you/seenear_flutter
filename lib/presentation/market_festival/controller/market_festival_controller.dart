@@ -17,16 +17,16 @@ class MarketFestivalController extends GetxController {
   RxList<InfoItemResponse> festivalList = <InfoItemResponse>[].obs;
   RxInt totalCount = 10.obs;
 
+  List<AddressResponse> addressList = []; // 서버에서 받은 값
+  List<String> regionList = []; // 서버에서 받은 값 (addressDetailA에 해당)
+  List<String> locationList = []; // 서버에서 받은 값 (addressDetailB에 해당)
+
   RxString selectedRegion = ''.obs; // 지역
   RxString selectedLocation = ''.obs; // 동네
   RxString selectedDate = ''.obs; // 2023-10-07 (월) 이런식
 
   RxList<String> filterList = <String>[].obs;
   RxString sort = '거리순'.obs; // or 인기순
-
-  List<AddressResponse> addressList = []; // 서버에서 받은 값
-  List<String> regionList = []; // 서버에서 받은 값 (addressDetailA에 해당)
-  List<String> locationList = []; // 서버에서 받은 값 (addressDetailB에 해당)
 
   // usecase
   final GetAddressList _getAddressList = GetAddressList(); // 주소 선택을 위해 목록 받아오기

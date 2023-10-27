@@ -67,48 +67,55 @@ class SignUpScreen extends GetView<SignUpController> {
       case SignUpProcessStage.region:
       case SignUpProcessStage.interest:
       case SignUpProcessStage.interestRegion:
-      return GridView.builder(
-        itemCount: itemCount,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, //1 개의 행에 보여줄 item 개수
-          childAspectRatio: controller.currentStage == SignUpProcessStage.interest ? 80 / 103 : 1,
-          mainAxisSpacing: 30, //수평 Padding
-          crossAxisSpacing: 30, //수직 Padding
-        ),
-        itemBuilder: (context, index) {
-          switch (controller.currentStage) {
-          // 관심사 (최대 5개)
-            case SignUpProcessStage.interest:
-              return SelectImageItemCell(
-                isSelected: controller.selectedInterest.contains(controller.interestList[index]),
-                imageUrl: controller.interestList[index].imageSrc,
-                title: controller.interestList[index].displayText,
-              );
+        return GridView.builder(
+          itemCount: itemCount,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3, //1 개의 행에 보여줄 item 개수
+            childAspectRatio: controller.currentStage == SignUpProcessStage.interest ? 80 / 103 : 1,
+            mainAxisSpacing: 30, //수평 Padding
+            crossAxisSpacing: 30, //수직 Padding
+          ),
+          itemBuilder: (context, index) {
+            switch (controller.currentStage) {
+              // 1. 거주 지역
+              case SignUpProcessStage.region:
+                return SelectTextItemCell(
+                  fgColor: controller.selectedRegion.value == Defines.signUpRegionList[index] ? Colors.white : SeenearColor.grey50,
+                  bgColor: controller.selectedRegion.value == Defines.signUpRegionList[index] ? SeenearColor.blue60 : SeenearColor.grey5,
+                  text: Defines.signUpRegionList[index],
+                  onTap: () {
+                    controller.selectedRegion.value = Defines.signUpRegionList[index];
+                  },
+                );
 
-            case SignUpProcessStage.interestRegion:
-            // 관심지역 (최대 5개)
-              return SelectTextItemCell(
-                fgColor: controller.selectedRegion.value.contains(Defines.signUpRegionList[index]) ? Colors.white : SeenearColor.grey50,
-                bgColor: controller.selectedRegion.value.contains(Defines.signUpRegionList[index])
-                    ? SeenearColor.blue60
-                    : SeenearColor.grey5,
-                text: Defines.signUpRegionList[index],
-                onTap: () {},
-              );
+              // 2. 관심사 (최대 5개)
+              case SignUpProcessStage.interest:
+                return SelectImageItemCell(
+                  isSelected: controller.selectedInterest.contains(controller.interestList[index]),
+                  imageUrl: controller.interestList[index].imageSrc,
+                  title: controller.interestList[index].displayText,
+                  onTap: () {
+                    controller.selectListUpToFive(item: controller.interestList[index], isInterest: true);
+                  },
+                );
 
-            case SignUpProcessStage.region:
-            // 거주 지역
-              return SelectTextItemCell(
-                fgColor: controller.selectedRegion.value == Defines.signUpRegionList[index] ? Colors.white : SeenearColor.grey50,
-                bgColor: controller.selectedRegion.value == Defines.signUpRegionList[index] ? SeenearColor.blue60 : SeenearColor.grey5,
-                text: Defines.signUpRegionList[index],
-                onTap: () {},
-              );
-            default:
-              return Container();
-          }
-        },
-      );
+              // 3. 관심지역 (최대 5개)
+              case SignUpProcessStage.interestRegion:
+                return SelectTextItemCell(
+                  fgColor: controller.selectedRegion.value.contains(Defines.signUpRegionList[index]) ? Colors.white : SeenearColor.grey50,
+                  bgColor:
+                      controller.selectedRegion.value.contains(Defines.signUpRegionList[index]) ? SeenearColor.blue60 : SeenearColor.grey5,
+                  text: Defines.signUpRegionList[index],
+                  onTap: () {
+                    controller.selectListUpToFive(item: Defines.signUpRegionList[index], isInterest: false);
+                  },
+                );
+
+              default:
+                return Container();
+            }
+          },
+        );
       case SignUpProcessStage.nickname:
         return TextFieldWithHelperText(
           editingController: controller.nicknameController,
