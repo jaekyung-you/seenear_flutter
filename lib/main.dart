@@ -19,7 +19,7 @@ void main() async {
   KakaoSdk.init(
     nativeAppKey: Defines.KAKAO_SDK_KEY,
   );
-  
+
   // 스플레시 화면 3초간 노출
   await Future.delayed(const Duration(seconds: 3));
   runApp(const MyApp());
@@ -35,14 +35,15 @@ class MyApp extends StatelessWidget {
       getPages: SeenearRoute.routes,
       initialRoute: '/',
       initialBinding: BindingsBuilder(
-        () {
+            () {
           Get.put(HomeController());
         },
       ),
       // initialRoute: SeenearPath.SIGN_UP,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: SeenearColor.blue60),
+        fontFamily: 'Pretendard',
         useMaterial3: true,
       ),
       home: const HomeScreen(),
@@ -86,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
               editingController: textEditingController,
               hintText: '닉네임을 입력해주세요',
               helperTextType:
-                  HelperTextType(isError: true, helperText: '닉네임을 입력해주세요!'),
+              HelperTextType(isError: true, helperText: '닉네임을 입력해주세요!'),
             ),
             RoundedWidget(
               text: '오픈예정',
