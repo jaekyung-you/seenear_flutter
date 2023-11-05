@@ -4,8 +4,11 @@ import 'package:seenear/const/design_system/base_bottom_sheet.dart';
 import 'package:seenear/data/local/helper_text_type.dart';
 import 'package:seenear/data/remote/api/member/check_nickname_duplicate.dart';
 import 'package:seenear/data/remote/api/profile/edit_my_profile.dart';
+import 'package:seenear/data/remote/api/setting/get_alarm.dart';
 import 'package:seenear/data/remote/api/setting/get_sign_out_reasons.dart';
+import 'package:seenear/data/remote/api/setting/set_alarm.dart';
 import 'package:seenear/data/remote/api/setting/sign_out_account.dart';
+import 'package:seenear/data/remote/response/alarm_response.dart';
 import 'package:seenear/domain/util/snack_bar_manager.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/deactive_account_screen.dart';
 import 'package:seenear/presentation/my_page/widget/my_setting_menu/deactive_complete_screen.dart';
@@ -50,6 +53,9 @@ class MyPageSettingController extends GetxController {
 
   final GetSignOutReasons _getSignOutReasons = GetSignOutReasons();
   final SignOutAccount _signOutAccount = SignOutAccount();
+
+  final GetAlarm _getAlarm = GetAlarm();
+  final SetAlarm _setAlarm = SetAlarm();
 
   @override
   void onInit() {
@@ -150,6 +156,36 @@ class MyPageSettingController extends GetxController {
       selectedReasons.remove(reason);
     } else {
       selectedReasons.add(reason);
+    }
+  }
+
+  /// 알림 설정
+  Future<void> getAlarmSetting() async {
+    AlarmResponse res = await _getAlarm();
+
+    notificationSwitchList[0]?.value = res.serviceNoticeNotificationEnabled &&
+        res.appUpdateNotificationEnabled &&
+        res.marketingTermsAgreed &&
+        res.reviewCommentNotificationEnabled;
+
+    notificationSwitchList[1]?.value = res.serviceNoticeNotificationEnabled; // 공지사항 알림
+    notificationSwitchList[2]?.value = res.reviewCommentNotificationEnabled; // 후기 댓글 알림
+    notificationSwitchList[3]?.value = res.appUpdateNotificationEnabled; // 업데이트 알림
+    notificationSwitchList[4]?.value = res.marketingTermsAgreed; // 마케팅 알림
+  }
+
+  Future<void> setAlarmSetting() async {
+    AlarmResponse request = AlarmResponse(
+      appUpdateNotificationEnabled: notificationSwitchList[3]!.value,
+      marketingTermsAgreed: notificationSwitchList[4]!.value,
+      reviewCommentNotificationEnabled: notificationSwitchList[2]!.value,
+      serviceNoticeNotificationEnabled: notificationSwitchList[1]!.value,
+    );
+
+    bool res = await _setAlarm(request: request);
+    Get.back();
+    if (!res) {
+      Get.snackbar('알림', '일시적 오류가 발생했습니다.');
     }
   }
 

@@ -7,8 +7,22 @@ import 'package:seenear/presentation/my_page/controller/my_page_setting_controll
 
 import '../../../../const/design_system/seenear_color.dart';
 
-class NotificationScreen extends GetView<MyPageSettingController> {
+class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
+
+  @override
+  State<NotificationScreen> createState() => _NotificationScreenState();
+}
+
+class _NotificationScreenState extends State<NotificationScreen> {
+  final MyPageSettingController controller = Get.find<MyPageSettingController>();
+
+  @override
+  void initState() {
+    super.initState();
+    super.initState();
+    controller.getAlarmSetting();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +30,12 @@ class NotificationScreen extends GetView<MyPageSettingController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: BaseHeader(title: '알림 설정'),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: BaseHeader(
+              title: '알림 설정',
+              onTapBack: controller.setAlarmSetting,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
