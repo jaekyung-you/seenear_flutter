@@ -9,11 +9,13 @@ import 'package:seenear/data/remote/api/favorite/delete_favorite_item.dart';
 import 'package:seenear/data/remote/api/follower/add_follower.dart';
 import 'package:seenear/data/remote/api/follower/delete_follower.dart';
 import 'package:seenear/data/remote/api/follower/get_follower_list.dart';
+import 'package:seenear/data/remote/api/follower/get_following_list.dart';
 import 'package:seenear/data/remote/api/recent/add_recent_item.dart';
 import 'package:seenear/data/remote/api/recent/delete_recent_item.dart';
 import 'package:seenear/data/remote/api/favorite/get_favorite_items.dart';
 import 'package:seenear/data/remote/api/recent/get_recent_view_list.dart';
 import 'package:seenear/data/remote/api/review/get_review_list.dart';
+import 'package:seenear/data/remote/response/member_follow_list_response.dart';
 import 'package:seenear/data/remote/response/review_item_response.dart';
 import 'package:seenear/domain/util/snack_bar_manager.dart';
 import '../../../const/design_system/base_bottom_sheet.dart';
@@ -54,6 +56,7 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
 
   // 구독 관리
   final GetFollowerList _getFollowerList = GetFollowerList();
+  final GetFollowingList _getFollowingList = GetFollowingList();
   final AddFollower _addFollower = AddFollower();
   final DeleteFollower _deleteFollower = DeleteFollower();
   List<MemberResponse> followerList = <MemberResponse>[];
@@ -156,8 +159,22 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
 
   Future<void> _requestFollowerList() async {
     // todo: 페이징 구현
-    List<MemberResponse> res = await _getFollowerList(size: 0);
-    followerList = res;
+    MemberFollowListResponse res = await _getFollowerList(size: 10);
+    followerList = res.members ?? [];
+    // todo: 서버 쪽에서 타입 분리 필요
+    // for (MemberResponse item in followerList) {
+    //   if (item.itemType == "MARKET") {
+    //     recentMarketItemList                .add(item);
+    //   } else if (item.itemType == "FESTIVAL") {
+    //     recentFestivalItemList.add(item);
+    //   }
+    // }
+  }
+
+  Future<void> _requestFollowingList() async {
+    // todo: 페이징 구현
+    MemberFollowListResponse res = await _getFollowingList(size: 10);
+    followerList = res.members ?? [];
     // todo: 서버 쪽에서 타입 분리 필요
     // for (MemberResponse item in followerList) {
     //   if (item.itemType == "MARKET") {

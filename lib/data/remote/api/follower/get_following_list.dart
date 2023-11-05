@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:seenear/data/remote/api/api_base.dart';
 import '../../response/member_follow_list_response.dart';
-import '../api_base.dart';
 
-/// 내가 팔로우하는 사람들 목록
-class GetFollowerList {
+/// 나를 팔로잉하는 사람들 목록
+class GetFollowingList {
   Future<MemberFollowListResponse> call({required int size, int? page = 0}) async {
     Response res = await ApiBase().get(
-      '/member/api/v1/followers',
+      '/member/api/v1/followereds',
       query: {'page': page, 'size': size},
     );
     return MemberFollowListResponse.fromJson(res.data);
