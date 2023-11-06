@@ -24,4 +24,5 @@ class SeenearPath {
 
   static String COMMUNITY = '/community'; // 이모저모 이야기방
   static String COMMUNITY_DETAIL = '/community/detail'; // 이야기방 글 상세화면
+  static String COMMUNITY_WRITE = '/community/write'; // 이야기방 글 작성화면
 }

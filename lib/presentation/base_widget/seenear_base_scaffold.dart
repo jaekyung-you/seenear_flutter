@@ -89,12 +89,11 @@ class _SeenearBaseScaffoldState extends State<SeenearBaseScaffold> {
             onTap: (index) {
               setState(() {
                 _selectedIndex = index;
-                print("selectedIndex: ${_selectedIndex}");
                 switch (index) {
                   case 0:
-                    Get.offAllNamed(SeenearPath.MARKET);
+                    Get.offAllNamed(SeenearPath.MARKET, arguments: {'type': 'market'});
                   case 1:
-                    Get.offAllNamed(SeenearPath.FESTIVAl);
+                    Get.offAllNamed(SeenearPath.FESTIVAl, arguments: {'type': 'festival'});
                   case 2:
                     Get.offAllNamed(SeenearPath.HOME);
                   case 3:

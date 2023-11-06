@@ -5,6 +5,7 @@ import 'package:seenear/const/design_system/seenear_color.dart';
 import '../../../const/design_system/base_header.dart';
 import '../../../const/enum/community_filter_type.dart';
 import '../../../const/enum/community_tab_type.dart';
+import '../../../const/seenear_path.dart';
 import '../../base_widget/seenear_base_scaffold.dart';
 import '../controller/community_main_controller.dart';
 import 'community_cell.dart';
@@ -18,7 +19,7 @@ class CommunityMainScreen extends GetView<CommunityMainController> {
     return SeenearBaseScaffold(
       floatingActionButton: InkWell(
         onTap: () {
-          // Get.toNamed()
+          Get.toNamed(SeenearPath.COMMUNITY_WRITE);
         },
         child: Container(
           width: 88,
