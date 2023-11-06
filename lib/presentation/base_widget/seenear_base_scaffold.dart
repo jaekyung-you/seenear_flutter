@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:seenear/const/design_system/seenear_color.dart';
+
+import '../../const/seenear_path.dart';
 
 class SeenearBaseScaffold extends StatefulWidget {
   final Widget child;
@@ -86,23 +89,21 @@ class _SeenearBaseScaffoldState extends State<SeenearBaseScaffold> {
             onTap: (index) {
               setState(() {
                 _selectedIndex = index;
+                print("selectedIndex: ${_selectedIndex}");
+                switch (index) {
+                  case 0:
+                    Get.offAllNamed(SeenearPath.MARKET);
+                  case 1:
+                    Get.offAllNamed(SeenearPath.FESTIVAl);
+                  case 2:
+                    Get.offAllNamed(SeenearPath.HOME);
+                  case 3:
+                    Get.offAllNamed(SeenearPath.COMMUNITY);
+                  case 4:
+                  // todo: 로그인 안 했으면 로그인 화면!!!
+                    Get.offAllNamed(SeenearPath.MY_PAGE);
+                }
               });
-              switch (index) {
-                case 0:
-                  // Get.offAllNamed(SeenearPath.HOME);
-                  break;
-                case 1:
-                  break;
-                case 2:
-                  // Get.offAllNamed(SeenearPath.SEARCH);
-                  break;
-                case 3:
-                  break;
-                case 4:
-                  break;
-                case 5:
-                  break;
-              }
             },
           ),
           body: SafeArea(

@@ -32,7 +32,7 @@ class SearchScreen extends GetView<SearchScreenController> {
                     Icons.search,
                     color: SeenearColor.grey50,
                   ),
-                  fillColor: Colors.white,
+                  fillColor: SeenearColor.grey5,
                   filled: true,
                   focusColor: Colors.white,
                   enabledBorder: const OutlineInputBorder(borderSide: BorderSide.none),

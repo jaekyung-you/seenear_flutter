@@ -5,6 +5,7 @@ import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
 import '../../../const/design_system/seenear_color.dart';
 import '../../../const/design_system/select_text_item_cell.dart';
 import '../../../const/enum/home_menu.dart';
+import '../../../const/seenear_path.dart';
 import '../controller/home_controller.dart';
 
 class HomeScreen extends GetView<HomeController> {
@@ -43,6 +44,36 @@ class HomeScreen extends GetView<HomeController> {
                   height: 40,
                 ),
               ],
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Get.toNamed(SeenearPath.SEARCH);
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Container(
+                height: 48,
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6.0),
+                  color: SeenearColor.grey5,
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      'assets/images/search.png',
+                      color: SeenearColor.grey50,
+                      width: 28,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      '찾고 싶은 정보를 입력하세요.',
+                      style: TextStyle(fontWeight: FontWeight.w400, fontSize: 17, color: SeenearColor.grey30),
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
           Obx(() {
