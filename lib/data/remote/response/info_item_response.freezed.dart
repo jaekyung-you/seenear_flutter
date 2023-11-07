@@ -30,6 +30,8 @@ mixin _$InfoItemResponse {
   int get reviewCount => throw _privateConstructorUsedError;
   int get score => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
+  bool? get closed => throw _privateConstructorUsedError;
+  bool? get like => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,7 +54,9 @@ abstract class $InfoItemResponseCopyWith<$Res> {
       String name,
       int reviewCount,
       int score,
-      String? updatedAt});
+      String? updatedAt,
+      bool? closed,
+      bool? like});
 }
 
 /// @nodoc
@@ -77,6 +81,8 @@ class _$InfoItemResponseCopyWithImpl<$Res, $Val extends InfoItemResponse>
     Object? reviewCount = null,
     Object? score = null,
     Object? updatedAt = freezed,
+    Object? closed = freezed,
+    Object? like = freezed,
   }) {
     return _then(_value.copyWith(
       createdAt: freezed == createdAt
@@ -115,6 +121,14 @@ class _$InfoItemResponseCopyWithImpl<$Res, $Val extends InfoItemResponse>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      closed: freezed == closed
+          ? _value.closed
+          : closed // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      like: freezed == like
+          ? _value.like
+          : like // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -136,7 +150,9 @@ abstract class _$$InfoItemResponseImplCopyWith<$Res>
       String name,
       int reviewCount,
       int score,
-      String? updatedAt});
+      String? updatedAt,
+      bool? closed,
+      bool? like});
 }
 
 /// @nodoc
@@ -159,6 +175,8 @@ class __$$InfoItemResponseImplCopyWithImpl<$Res>
     Object? reviewCount = null,
     Object? score = null,
     Object? updatedAt = freezed,
+    Object? closed = freezed,
+    Object? like = freezed,
   }) {
     return _then(_$InfoItemResponseImpl(
       createdAt: freezed == createdAt
@@ -197,6 +215,14 @@ class __$$InfoItemResponseImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      closed: freezed == closed
+          ? _value.closed
+          : closed // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      like: freezed == like
+          ? _value.like
+          : like // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -215,7 +241,9 @@ class _$InfoItemResponseImpl
       required this.name,
       required this.reviewCount,
       required this.score,
-      this.updatedAt})
+      this.updatedAt,
+      this.closed,
+      this.like})
       : _images = images;
 
   factory _$InfoItemResponseImpl.fromJson(Map<String, dynamic> json) =>
@@ -248,10 +276,14 @@ class _$InfoItemResponseImpl
   final int score;
   @override
   final String? updatedAt;
+  @override
+  final bool? closed;
+  @override
+  final bool? like;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'InfoItemResponse(createdAt: $createdAt, date: $date, images: $images, itemId: $itemId, itemType: $itemType, name: $name, reviewCount: $reviewCount, score: $score, updatedAt: $updatedAt)';
+    return 'InfoItemResponse(createdAt: $createdAt, date: $date, images: $images, itemId: $itemId, itemType: $itemType, name: $name, reviewCount: $reviewCount, score: $score, updatedAt: $updatedAt, closed: $closed, like: $like)';
   }
 
   @override
@@ -267,7 +299,9 @@ class _$InfoItemResponseImpl
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('reviewCount', reviewCount))
       ..add(DiagnosticsProperty('score', score))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+      ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('closed', closed))
+      ..add(DiagnosticsProperty('like', like));
   }
 
   @override
@@ -287,7 +321,9 @@ class _$InfoItemResponseImpl
                 other.reviewCount == reviewCount) &&
             (identical(other.score, score) || other.score == score) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.closed, closed) || other.closed == closed) &&
+            (identical(other.like, like) || other.like == like));
   }
 
   @JsonKey(ignore: true)
@@ -302,7 +338,9 @@ class _$InfoItemResponseImpl
       name,
       reviewCount,
       score,
-      updatedAt);
+      updatedAt,
+      closed,
+      like);
 
   @JsonKey(ignore: true)
   @override
@@ -329,7 +367,9 @@ abstract class _InfoItemResponse implements InfoItemResponse {
       required final String name,
       required final int reviewCount,
       required final int score,
-      final String? updatedAt}) = _$InfoItemResponseImpl;
+      final String? updatedAt,
+      final bool? closed,
+      final bool? like}) = _$InfoItemResponseImpl;
 
   factory _InfoItemResponse.fromJson(Map<String, dynamic> json) =
       _$InfoItemResponseImpl.fromJson;
@@ -352,6 +392,10 @@ abstract class _InfoItemResponse implements InfoItemResponse {
   int get score;
   @override
   String? get updatedAt;
+  @override
+  bool? get closed;
+  @override
+  bool? get like;
   @override
   @JsonKey(ignore: true)
   _$$InfoItemResponseImplCopyWith<_$InfoItemResponseImpl> get copyWith =>

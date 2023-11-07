@@ -22,6 +22,8 @@ ReviewItemResponse _$ReviewItemResponseFromJson(Map<String, dynamic> json) {
 mixin _$ReviewItemResponse {
   int get id => throw _privateConstructorUsedError; // 리뷰 자체 id
   int get itemId => throw _privateConstructorUsedError; // 리뷰를 단 게시물에 대한 itemId
+  String get itemType =>
+      throw _privateConstructorUsedError; // MARKET, FESTIVAL 등
   int? get commentCount => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
   String? get date => throw _privateConstructorUsedError;
@@ -43,6 +45,7 @@ abstract class $ReviewItemResponseCopyWith<$Res> {
   $Res call(
       {int id,
       int itemId,
+      String itemType,
       int? commentCount,
       String? content,
       String? date,
@@ -65,6 +68,7 @@ class _$ReviewItemResponseCopyWithImpl<$Res, $Val extends ReviewItemResponse>
   $Res call({
     Object? id = null,
     Object? itemId = null,
+    Object? itemType = null,
     Object? commentCount = freezed,
     Object? content = freezed,
     Object? date = freezed,
@@ -80,6 +84,10 @@ class _$ReviewItemResponseCopyWithImpl<$Res, $Val extends ReviewItemResponse>
           ? _value.itemId
           : itemId // ignore: cast_nullable_to_non_nullable
               as int,
+      itemType: null == itemType
+          ? _value.itemType
+          : itemType // ignore: cast_nullable_to_non_nullable
+              as String,
       commentCount: freezed == commentCount
           ? _value.commentCount
           : commentCount // ignore: cast_nullable_to_non_nullable
@@ -115,6 +123,7 @@ abstract class _$$ReviewItemResponseImplCopyWith<$Res>
   $Res call(
       {int id,
       int itemId,
+      String itemType,
       int? commentCount,
       String? content,
       String? date,
@@ -135,6 +144,7 @@ class __$$ReviewItemResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? itemId = null,
+    Object? itemType = null,
     Object? commentCount = freezed,
     Object? content = freezed,
     Object? date = freezed,
@@ -150,6 +160,10 @@ class __$$ReviewItemResponseImplCopyWithImpl<$Res>
           ? _value.itemId
           : itemId // ignore: cast_nullable_to_non_nullable
               as int,
+      itemType: null == itemType
+          ? _value.itemType
+          : itemType // ignore: cast_nullable_to_non_nullable
+              as String,
       commentCount: freezed == commentCount
           ? _value.commentCount
           : commentCount // ignore: cast_nullable_to_non_nullable
@@ -182,6 +196,7 @@ class _$ReviewItemResponseImpl
   const _$ReviewItemResponseImpl(
       {required this.id,
       required this.itemId,
+      required this.itemType,
       this.commentCount,
       this.content,
       this.date,
@@ -198,6 +213,9 @@ class _$ReviewItemResponseImpl
   final int itemId;
 // 리뷰를 단 게시물에 대한 itemId
   @override
+  final String itemType;
+// MARKET, FESTIVAL 등
+  @override
   final int? commentCount;
   @override
   final String? content;
@@ -210,7 +228,7 @@ class _$ReviewItemResponseImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ReviewItemResponse(id: $id, itemId: $itemId, commentCount: $commentCount, content: $content, date: $date, images: $images, likeCount: $likeCount)';
+    return 'ReviewItemResponse(id: $id, itemId: $itemId, itemType: $itemType, commentCount: $commentCount, content: $content, date: $date, images: $images, likeCount: $likeCount)';
   }
 
   @override
@@ -220,6 +238,7 @@ class _$ReviewItemResponseImpl
       ..add(DiagnosticsProperty('type', 'ReviewItemResponse'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('itemId', itemId))
+      ..add(DiagnosticsProperty('itemType', itemType))
       ..add(DiagnosticsProperty('commentCount', commentCount))
       ..add(DiagnosticsProperty('content', content))
       ..add(DiagnosticsProperty('date', date))
@@ -234,6 +253,8 @@ class _$ReviewItemResponseImpl
             other is _$ReviewItemResponseImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.itemId, itemId) || other.itemId == itemId) &&
+            (identical(other.itemType, itemType) ||
+                other.itemType == itemType) &&
             (identical(other.commentCount, commentCount) ||
                 other.commentCount == commentCount) &&
             (identical(other.content, content) || other.content == content) &&
@@ -245,8 +266,8 @@ class _$ReviewItemResponseImpl
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, itemId, commentCount, content, date, images, likeCount);
+  int get hashCode => Object.hash(runtimeType, id, itemId, itemType,
+      commentCount, content, date, images, likeCount);
 
   @JsonKey(ignore: true)
   @override
@@ -267,6 +288,7 @@ abstract class _ReviewItemResponse implements ReviewItemResponse {
   const factory _ReviewItemResponse(
       {required final int id,
       required final int itemId,
+      required final String itemType,
       final int? commentCount,
       final String? content,
       final String? date,
@@ -281,6 +303,8 @@ abstract class _ReviewItemResponse implements ReviewItemResponse {
   @override // 리뷰 자체 id
   int get itemId;
   @override // 리뷰를 단 게시물에 대한 itemId
+  String get itemType;
+  @override // MARKET, FESTIVAL 등
   int? get commentCount;
   @override
   String? get content;

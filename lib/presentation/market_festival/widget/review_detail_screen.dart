@@ -6,10 +6,10 @@ import 'package:seenear/presentation/base_widget/seenear_base_scaffold.dart';
 import '../../../const/design_system/seenear_color.dart';
 import '../../base_widget/circle_profile_image.dart';
 import '../../base_widget/comment_cell.dart';
-import '../controller/detail_review_controller.dart';
+import '../controller/review_detail_controller.dart';
 
-class DetailReviewScreen extends GetView<DetailReviewController> {
-  const DetailReviewScreen({super.key});
+class ReviewDetailScreen extends GetView<ReviewDetailController> {
+  const ReviewDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

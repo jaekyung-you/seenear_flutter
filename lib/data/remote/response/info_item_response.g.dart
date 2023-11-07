@@ -19,6 +19,8 @@ _$InfoItemResponseImpl _$$InfoItemResponseImplFromJson(
       reviewCount: json['reviewCount'] as int,
       score: json['score'] as int,
       updatedAt: json['updatedAt'] as String?,
+      closed: json['closed'] as bool?,
+      like: json['like'] as bool?,
     );
 
 Map<String, dynamic> _$$InfoItemResponseImplToJson(
@@ -33,4 +35,6 @@ Map<String, dynamic> _$$InfoItemResponseImplToJson(
       'reviewCount': instance.reviewCount,
       'score': instance.score,
       'updatedAt': instance.updatedAt,
+      'closed': instance.closed,
+      'like': instance.like,
     };

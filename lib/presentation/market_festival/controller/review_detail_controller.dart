@@ -3,7 +3,7 @@ import 'package:seenear/data/remote/response/review_item_response.dart';
 
 import '../../../data/remote/api/review/get_review_detail.dart';
 
-class DetailReviewController extends GetxController {
+class ReviewDetailController extends GetxController {
   int id = 0; // 조회하는 리뷰 id
 
   // usecase

@@ -11,6 +11,7 @@ _$ReviewItemResponseImpl _$$ReviewItemResponseImplFromJson(
     _$ReviewItemResponseImpl(
       id: json['id'] as int,
       itemId: json['itemId'] as int,
+      itemType: json['itemType'] as String,
       commentCount: json['commentCount'] as int?,
       content: json['content'] as String?,
       date: json['date'] as String?,
@@ -23,6 +24,7 @@ Map<String, dynamic> _$$ReviewItemResponseImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'itemId': instance.itemId,
+      'itemType': instance.itemType,
       'commentCount': instance.commentCount,
       'content': instance.content,
       'date': instance.date,

@@ -21,9 +21,9 @@ import '../presentation/community/controller/community_detail_controller.dart';
 import '../presentation/community/controller/community_write_controller.dart';
 import '../presentation/community/widget/detail/community_detail_screen.dart';
 import '../presentation/community/widget/write/community_write_screen.dart';
-import '../presentation/market_festival/controller/detail_review_controller.dart';
+import '../presentation/market_festival/controller/review_detail_controller.dart';
 import '../presentation/market_festival/controller/market_detail_controller.dart';
-import '../presentation/market_festival/widget/detail_review_screen.dart';
+import '../presentation/market_festival/widget/review_detail_screen.dart';
 import '../presentation/my_page/controller/help_desk_controller.dart';
 import '../presentation/my_page/controller/my_page_notice_controller.dart';
 import '../presentation/my_page/widget/my_page_menu/my_page_screen.dart';
@@ -177,10 +177,10 @@ class SeenearRoute {
     ),
     GetPage(
       name: SeenearPath.REVIEW_DETAIL,
-      page: () => const DetailReviewScreen(),
+      page: () => const ReviewDetailScreen(),
       binding: BindingsBuilder(
             () {
-          Get.put(DetailReviewController());
+          Get.put(ReviewDetailController());
         },
       ),
     ),

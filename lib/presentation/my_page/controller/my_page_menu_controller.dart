@@ -4,12 +4,15 @@ import 'package:seenear/const/enum/my_page_menu.dart';
 import 'package:seenear/const/enum/my_page_setting.dart';
 import 'package:seenear/const/seenear_path.dart';
 import 'package:seenear/data/local/member.dart';
+import 'package:seenear/data/remote/api/block/block_member.dart';
 import 'package:seenear/data/remote/api/favorite/add_favorite_item.dart';
 import 'package:seenear/data/remote/api/favorite/delete_favorite_item.dart';
 import 'package:seenear/data/remote/api/follower/add_follower.dart';
 import 'package:seenear/data/remote/api/follower/delete_follower.dart';
 import 'package:seenear/data/remote/api/follower/get_follower_list.dart';
 import 'package:seenear/data/remote/api/follower/get_following_list.dart';
+import 'package:seenear/data/remote/api/like/do_like.dart';
+import 'package:seenear/data/remote/api/like/do_unlike.dart';
 import 'package:seenear/data/remote/api/recent/add_recent_item.dart';
 import 'package:seenear/data/remote/api/recent/delete_recent_item.dart';
 import 'package:seenear/data/remote/api/favorite/get_favorite_items.dart';
@@ -21,6 +24,7 @@ import 'package:seenear/domain/util/snack_bar_manager.dart';
 import '../../../const/design_system/base_bottom_sheet.dart';
 import '../../../data/remote/api/setting/logout.dart';
 import '../../../data/remote/response/info_item_response.dart';
+
 import '../../../data/remote/response/member_response.dart';
 import '../widget/my_page_menu/my_page_content_screen.dart';
 
@@ -59,9 +63,14 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
   final GetFollowingList _getFollowingList = GetFollowingList();
   final AddFollower _addFollower = AddFollower();
   final DeleteFollower _deleteFollower = DeleteFollower();
+  final BlockMember _blockMember = BlockMember();
   List<MemberResponse> followerList = <MemberResponse>[];
   RxList<MemberResponse> myFollowerList = <MemberResponse>[].obs;
   RxList<MemberResponse> myFollowingList = <MemberResponse>[].obs;
+
+  // 좋아요, 공감
+  final DoLike _doLike = DoLike();
+  final DoUnlike _doUnlike = DoUnlike();
 
   // 로그아웃
   final Logout _logout = Logout();
@@ -148,12 +157,11 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
     List<ReviewItemResponse> res = await _getReviewList(size: requestSize, type: '');
     reviewList = res;
     for (ReviewItemResponse item in reviewList) {
-      // todo: 서버 쪽에서 타입 분리 필요
-      // if (item.itemType == "MARKET") {
-      //   recentMarketItemList.add(item);
-      // } else if (item.itemType == "FESTIVAL") {
-      //   recentFestivalItemList.add(item);
-      // }
+      if (item.itemType == "MARKET") {
+        reviewMarketItemList.add(item);
+      } else if (item.itemType == "FESTIVAL") {
+        reviewFestivalItemList.add(item);
+      }
     }
   }
 
@@ -288,15 +296,18 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
     }
   }
 
-  void onTapBlockFollower() {
+  void onTapBlockFollower({required int memberId}) {
     Get.bottomSheet(
       BaseBottomSheet(
         title: '방실방실방실이 님을\n차단 하시겠어요?',
         desc: '차단하사면 상대방은 회원님의 글을 볼 수 없어요.',
         buttonTitles: const ['아니요', '네 취소할래요'],
-        onTapButton: (index) {
+        onTapButton: (index) async {
           Get.back();
-          if (index == 1) SnackBarManager().showSnackBar(title: '차단이 완료되었습니다.');
+          if (index == 1) {
+            await _blockMember(id: memberId);
+            SnackBarManager().showSnackBar(title: '차단이 완료되었습니다.');
+          }
         },
       ),
     );
@@ -331,6 +342,14 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
     } catch (e) {
       print('e: $e');
       return false;
+    }
+  }
+
+  Future<void> toggleLike({required bool isLiked, required int itemId, required String itemType}) async {
+    if (isLiked) {
+      bool res = await _doUnlike(itemType: itemType, itemId: itemId);
+    } else {
+      bool res = await _doLike(itemId: itemId, itemType: itemType);
     }
   }
 }

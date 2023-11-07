@@ -81,7 +81,7 @@ class SubscriptionCell extends GetView<MyPageMenuController> {
                               }
 
                               if (button == SubscriptionButtonType.block) {
-                                controller.onTapBlockFollower();
+                                controller.onTapBlockFollower(memberId: memberId);
                               }
 
                               if (button == SubscriptionButtonType.follow) {

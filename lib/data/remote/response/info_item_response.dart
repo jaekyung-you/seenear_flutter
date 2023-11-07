@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
 part 'info_item_response.freezed.dart';
+
 part 'info_item_response.g.dart';
 
 @freezed
@@ -16,8 +17,9 @@ class InfoItemResponse with _$InfoItemResponse {
     required int reviewCount,
     required int score,
     String? updatedAt,
+    bool? closed,
+    bool? like, // 하트 눌렀는지 여부
   }) = _InfoItemResponse;
 
-  factory InfoItemResponse.fromJson(Map<String, Object?> json)
-      => _$InfoItemResponseFromJson(json);
+  factory InfoItemResponse.fromJson(Map<String, Object?> json) => _$InfoItemResponseFromJson(json);
 }

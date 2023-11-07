@@ -10,6 +10,7 @@ class ReviewItemResponse with _$ReviewItemResponse {
   const factory ReviewItemResponse({
     required int id, // 리뷰 자체 id
     required int itemId, // 리뷰를 단 게시물에 대한 itemId
+    required String itemType, // MARKET, FESTIVAL 등
     int? commentCount,
     String? content,
     String? date,

@@ -113,7 +113,7 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
   Widget marketContentView(MyPageMenu menu) {
     // todo: menu에 따라 위에 헤더가 추가됨
     switch (menu) {
-    // 최대 10개까지만 해서 페이징 없음
+      // 최대 10개까지만 해서 페이징 없음
       case MyPageMenu.recentView:
         return Obx(() {
           if (controller.myPageTabController.index == 0 && controller.recentMarketItemList.isEmpty) {
@@ -243,7 +243,13 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
               return FestivalCell(
                 item: controller.recentFestivalItemList[index],
                 onTapItemCell: () {},
-                onTapFavoriteIcon: () {},
+                onTapFavoriteIcon: () {
+                  controller.onTapFavoriteIcon(
+                    menu: MyPageMenu.recentView,
+                    itemId: controller.recentFestivalItemList[index].itemId,
+                    itemType: controller.recentFestivalItemList[index].itemType,
+                  );
+                },
                 onTapDelete: () {
                   controller.onDeleteItem(
                     menu: MyPageMenu.recentView,
@@ -272,7 +278,13 @@ class _MyPageContentScreenState extends State<MyPageContentScreen> {
               return FestivalCell(
                 item: controller.favoriteFestivalItemList[index],
                 onTapItemCell: () {},
-                onTapFavoriteIcon: () {},
+                onTapFavoriteIcon: () {
+                  controller.onTapFavoriteIcon(
+                    menu: MyPageMenu.favorite,
+                    itemId: controller.favoriteFestivalItemList[index].itemId,
+                    itemType: controller.favoriteFestivalItemList[index].itemType,
+                  );
+                },
                 onTapDelete: () {
                   controller.onDeleteItem(
                     menu: MyPageMenu.favorite,
