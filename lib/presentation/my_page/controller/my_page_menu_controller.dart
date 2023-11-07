@@ -11,8 +11,6 @@ import 'package:seenear/data/remote/api/follower/add_follower.dart';
 import 'package:seenear/data/remote/api/follower/delete_follower.dart';
 import 'package:seenear/data/remote/api/follower/get_follower_list.dart';
 import 'package:seenear/data/remote/api/follower/get_following_list.dart';
-import 'package:seenear/data/remote/api/like/do_like.dart';
-import 'package:seenear/data/remote/api/like/do_unlike.dart';
 import 'package:seenear/data/remote/api/recent/add_recent_item.dart';
 import 'package:seenear/data/remote/api/recent/delete_recent_item.dart';
 import 'package:seenear/data/remote/api/favorite/get_favorite_items.dart';
@@ -67,10 +65,6 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
   List<MemberResponse> followerList = <MemberResponse>[];
   RxList<MemberResponse> myFollowerList = <MemberResponse>[].obs;
   RxList<MemberResponse> myFollowingList = <MemberResponse>[].obs;
-
-  // 좋아요, 공감
-  final DoLike _doLike = DoLike();
-  final DoUnlike _doUnlike = DoUnlike();
 
   // 로그아웃
   final Logout _logout = Logout();
@@ -326,7 +320,7 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
   }
 
   Future<void> onTapReviewItem({required int id}) async {
-    Get.toNamed(SeenearPath.REVIEW_DETAIL, arguments: {'id': id});
+    Get.toNamed(SeenearPath.REVIEW_DETAIL, arguments: {'id': id, 'isMine': true});
   }
 
   Future<void> onTapAddFollower({required int memberId}) async {
@@ -342,14 +336,6 @@ class MyPageMenuController extends GetxController with GetSingleTickerProviderSt
     } catch (e) {
       print('e: $e');
       return false;
-    }
-  }
-
-  Future<void> toggleLike({required bool isLiked, required int itemId, required String itemType}) async {
-    if (isLiked) {
-      bool res = await _doUnlike(itemType: itemType, itemId: itemId);
-    } else {
-      bool res = await _doLike(itemId: itemId, itemType: itemType);
     }
   }
 }

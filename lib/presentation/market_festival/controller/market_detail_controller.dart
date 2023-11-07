@@ -19,14 +19,10 @@ class MarketDetailController extends GetxController {
   }
 
   // '찜하기' 토글
-  Future<void> onTapFavoriteButton() async {
-
-  }
+  Future<void> onTapFavoriteButton() async {}
 
   // '주소복사' 버튼
-  Future<void> onTapCopyAddress() async {
-
-  }
+  Future<void> onTapCopyAddress() async {}
 
   // '가는 길 바로보기' 버튼
   Future<void> onTapNavigate() async {
@@ -34,12 +30,10 @@ class MarketDetailController extends GetxController {
   }
 
   // '나도 후기 쓰기' 버튼
-  Future<void> onTapWriteReview() async {
+  Future<void> onTapWriteReview() async {}
 
-  }
-  
   // 방문자 후기 사진 클릭
   Future<void> onTapReviewDetail({required int id}) async {
-    Get.toNamed(SeenearPath.REVIEW_DETAIL, arguments: {'id': id});
+    Get.toNamed(SeenearPath.REVIEW_DETAIL, arguments: {'id': id, 'isMine': false});
   }
 }

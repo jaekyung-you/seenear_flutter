@@ -20,7 +20,7 @@ class ReviewDetailScreen extends GetView<ReviewDetailController> {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           children: [
-            const BaseHeader(title: '방문자 후기'),
+            BaseHeader(title: controller.isMine ? '리뷰 관리' : '방문자 후기'),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -195,7 +195,25 @@ class ReviewDetailScreen extends GetView<ReviewDetailController> {
                   const Spacer(),
                 ],
               ),
-            )
+            ),
+            if (controller.isMine)
+              Expanded(
+                child: Row(
+                  children: [
+                    const Spacer(),
+                    Image.asset(
+                      'assets/images/write.png',
+                      color: SeenearColor.grey50,
+                      width: 14,
+                    ),
+                    Text(
+                      '수정/삭제',
+                      style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: SeenearColor.grey50),
+                    ),
+                    const Spacer(),
+                  ],
+                ),
+              )
           ],
         )
       ],
