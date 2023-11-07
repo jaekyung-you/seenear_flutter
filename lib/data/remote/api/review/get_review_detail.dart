@@ -1,15 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:seenear/data/remote/api/api_base.dart';
-import 'package:seenear/data/remote/response/review_item_response.dart';
+
+import '../../response/review_detail_response.dart';
 
 /// 리뷰 상세보기
 class GetReviewDetail {
-  Future<ReviewItemResponse> call({required int id, required int itemId, required String itemType}) async {
-    Response res = await ApiBase().get(
-      '/review/api/v1/$id',
-      query: {'itemId': itemId, 'itemType': itemType},
-    );
+  Future<ReviewDetailResponse> call({required int id}) async {
+    Response res = await ApiBase().get('/review/api/v1/$id');
 
-    return ReviewItemResponse.fromJson(res.data);
+    return ReviewDetailResponse.fromJson(res.data);
   }
 }

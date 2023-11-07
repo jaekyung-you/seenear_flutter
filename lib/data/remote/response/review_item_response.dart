@@ -14,7 +14,7 @@ class ReviewItemResponse with _$ReviewItemResponse {
     int? commentCount,
     String? content,
     String? date,
-    String? images,
+    List<String>? images,
     int? likeCount,
   }) = _ReviewItemResponse;
 

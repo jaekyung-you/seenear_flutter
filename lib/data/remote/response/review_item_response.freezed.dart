@@ -27,7 +27,7 @@ mixin _$ReviewItemResponse {
   int? get commentCount => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
   String? get date => throw _privateConstructorUsedError;
-  String? get images => throw _privateConstructorUsedError;
+  List<String>? get images => throw _privateConstructorUsedError;
   int? get likeCount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $ReviewItemResponseCopyWith<$Res> {
       int? commentCount,
       String? content,
       String? date,
-      String? images,
+      List<String>? images,
       int? likeCount});
 }
 
@@ -103,7 +103,7 @@ class _$ReviewItemResponseCopyWithImpl<$Res, $Val extends ReviewItemResponse>
       images: freezed == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as List<String>?,
       likeCount: freezed == likeCount
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
@@ -127,7 +127,7 @@ abstract class _$$ReviewItemResponseImplCopyWith<$Res>
       int? commentCount,
       String? content,
       String? date,
-      String? images,
+      List<String>? images,
       int? likeCount});
 }
 
@@ -177,9 +177,9 @@ class __$$ReviewItemResponseImplCopyWithImpl<$Res>
           : date // ignore: cast_nullable_to_non_nullable
               as String?,
       images: freezed == images
-          ? _value.images
+          ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as List<String>?,
       likeCount: freezed == likeCount
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
@@ -200,8 +200,9 @@ class _$ReviewItemResponseImpl
       this.commentCount,
       this.content,
       this.date,
-      this.images,
-      this.likeCount});
+      final List<String>? images,
+      this.likeCount})
+      : _images = images;
 
   factory _$ReviewItemResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ReviewItemResponseImplFromJson(json);
@@ -221,8 +222,16 @@ class _$ReviewItemResponseImpl
   final String? content;
   @override
   final String? date;
+  final List<String>? _images;
   @override
-  final String? images;
+  List<String>? get images {
+    final value = _images;
+    if (value == null) return null;
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final int? likeCount;
 
@@ -259,15 +268,23 @@ class _$ReviewItemResponseImpl
                 other.commentCount == commentCount) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.date, date) || other.date == date) &&
-            (identical(other.images, images) || other.images == images) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, itemId, itemType,
-      commentCount, content, date, images, likeCount);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      itemId,
+      itemType,
+      commentCount,
+      content,
+      date,
+      const DeepCollectionEquality().hash(_images),
+      likeCount);
 
   @JsonKey(ignore: true)
   @override
@@ -292,7 +309,7 @@ abstract class _ReviewItemResponse implements ReviewItemResponse {
       final int? commentCount,
       final String? content,
       final String? date,
-      final String? images,
+      final List<String>? images,
       final int? likeCount}) = _$ReviewItemResponseImpl;
 
   factory _ReviewItemResponse.fromJson(Map<String, dynamic> json) =
@@ -311,7 +328,7 @@ abstract class _ReviewItemResponse implements ReviewItemResponse {
   @override
   String? get date;
   @override
-  String? get images;
+  List<String>? get images;
   @override
   int? get likeCount;
   @override

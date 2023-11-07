@@ -15,7 +15,8 @@ _$ReviewItemResponseImpl _$$ReviewItemResponseImplFromJson(
       commentCount: json['commentCount'] as int?,
       content: json['content'] as String?,
       date: json['date'] as String?,
-      images: json['images'] as String?,
+      images:
+          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       likeCount: json['likeCount'] as int?,
     );
 
