@@ -147,28 +147,35 @@ class ReviewDetailScreen extends GetView<ReviewDetailController> {
         Row(
           children: [
             Expanded(
-              child: Row(
-                children: [
-                  const Spacer(),
-                  Image.asset(
-                    'assets/images/heart.png',
-                    color: SeenearColor.grey50,
-                    width: 14,
-                  ),
-                  Text(
-                    '공감',
-                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: SeenearColor.grey50),
-                  ),
-                  Text(
-                    '10',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
+              child: InkWell(
+                onTap: () {
+                  controller.toggleLike();
+                },
+                child: Row(
+                  children: [
+                    const Spacer(),
+                    Image.asset(
+                      'assets/images/heart${controller.isLiked.value ? '_filled' : ''}.png',
                       color: SeenearColor.grey50,
+                      width: 14,
                     ),
-                  ),
-                  const Spacer(),
-                ],
+                    Text(
+                      '공감',
+                      style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: SeenearColor.grey50),
+                    ),
+                    Obx(() {
+                      return Text(
+                        '${controller.likeCount}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                          color: SeenearColor.grey50,
+                        ),
+                      );
+                    }),
+                    const Spacer(),
+                  ],
+                ),
               ),
             ),
             Expanded(
@@ -184,14 +191,16 @@ class ReviewDetailScreen extends GetView<ReviewDetailController> {
                     '댓글',
                     style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: SeenearColor.grey50),
                   ),
-                  Text(
-                    '2',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                      color: SeenearColor.grey50,
-                    ),
-                  ),
+                  Obx(() {
+                    return Text(
+                      '${controller.commentList.length}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                        color: SeenearColor.grey50,
+                      ),
+                    );
+                  }),
                   const Spacer(),
                 ],
               ),

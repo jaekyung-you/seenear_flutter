@@ -7,7 +7,6 @@ import '../../response/review_detail_response.dart';
 class GetReviewDetail {
   Future<ReviewDetailResponse> call({required int id}) async {
     Response res = await ApiBase().get('/review/api/v1/$id');
-
     return ReviewDetailResponse.fromJson(res.data);
   }
 }

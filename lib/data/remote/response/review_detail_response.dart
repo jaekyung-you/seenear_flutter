@@ -9,7 +9,7 @@ part 'review_detail_response.g.dart';
 @freezed
 class ReviewDetailResponse with _$ReviewDetailResponse {
   const factory ReviewDetailResponse({
-    CommentResponse? comment,
+    List<CommentResponse>? comment,
     String? content,
     required String createdAt,
     required int id,
