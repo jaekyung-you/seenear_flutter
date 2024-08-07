@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-# seenear-flutter
-seenear flutter 프로젝트
-=======
-# seenear
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
->>>>>>> caaec74 (git init 및 에셋, config 추가)
+사이드 프로젝트
+- 로그인 & 회원가입 절차 간소화를 위해 카카오 로그인 연결
+- 어르신들을 위한 축제, 행사 등을 알려주는 Flutter 어플
